@@ -8,7 +8,7 @@ export const LargeButton = styled.button`
   font-family: 'Rubik', sans-serif;
   padding: 1em;
   
-  border-radius: 15px;
+  border-radius: 8px;
   border: none;
 `;
 
@@ -18,7 +18,7 @@ export const MediumButton = styled.button`
   font-size: 14px;
   font-family: 'Rubik', sans-serif;
   padding: .8em;
-  border-radius: 12px;
+  border-radius: 6px;
   border: none;
 `;
 

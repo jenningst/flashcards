@@ -1,26 +1,20 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-import CollectionContext, { CollectionProvider } from '../contexts/collectionContext';
-import FlashcardContainer from '../containers/FlashcardContainer';
+import { PackProvider } from '../contexts/packContext';
 import ThemeContext, { ThemeProvider } from '../contexts/themeContext';
 
+
+import AppRouter from '../containers/AppRouter';
+
 function App() {
-  const { dispatch } = useContext(CollectionContext);
-  const { theme } = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
 
   return (
-    <CollectionProvider value={dispatch}>
+    <PackProvider>
       <ThemeProvider value={theme}>
-        <AppWrapper className="app">
-          <FlashcardContainer />
-        </AppWrapper>
+        <AppRouter />
       </ThemeProvider>
-    </CollectionProvider>
+    </PackProvider>
   );
 };
-
-const AppWrapper = styled.div`
-  height: 100%;
-`;
 
 export default App;

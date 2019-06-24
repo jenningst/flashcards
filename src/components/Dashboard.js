@@ -1,65 +1,71 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
+import { usePackDispatch } from '../contexts/packContext';
 
 import PackCard from './PackCard';
 import { Title1, Title4 } from '../components/Elements/Text';
 
-function Collections({ displayCollection }) {
-  // Contecxt
+function Dashboard({ allPacks }) {
   const theme = useContext(ThemeContext);
+  const dispatch = usePackDispatch();
+  const toggleCreatePack = () => dispatch({ type: 'TOGGLE_CREATE_PACK' });
 
-  const CollectionsWrapper = styled.div`
-    height: 100%;
+  const DashboardWrapper = styled.div`
     padding: 1rem;
     background: ${theme.background.primary};
 
-    .Collections__header {
+    .Dashboard__header {
       display: flex;
       justify-content: center;
       color: ${theme.font.primary};
       padding: .50rem;
     }
 
-    .Collections__tiled-list {
+    .Dashboard__tiled-list {
       display: grid;
+      overflow: scroll;
       grid-template-columns: repeat(auto-fit, minmax(135px, 45%));
       grid-gap: 1rem;
     }
 
-    .Collections__add-collection {
+    .Dashboard__add-collection {
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 1rem;
+
+      background: ${theme.background.inactive};
+      border: 2px solid ${theme.background.inactive};
+      outline: none;
+      &:hover {
+
+      }
+      &:active {
+
+      }
     }
 `;
 
-  // get collections
-  const collections = [
-    { id: 2, name: 'JavaScript', pack: 'javscript', image: '', count: 1000,},
-    { id: 3, name: 'CSS',  route: 'css', image: '', count: 999,},
-    { id: 4, name: 'HTML',  route: 'html', image: '', count: 150,},
-    { id: 5, name: 'React',  route: 'react', image: '', count: 42,},
-    { id: 6, name: 'Theory',  route: 'theory', image: '', count: 1,},
-  ];
-
   return (
-    <CollectionsWrapper className="Collections">
-      <header className="Collections__header">
+    <DashboardWrapper className="Dashboard">
+      <header className="Dashboard__header">
         <Title4>SOME HEADER CONTENT</Title4>
       </header>
-      <section className="Collections__tiled-list">
-        <button className="Collections__add-collection">
+      <section className="Dashboard__tiled-list">
+        <button
+          className="Dashboard__add-collection"
+          onClick={e => toggleCreatePack()}
+        >
           <Title1>+</Title1>
         </button>
-        {collections.map(c => {
+        {allPacks.map(c => {
           const { id, ...rest } = c;
-          return <PackCard key={id} {...rest} startCollection={displayCollection}/>
+          return <PackCard key={id} {...rest} />
         })}
       </section>
-    </CollectionsWrapper>
+    </DashboardWrapper>
   );
 };
 
-export default Collections;
+export default Dashboard;

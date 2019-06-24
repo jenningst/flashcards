@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 
-import { Title1, Body } from '../components/Elements/Text';
+import { Body } from '../components/Elements/Text';
 import { MediumButton } from '../components/Elements/Button';
 
 Flashcard.propTypes = {
@@ -54,7 +54,7 @@ function Flashcard({ text, isAnswer, toggle }) {
       }
 
       border-radius: 15px;
-      width: 50%;
+      width: 100%;
     }
   `;
 
@@ -67,7 +67,7 @@ function Flashcard({ text, isAnswer, toggle }) {
       </div>
       <MediumButton
         className="Flashcard__toggle-button" type="button" onClick={toggle}>
-        {"Flip"}
+        {!isAnswer ? 'SHOW ANSWER' : 'SHOW QUESTION'}
       </MediumButton>
     </FlashcardWrapper>
   );

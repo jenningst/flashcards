@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import CollectionContext from '../contexts/collectionContext';
+import { usePackDispatch } from '../contexts/packContext';
 import ThemeContext from '../contexts/themeContext';
 
 import { Title4, Caption3 } from '../components/Elements/Text';
@@ -16,9 +16,9 @@ PackCard.propTypes = {
 };
 
 function PackCard(props){
-  const { name, image, count, startCollection } = props;
+  const { name, image, count } = props;
   // Context
-  const { dispatch } = useContext(CollectionContext);
+  const dispatch = usePackDispatch();
   const theme = useContext(ThemeContext);
   // Actions
   const setCollection = name => dispatch({ type: 'SET_COLLECTION', name });
