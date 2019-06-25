@@ -26,8 +26,6 @@ function Pack({ mode, data }) {
 
   // State
   const [index, setIndex] = useState(0);
-
-  // Action types
   const priorCard = () => setIndex(index - 1);
   const nextCard = () => setIndex(index + 1);
 
