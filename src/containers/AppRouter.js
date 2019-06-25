@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { usePackState } from '../contexts/packContext';
 
 import Dashboard from '../components/Dashboard';
-import PackContainer from '../containers/PackContainer';
 import CreatePack from '../components/CreatePack';
+import PackRouter from './PackRouter';
 
 function AppRouter() {
   const state = usePackState();
-  const { createPack, packFilter } = state;
-  
+  const { displayCreatePack, packFilter, packMode } = state;
+
 
   /* TODO: ** temporary hard-coded packs; put into state later ***** */
   const tempPacks = [
@@ -37,11 +37,11 @@ function AppRouter() {
 
   return (
     <div className="app" style={ { height: '100%' } }>
-      {createPack
+      {displayCreatePack
         ? <CreatePack addPack={addPack} />
         : packFilter === 'SHOW_ALL'
           ? <Dashboard allPacks={packs} />
-          : <PackContainer />
+          : <PackRouter />
       }
     </div>
   );

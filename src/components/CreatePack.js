@@ -5,33 +5,35 @@ import ThemeContext from '../contexts/themeContext';
 import { usePackDispatch } from '../contexts/packContext';
 
 import { MediumButton } from './Elements/Button';
-import { Title1, Body } from './Elements/Text';
-import { ReactComponent as CancelIcon } from '../icons/error.svg';
+import { Title1 } from './Elements/Text';
+import { ReactComponent as BackIcon } from '../icons/back.svg';
 
 CreatePack.propTypes = {
   addPack: PropTypes.func.isRequired,
 };
 
 function CreatePack({ addPack }) {
-  const [packName, setPackName] = useState('');
   const theme = useContext(ThemeContext);
   const dispatch = usePackDispatch();
   const toggleCreatePack = () => dispatch({ type: 'TOGGLE_CREATE_PACK' });
+  const [packName, setPackName] = useState('');
 
   function handleNameChange(e) {
-    setPackName(e.target.value);  
+    setPackName(e.target.value); // handler for local input state
   };
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    addPack(packName);
-    toggleCreatePack();
+    if (packName !== '') {
+      addPack(packName); // SIDE EFFECT: invokes addPack function in AppRouter
+    }
+    toggleCreatePack(); // toggles createPack state; rerender
   };
 
   return (
     <StyledCreatePack className="CreatePackWrapper">
       <header>
-        <CancelIcon 
+        <BackIcon 
           className="CreatePackWrapper__button-close"
           onClick={toggleCreatePack}
         />
@@ -40,9 +42,9 @@ function CreatePack({ addPack }) {
         onSubmit={e => handleFormSubmit(e)}
       >
         <Title1 className="CreatePackWrapper__title">Create a Pack</Title1>
-        <Body className="CreatePackWrapper__content">Enter a new pack name below:</Body>
         <input
           className="CreatePackWrapper__input-name"
+          placeholder="Enter a Pack Name"
           name="pack-name"
           value={packName}
           onChange={e => handleNameChange(e)}
@@ -50,6 +52,8 @@ function CreatePack({ addPack }) {
         <MediumButton
           className="CreatePackWrapper__button-submit"
           type="submit"
+          onSubmit={e => handleFormSubmit(e)}
+          disabled={packName === '' ? true : false}
         >
           Submit
         </MediumButton>
@@ -89,8 +93,8 @@ const StyledCreatePack = styled.div`
 
   .CreatePackWrapper__input-name {
     margin: 1rem 0rem 1rem 0rem;
-    width: 50%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    text-align: center;
     height: 2rem;
     padding: .25rem;
   }

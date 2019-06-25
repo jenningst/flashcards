@@ -4,113 +4,51 @@ import styled from 'styled-components';
 import { usePackDispatch } from '../contexts/packContext';
 import ThemeContext from '../contexts/themeContext';
 
-import { Headline, Subhead, Title1, Body } from '../components/Elements/Text';
-import Flashcard from './Flashcard';
+import { Headline, Subhead} from '../components/Elements/Text';
 import { ReactComponent as CancelIcon } from '../icons/error.svg';
 import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
 import { ReactComponent as RightArrow } from '../icons/right-arrow.svg';
 import { ReactComponent as OvalIcon } from '../icons/oval.svg';
-import { LargeButton, SmallButton } from './Elements/Button';
+import { SmallButton } from './Elements/Button';
+import Flashcard from './Flashcard';
+import ComposeFlashcard from './ComposeFlashcard';
 
 Pack.propTypes = {
-  pack: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
-function Pack({ pack }) {
+function Pack({ mode, data }) {
   // Context
   const theme = useContext(ThemeContext);
   const dispatch = usePackDispatch();
-  const exitToDashboard = () => dispatch({ type: 'CLEAR_COLLECTION' });
+  const exitToPackHome = () => dispatch({ type: 'CLEAR_MODE' });
 
   // State
   const [index, setIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
 
   // Action types
-  const toggleAnswer = () => setShowAnswer(!showAnswer);
   const priorCard = () => setIndex(index - 1);
   const nextCard = () => setIndex(index + 1);
 
-  // todo: pull in question collection into state
-  const data = {
-    javascript: {
-      questions: {
-        byId: {
-          1: {
-            id: 1,
-            text: '"JavaScript lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ultrices eros. Mauris bibendum orci purus, id luctus odio molestie eu. Suspendisse potenti. Donec ut eleifend lacus. Suspendisse malesuada ante bibendum, cursus mi id, finibus arcu. Cras convallis tincidunt facilisis. Cras ac orci non justo elementum pellentesque non eu orci. Integer bibendum nec nulla at tempor. Nunc faucibus felis auctor nisi iaculis semper in nec enim. Nullam dui urna, auctor eu ante non, aliquet volutpat?"',
-            answer: '4',
-          },
-          2: {
-            id: 2,
-            text: 'What is the capitol of Sweden?',
-            answer: 'Stockholm',
-          },
-        },
-        allIds: [1, 2],
-      },
-    },
-    css: {
-      questions: {
-        byId: {
-          1: {
-            id: 1,
-            text: '"CSS lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ultrices eros. Mauris bibendum orci purus, id luctus odio molestie eu. Suspendisse potenti. Donec ut eleifend lacus. Suspendisse malesuada ante bibendum, cursus mi id, finibus arcu. Cras convallis tincidunt facilisis. Cras ac orci non justo elementum pellentesque non eu orci. Integer bibendum nec nulla at tempor. Nunc faucibus felis auctor nisi iaculis semper in nec enim. Nullam dui urna, auctor eu ante non, aliquet volutpat?"',
-            answer: 'Flexbox, duh.',
-          },
-          2: {
-            id: 2,
-            text: 'Who is your daddy and what does he do?',
-            answer: 'Um, nun-ya-business',
-          },
-        },
-        allIds: [1, 2],
-      }
-    },
-    angular: {
-      questions: {
-        byId: {},
-        allIds: [],
-      },
-    },
-    html: {
-      questions: {
-        byId: {},
-        allIds: [],
-      },
-    },
-    react: {
-      questions: {
-        byId: {},
-        allIds: [],
-      },
-    },
-    theory: {
-      questions: {
-        byId: {},
-        allIds: [],
-      },
-    },
-  };
-
   // Constants for logic
-  const currentQuestion = data[pack.toLowerCase()].questions.byId[data[pack.toLowerCase()].questions.allIds[index]];
+  const currentQuestion = data.byId[data.allIds[index]];
   const zeroPaddedIndex = (index + 1).toString().padStart(3, '0');
-  const packTotal = data[pack.toLowerCase()].questions.allIds.length;
+  const packTotal = data.allIds.length;
   const zeroPaddedTotal = packTotal.toString().padStart(3, '0');
-
-  // console.log(currentQuestion);
-  // console.log(zeroPaddedIndex);
-  // console.log(packTotal);
-  // console.log(zeroPaddedTotal);
+  
+  console.log(`currentQuestion: ${JSON.stringify(currentQuestion, 2, null)}`);
+  console.log(`zeroPaddedIndex: ${zeroPaddedIndex}`);
+  console.log(`zeroPaddedTotal: ${zeroPaddedTotal}`);
+  console.log(`packTotal: ${packTotal}`);
 
   const PackWrapper = styled.div`
     display: grid;
-    grid-template-rows: minmax(11%, 13%) auto 1fr;
+    grid-template-rows: minmax(11%, 13%) 1fr auto;
     grid-template-areas:
       "header"
-      "carousel"
-      "card";
+      "card"
+      "carousel";
     height: 100%;
 
     background: ${theme.background.primary};
@@ -223,30 +161,18 @@ function Pack({ pack }) {
     }
   `;
 
-  if(!packTotal) {
-    return (
-      <div>
-        <Title1>No Flashcards Yet!</Title1>
-        <Body>Create your first flashcard in this deck</Body>
-        <LargeButton>Create Flashcard</LargeButton>
-        
-        <SmallButton
-          type="button"
-          onClick={e => exitToDashboard()}
-        >
-          Back to Dashboard
-        </SmallButton>
-      </div>
-    );
-  };
-
   return (
     <PackWrapper className="Pack">
       <header className="Pack__header">
         <CancelIcon 
           className="Pack__button-close"
-          onClick={e => exitToDashboard()}
+          onClick={e => exitToPackHome()}
         />
+        <div className="Pack__mode-pill">
+          <Subhead>
+            {mode}
+          </Subhead>
+        </div>
         <div className="Pack__counter">
           <div className="counter__current">
             <Headline>{zeroPaddedIndex}</Headline>
@@ -261,22 +187,37 @@ function Pack({ pack }) {
           </div>
         </div>
       </header>
+      <section className="Pack__card-viewer">
+      {
+        mode === 'REVIEW_MODE'
+        ?
+          <Flashcard
+            question={currentQuestion}
+            // isAnswer={showAnswer}
+            // toggle={toggleAnswer}
+          />
+        :
+          <ComposeFlashcard
+            question={currentQuestion}
+        />
+      }
+      </section>
       <section className="Pack__carousel">
         <LeftArrow 
           className={`Pack__button-navigate${!packTotal || index === 0 ? ' disabled' : ''}`}
           onClick={priorCard}
         />
+        {mode !== 'REVIEW_MODE'
+          ? <SmallButton
+            className=""
+            >
+              SAVE CARD
+            </SmallButton>
+          : null
+        }
         <RightArrow 
           className={`Pack__button-navigate${!packTotal || index === packTotal - 1 ? ' disabled' : ''}`}
           onClick={nextCard}
-        />
-      </section>
-      <section className="Pack__card-viewer">
-        <Flashcard
-          key={currentQuestion.id}
-          text={showAnswer ? currentQuestion.answer : currentQuestion.text}
-          isAnswer={showAnswer}
-          toggle={toggleAnswer}
         />
       </section>
     </PackWrapper>
