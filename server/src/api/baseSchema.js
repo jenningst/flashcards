@@ -2,8 +2,8 @@ const { gql } = require('apollo-server-express');
 
 const base = gql`
   type Query {
-    fetchPacks: [Packs!]!
-    fetchFlashcards: [Flashcards!]!
+    fetchPacks: [Pack!]!
+    fetchFlashcards: [Flashcard!]!
   }
 
   type Mutation {

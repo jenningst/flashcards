@@ -1,6 +1,14 @@
 const Flashcard = require('./flashcardModel');
 
 module.exports = {
+  FlashcardPayload: {
+    __resolveType(obj) {
+      if (obj.card) {
+        return 'Flashcard'
+      }
+      return null;
+    }
+  },
   Query: {
     fetchFlashcards: async function() {
       const cards = await Flashcard.find({});

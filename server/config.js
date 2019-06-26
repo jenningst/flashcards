@@ -9,9 +9,9 @@ const config = {
     port: 4000,
     hostname: "localhost",
     database: {
-      host: "ds151586.mlab.com",
-      port: 51586,
-      name: "quizr"
+      host: "ds243897.mlab.com",
+      port: 43897,
+      name: "flashcards"
     }
   }
 };

@@ -8,4 +8,4 @@ const flashcardSchema = new Schema({
   pack_id: String,
 });
 
-module.exports = mongoose.model('Question', flashcardSchema);
+module.exports = mongoose.model('Flashcard', flashcardSchema);

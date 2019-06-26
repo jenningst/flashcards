@@ -1,7 +1,7 @@
 const { mergeResolvers } = require('merge-graphql-schemas');
 
 const flashcardResolver = require('./flashcard/flashcardResolver');
-const packResolver = require('./choice/packResolver');
+const packResolver = require('./pack/packResolver');
 
 const resolvers = [packResolver, flashcardResolver];
 

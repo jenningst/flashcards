@@ -1,17 +1,19 @@
 const Pack = require('./packModel');
 
 module.exports = {
+  PackPayload: {
+    __resolveType(obj, context, info) {
+      if(obj.pack) {
+        return 'Pack'
+      }
+      return null;
+    },
+  },
   Query: {
     fetchPacks: async function() {
       const packs = await Pack.find({});
       return packs.map(pack => {
         return { ...pack._doc, _id: pack.id };
-      });
-    },
-    fetchQuestions: async function() {
-      const questions = await Question.find({});
-      return questions.map(question => {
-        return { ...question._doc, _id: question.id };
       });
     },
   },
