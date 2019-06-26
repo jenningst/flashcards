@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { usePackDispatch } from '../contexts/packContext';
 import ThemeContext from '../contexts/themeContext';
 
-import { Title4, Caption3 } from '../components/Elements/Text';
+import { Title4, Caption3 } from './Elements/Text';
 
 PackCard.propTypes = {
   props: PropTypes.shape({

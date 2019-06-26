@@ -7,7 +7,7 @@ import PackRouter from './PackRouter';
 
 function AppRouter() {
   const state = usePackState();
-  const { displayCreatePack, packFilter, packMode } = state;
+  const { displayCreatePack, packFilter } = state;
 
 
   /* TODO: ** temporary hard-coded packs; put into state later ***** */

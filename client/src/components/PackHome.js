@@ -18,7 +18,7 @@ function PackHome({ data, packName }) {
   const setReviewMode = () => dispatch({ type: 'SET_REVIEW_MODE'});
   const setComposeMode = () => dispatch({ type: 'SET_WRITE_MODE'});
 
-  const hasQuestions = data.allIds.length > 0;
+  const hasQuestions = data.questions.allIds.length > 0;
 
   return (
     <StyledPackHome className="PackHome">
@@ -33,7 +33,7 @@ function PackHome({ data, packName }) {
         <div className="PackHome__card">
           <div className="card-content">
             <Title1>{packName}</Title1>
-            <Subhead>{data.allIds.length} FLASHCARDS</Subhead>
+            <Subhead>{data.questions.allIds.length} FLASHCARDS</Subhead>
           </div>
           <LargeButton
             className="PackHome__button-review card-button"
@@ -122,10 +122,6 @@ const StyledPackHome = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-
-    button {
-
-    }
 
     button + button {
       margin-top: 1rem;

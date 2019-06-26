@@ -4,7 +4,7 @@ import ThemeContext from '../contexts/themeContext';
 import { usePackDispatch } from '../contexts/packContext';
 
 import PackCard from './PackCard';
-import { Title1, Title4 } from '../components/Elements/Text';
+import { Title1, Title4 } from './Elements/Text';
 
 function Dashboard({ allPacks }) {
   const theme = useContext(ThemeContext);

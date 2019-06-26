@@ -1,5 +1,5 @@
 // todo: pull in question collection into state
-export const data = {
+const fakeDatabase = {
   javascript: {
     questions: {
       byId: {
@@ -39,3 +39,20 @@ export const data = {
   react: { questions: { byId: {}, allIds: []}},
   theory: { questions: { byId: {}, allIds: []}},
 };
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+export const fetchQuestions = (filter, pack) =>
+  delay(500).then(() => {
+    switch (filter) {
+      case 'ALL':
+        console.log('all');
+        console.log(pack);
+        console.log(fakeDatabase[pack]);
+        return fakeDatabase[pack];
+      default:
+        throw new Error(`Unknown filter: ${filter}`);
+    }
+  });
+
+export { fakeDatabase };

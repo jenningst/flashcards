@@ -1,29 +1,24 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 
-import { Body } from '../components/Elements/Text';
-import { MediumButton } from '../components/Elements/Button';
-import { ReactComponent as EditIcon } from '../'
+import { MediumButton } from './Elements/Button';
 
 ComposeFlashcard.propTypes = {
-
+  handleTextChange: PropTypes.func.isRequired,
+  handleAnswerChange: PropTypes.func.isRequired,
 };
 
-function ComposeFlashcard({ question }) {
+function ComposeFlashcard({
+  handleTextChange,
+  handleAnswerChange,
+  questionText,
+  questionAnswer
+}) {
   const theme = useContext(ThemeContext);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [isEditable, setIsEditable] = useState(true);
-  const [questionText, setQuestionText] = useState('');
-  const [questionAnswer, setQuestionAnswer] = useState('');
-
-  const handleTextChange = e => setQuestionText(e.target.value);
-  const handleAnswerChange = e => setQuestionAnswer(e.target.value);
-  const toggleAnswer = () => {
-    setShowAnswer(!showAnswer);
-  };
-  const toggleEditable = () => setIsEditable(!isEditable);
+  const [showAnswer, setShowAnswer] = useState(false); 
+  const toggleAnswer = () => setShowAnswer(!showAnswer);
 
     return (
     <ComposeFlashcardWrapper className="ComposeFlashcard">
@@ -81,6 +76,8 @@ const ComposeFlashcardWrapper = styled.div`
       width: 100%;
       border: none;
       resize: none;
+      padding: .25rem;
+      outline: 1px dashed grey;
 
       font-family: 'Rubik', sans-serif;
       font-size: 15px;
@@ -95,6 +92,19 @@ const ComposeFlashcardWrapper = styled.div`
     }
     border-radius: 15px;
     width: 100%;
+  }
+
+  
+`;
+
+const FloatingDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .ComposeFlashcard__save-button {
+
   }
 `;
 
