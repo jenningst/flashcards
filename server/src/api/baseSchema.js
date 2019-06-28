@@ -4,6 +4,7 @@ const base = gql`
   type Query {
     fetchPacks: [Pack!]!
     fetchFlashcards: [Flashcard!]!
+    fetchFlashcardsByPack(id: String!): [Flashcard!]!
   }
 
   type Mutation {
