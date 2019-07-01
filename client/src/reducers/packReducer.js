@@ -1,13 +1,14 @@
 export const initialState = {
   packFilter: 'SHOW_ALL',
+  packName: '',
   displayCreatePack: false,
   packMode: '',
 };
 
 export default function packReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_COLLECTION':
-      return { ...state, packFilter: action.name };
+    case 'SET_PACK_FILTER':
+      return { ...state, packFilter: action.id, packName: action.name };
     case 'TOGGLE_CREATE_PACK':
       return { ...state, displayCreatePack: !state.displayCreatePack };
     case 'CLEAR_COLLECTION':

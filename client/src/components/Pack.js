@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { usePackDispatch } from '../contexts/packContext';
 import ThemeContext from '../contexts/themeContext';
+import { Mutation } from  'react-apollo';
+import { CREATE_FLASHCARD } from '../queries/index';
+import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import { zeroPad } from '../utilities/helpers';
 
@@ -17,43 +20,80 @@ import ComposeFlashcard from './ComposeFlashcard';
 
 Pack.propTypes = {
   mode: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
+  filter: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
-function Pack({ mode, data }) {
-  // Context
+function Pack({ mode, filter, data }) {
   const theme = useContext(ThemeContext);
   const dispatch = usePackDispatch();
   const [index, setIndex] = useState(0);
-
-  const exitToPackHome = () => dispatch({ type: 'CLEAR_MODE' });
-  const isReviewMode = mode === 'REVIEW_MODE';
-
-  // Setup display counters for REVIEW vs WRITE modes
-  const packTotal = data.questions.allIds.length;
-  const zeroPaddedTotal = isReviewMode ? zeroPad(packTotal) : zeroPad(parseInt(packTotal + 1));
-  const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(packTotal + 1));
-  
-  const priorCard = () => setIndex(index - 1);
-  const nextCard = () => setIndex(index + 1);
-  const saveCard = () => {
-    const cardPayload = {
-      text: questionText,
-      answer: questionAnswer,
-    };
-    // TODO: persist this to context/state higher in the tree
-    // update our index to the next number
-  }
-
   const [questionText, setQuestionText] = useState('');
   const [questionAnswer, setQuestionAnswer] = useState('');
   const handleTextChange = e => setQuestionText(e.target.value);
   const handleAnswerChange = e => setQuestionAnswer(e.target.value);
 
+  const exitToPackHome = () => dispatch({ type: 'CLEAR_MODE' });
+  const priorCard = () => setIndex(index - 1);
+  const nextCard = () => setIndex(index + 1);
+  const saveCardAndRefresh = () => {
+    setQuestionText('');
+    setQuestionAnswer('');
+  }
+  const isReviewMode = mode === 'REVIEW_MODE';
+  // Setup display counters for REVIEW vs WRITE modes
+  const packTotal = data.length;
+  const zeroPaddedTotal = isReviewMode ? zeroPad(packTotal) : zeroPad(parseInt(packTotal + 1));
+  const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(packTotal + 1));
+  
   // Constants for logic
-  const currentQuestion = data.questions.byId[data.questions.allIds[index]];
+  const currentQuestion = data[index];
   // Prettify mode name
   const modeName = mode.replace('_', ' ');
+
+  const CreateFlashcard = () => {
+    return (
+      <Mutation
+        mutation={CREATE_FLASHCARD}
+        update={(cache, { data }) => {
+          // get our current cards from the cache
+          const { fetchFlashcardsByPack } = cache.readQuery({ 
+            query: GET_FLASHCARDS_BY_PACK,
+            variables: { id: filter },
+          });
+
+          // write back to the cache, updating the data
+          cache.writeQuery({
+            query: GET_FLASHCARDS_BY_PACK,
+            variables: { id: filter },
+            data: { 
+              fetchFlashcardsByPack: [...fetchFlashcardsByPack, data.createFlashcard.card]
+            },
+          });
+        }}
+      >
+        {(addFlashcard) => (
+          <MediumButton
+            className="Pack_button-save"
+            disabled={questionText && questionAnswer ? false : true}
+            onClick={e => {
+              addFlashcard({ variables: { input: {
+                text: questionText,
+                answer: questionAnswer,
+                user_id: "1",
+                pack_id: filter,
+              }}});
+              saveCardAndRefresh();
+            }}
+            >
+              SAVE CARD
+            </MediumButton>
+        )}
+      </Mutation>
+    )
+  };
+
+
 
   return (
     <PackWrapper className="Pack">
@@ -103,13 +143,7 @@ function Pack({ mode, data }) {
       </section>
       <section className="Pack__carousel">
         {!isReviewMode
-          ? <MediumButton
-              className="Pack_button-save"
-              disabled={questionText && questionAnswer ? false : true}
-              onClick={saveCard}
-              >
-                SAVE CARD
-              </MediumButton>
+          ? <CreateFlashcard />
           : <React.Fragment>
               <LeftArrow 
                 className={`Pack__button-navigate${index === 0 ? ' disabled' : ''}`}

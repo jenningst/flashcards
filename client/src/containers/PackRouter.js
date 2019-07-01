@@ -1,24 +1,33 @@
 import React from 'react';
 import { usePackState } from '../contexts/packContext';
-import { fakeDatabase } from '../api'
+
+import { Query } from 'react-apollo';
+import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
 import Pack from '../components/Pack';
 
-function PackRouter() {
-  // context
+const PackRouter = ({ filter }) => {
   const state = usePackState();
-  const { packMode, packFilter } = state;
-  // state
-  const results = fakeDatabase[packFilter.toLowerCase()];
+  const { packMode, packName } = state;
   
   return (
-    <React.Fragment>
-      {packMode === ''
-        ? <PackHome data={results} packName={packFilter}/>
-        : <Pack mode={packMode} data={results} />
-      }
-    </React.Fragment>
+    <Query query={GET_FLASHCARDS_BY_PACK} variables={ { id: filter } }>
+      {({ loading, error, data }) => {
+        if (loading) return <div>Loading Flashcards...</div>;
+        if (error) return <div>Error! ${error.message}</div>;
+
+        const cards = data.fetchFlashcardsByPack;
+        return (
+          <React.Fragment>
+            {packMode === ''
+              ? <PackHome name={packName} data={cards} />
+              : <Pack mode={packMode} filter={filter} data={cards} />
+            }
+          </React.Fragment>
+        )
+      }}
+    </Query>
   );
 };
 

@@ -1,16 +1,16 @@
 import { gql } from 'apollo-boost';
 
-export const GET_PACKS = gql`
+const GET_PACKS = gql`
   query fetchPacks {
     fetchPacks {
-      _id,
+      _id
       name
     }
   }
 `;
 
-export const GET_FLASHCARDS_BY_PACK = gql`
-  query fetchFlashcardsByPack($id) {
+const GET_FLASHCARDS_BY_PACK = gql`
+  query fetchFlashcardsByPack($id: String!) {
     fetchFlashcardsByPack(id: $id) {
       _id
       text
@@ -21,7 +21,7 @@ export const GET_FLASHCARDS_BY_PACK = gql`
   }
 `;
 
-export const CREATE_PACK = gql`
+const CREATE_PACK = gql`
   mutation createPack($input: CreatePackInput!) {
     createPack(input: $input) {
       pack {
@@ -37,7 +37,7 @@ export const CREATE_PACK = gql`
   }
 `;
 
-export const CREATE_FLASHCARD = gql`
+const CREATE_FLASHCARD = gql`
   mutation createFlashcard($input: CreateFlashcardInput!) {
     createFlashcard(input: $input) {
       card {
@@ -55,3 +55,10 @@ export const CREATE_FLASHCARD = gql`
     }
   }
 `;
+
+export {
+  GET_PACKS,
+  CREATE_PACK,
+  CREATE_FLASHCARD,
+  GET_FLASHCARDS_BY_PACK
+};

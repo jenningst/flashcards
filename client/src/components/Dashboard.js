@@ -3,8 +3,29 @@ import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 import { usePackDispatch } from '../contexts/packContext';
 
+import { GET_PACKS } from '../queries/';
+import { Query } from 'react-apollo';
+
 import PackCard from './PackCard';
 import { Title1, Title4 } from './Elements/Text';
+
+const PackList = () => (
+  <Query query={GET_PACKS}>
+    {({ loading, error, data }) => {
+      if (loading) return 'Loading...';
+      if (error) return `Error! ${error.message}`;
+
+      const packs = data.fetchPacks;
+      return (
+        <React.Fragment>
+          {packs.map(pack => {
+            return <PackCard key={pack._id} {...pack} />
+          })}
+        </React.Fragment>
+      );
+    }}
+  </Query>
+);
 
 function Dashboard({ allPacks }) {
   const theme = useContext(ThemeContext);
@@ -59,10 +80,7 @@ function Dashboard({ allPacks }) {
         >
           <Title1>+</Title1>
         </button>
-        {allPacks.map(c => {
-          const { id, ...rest } = c;
-          return <PackCard key={id} {...rest} />
-        })}
+        <PackList />
       </section>
     </DashboardWrapper>
   );

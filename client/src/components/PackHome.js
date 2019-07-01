@@ -8,17 +8,17 @@ import { LargeButton } from './Elements/Button';
 import { Title1, Subhead } from './Elements/Text';
 
 PackHome.propTypes = {
-  data: PropTypes.object.isRequired,
-  packName: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
-function PackHome({ data, packName }) {
+function PackHome({ name, data }) {
   const dispatch = usePackDispatch();
   const exitToDashboard = () => dispatch({ type: 'CLEAR_COLLECTION' });
   const setReviewMode = () => dispatch({ type: 'SET_REVIEW_MODE'});
   const setComposeMode = () => dispatch({ type: 'SET_WRITE_MODE'});
 
-  const hasQuestions = data.questions.allIds.length > 0;
+  const hasQuestions = data.length > 0;
 
   return (
     <StyledPackHome className="PackHome">
@@ -32,8 +32,8 @@ function PackHome({ data, packName }) {
       <section className="PackHome__main">
         <div className="PackHome__card">
           <div className="card-content">
-            <Title1>{packName}</Title1>
-            <Subhead>{data.questions.allIds.length} FLASHCARDS</Subhead>
+            <Title1>{name}</Title1>
+            <Subhead>{data.length} FLASHCARDS</Subhead>
           </div>
           <LargeButton
             className="PackHome__button-review card-button"

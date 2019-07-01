@@ -16,12 +16,12 @@ PackCard.propTypes = {
 };
 
 function PackCard(props){
-  const { name, image, count } = props;
+  const { _id, name, image, count } = props;
   // Context
   const dispatch = usePackDispatch();
   const theme = useContext(ThemeContext);
   // Actions
-  const setCollection = name => dispatch({ type: 'SET_COLLECTION', name });
+  const setCollection = id => dispatch({ type: 'SET_PACK_FILTER', id: _id, name });
 
   const PackCardWrapper = styled.button`
     padding: .70rem;

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 import { usePackDispatch } from '../contexts/packContext';
+import { useMutation } from 'react-apollo-hooks';
+
+import { CREATE_PACK } from '../queries';
 
 import { MediumButton } from './Elements/Button';
 import { Title1 } from './Elements/Text';
@@ -12,11 +15,15 @@ CreatePack.propTypes = {
   addPack: PropTypes.func.isRequired,
 };
 
-function CreatePack({ addPack }) {
+function CreatePack() {
   const theme = useContext(ThemeContext);
   const dispatch = usePackDispatch();
   const toggleCreatePack = () => dispatch({ type: 'TOGGLE_CREATE_PACK' });
   const [packName, setPackName] = useState('');
+
+  const addPack = useMutation(CREATE_PACK, {
+    variables: { input: { name: packName } },
+  });
 
   function handleNameChange(e) {
     setPackName(e.target.value); // handler for local input state
@@ -25,7 +32,7 @@ function CreatePack({ addPack }) {
   function handleFormSubmit(e) {
     e.preventDefault();
     if (packName !== '') {
-      addPack(packName); // SIDE EFFECT: invokes addPack function in AppRouter
+      addPack();
     }
     toggleCreatePack(); // toggles createPack state; rerender
   };
