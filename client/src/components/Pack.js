@@ -93,8 +93,6 @@ function Pack({ mode, filter, data }) {
     )
   };
 
-
-
   return (
     <PackWrapper className="Pack">
       <header className="Pack__header">
