@@ -9,6 +9,14 @@ const GET_PACKS = gql`
   }
 `;
 
+const GET_PACK_BY_ID = gql`
+  query fetchPackById($id: String!) {
+    fetchPack(id: $id) {
+      name
+    }
+  }
+`;
+
 const GET_FLASHCARDS_BY_PACK = gql`
   query fetchFlashcardsByPack($id: String!) {
     fetchFlashcardsByPack(id: $id) {
@@ -58,6 +66,7 @@ const CREATE_FLASHCARD = gql`
 
 export {
   GET_PACKS,
+  GET_PACK_BY_ID,
   CREATE_PACK,
   CREATE_FLASHCARD,
   GET_FLASHCARDS_BY_PACK

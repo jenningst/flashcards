@@ -1,45 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { usePackDispatch } from '../contexts/packContext';
+import { usePackDispatch, usePackState } from '../contexts/packContext';
 
-import { ReactComponent as BackIcon } from '../icons/back.svg'
-import { LargeButton } from './Elements/Button';
-import { Title1, Subhead } from './Elements/Text';
+import { Query } from 'react-apollo';
+import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
-PackHome.propTypes = {
-  data: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired,
-};
+import LinkButton from './elements/LinkButton';
+import Pack from './Pack';
+import LinkBackIcon from './icons/LinkBackIcon';
+import { LargeButton } from './elements/Button';
+import { Title1, Subhead } from './elements/Text';
 
-function PackHome({ name, data }) {
+function PackHome({ name, cards }) {
   const dispatch = usePackDispatch();
-  const exitToDashboard = () => dispatch({ type: 'CLEAR_COLLECTION' });
+  const state = usePackState();
+  const { packFilter, packName, packMode } = state;
   const setReviewMode = () => dispatch({ type: 'SET_REVIEW_MODE'});
   const setComposeMode = () => dispatch({ type: 'SET_WRITE_MODE'});
-
-  const hasQuestions = data.length > 0;
 
   return (
     <StyledPackHome className="PackHome">
       <header className="PackHome__header">
-        <BackIcon 
-          className="PackHome__button-back"
-          type="button"
-          onClick={exitToDashboard}
-        />
+        <LinkBackIcon className="Dashboard__menu-button" to="/"/>
       </header>
       <section className="PackHome__main">
         <div className="PackHome__card">
           <div className="card-content">
             <Title1>{name}</Title1>
-            <Subhead>{data.length} FLASHCARDS</Subhead>
+            <Subhead>{cards.length} FLASHCARDS</Subhead>
           </div>
           <LargeButton
             className="PackHome__button-review card-button"
             type="button"
             onClick={setReviewMode}
-            disabled={!hasQuestions}
+            disabled={cards.length > 0 ? false : true}
           >
             {"Begin Review"}
           </LargeButton>

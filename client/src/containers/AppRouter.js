@@ -2,8 +2,8 @@ import React from 'react';
 import { usePackState } from '../contexts/packContext';
 
 import Dashboard from '../components/Dashboard';
-import CreatePack from '../components/CreatePack';
-import PackRouter from './PackRouter';
+import CreatePack from '../components/ComposePack';
+import PackRouter from './PackContainer';
 
 function AppRouter() {
   const state = usePackState();
