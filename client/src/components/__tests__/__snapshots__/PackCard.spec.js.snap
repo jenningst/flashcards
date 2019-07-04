@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PackCard /> spec assert component renders correctly 1`] = `
+exports[`<PackCard /> spec assert component matches snapshot 1`] = `
 <button
   className="PackCard sc-iwsKbI htqYNd"
   data-testid="card"

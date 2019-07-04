@@ -21,7 +21,7 @@ const renderComponent = ({ name, _id }) =>
   );
 
 describe('<PackCard /> spec', () => {
-  it('assert component renders correctly', () => {
+  it('assert component matches snapshot', () => {
     const name = 'JavaScript';
     const _id = '1';
     const tree = renderer

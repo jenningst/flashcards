@@ -7,11 +7,7 @@ import { Body } from './elements/Text';
 import { MediumButton } from './elements/Button';
 
 Flashcard.propTypes = {
-  question: PropTypes.objectOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    answer: PropTypes.string.isRequired,
-  })).isRequired,
+  question: PropTypes.object.isRequired,
 };
 
 function Flashcard({ question }) {
@@ -63,7 +59,9 @@ function Flashcard({ question }) {
   return (
     <FlashcardWrapper className="Flashcard">
       <div className="Flashcard__question">
-        <Body className="Flashcard__question-text">
+        <Body 
+          data-testid='card-text'
+          className="Flashcard__question-text">
           {!showAnswer
             ? question.text
             : question.answer
@@ -71,7 +69,11 @@ function Flashcard({ question }) {
         </Body>
       </div>
       <MediumButton
-        className="Flashcard__toggle-button" type="button" onClick={toggleAnswer}>
+        className="Flashcard__toggle-button"
+        data-testid="card-button"
+        type="button"
+        onClick={toggleAnswer}
+      >
         {!showAnswer ? 'SHOW ANSWER' : 'SHOW QUESTION'}
       </MediumButton>
     </FlashcardWrapper>
