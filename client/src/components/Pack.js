@@ -10,10 +10,10 @@ import { GET_FLASHCARDS_BY_PACK } from '../queries';
 import { zeroPad } from '../utilities/helpers';
 
 import { Headline, Subhead} from './elements/Text';
-import { ReactComponent as CancelIcon } from '../icons/error.svg';
-import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
-import { ReactComponent as RightArrow } from '../icons/right-arrow.svg';
-import { ReactComponent as OvalIcon } from '../icons/oval.svg';
+import { ReactComponent as CancelIcon } from '../components/icons/svg/error.svg';
+import { ReactComponent as LeftArrow } from '../components/icons/svg/left-arrow.svg';
+import { ReactComponent as RightArrow } from '../components/icons/svg/right-arrow.svg';
+import { ReactComponent as OvalIcon } from '../components/icons/svg/oval.svg';
 import { MediumButton } from './elements/Button';
 import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';

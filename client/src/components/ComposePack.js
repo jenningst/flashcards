@@ -23,9 +23,9 @@ function ComposePack() {
         <input
           className="ComposePackWrapper__input-name"
           placeholder="Enter a Pack Name"
-          name="pack-name"
+          name="packname"
           value={packName}
-          onChange={e => handleNameChange(e)}
+          onChange={(e) => handleNameChange(e)}
           />
         <Mutation
           mutation={CREATE_PACK}
