@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PackCard /> spec assert component renders correctly 1`] = `
+<button
+  className="PackCard sc-iwsKbI htqYNd"
+  data-testid="card"
+  onClick={[Function]}
+  type="button"
+>
+  <h4
+    className="PackCard__header sc-bxivhb dSXQHY"
+  >
+    JavaScript
+  </h4>
+  <div
+    className="PackCard__count-pill"
+  >
+    <h6
+      className="PackCard__count-text sc-dnqmqq cPuweH"
+    >
+      CARDS
+    </h6>
+  </div>
+</button>
+`;
