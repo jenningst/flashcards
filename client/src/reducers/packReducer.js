@@ -1,7 +1,6 @@
 export const initialState = {
   packFilter: 'SHOW_ALL',
   packName: '',
-  displayCreatePack: false,
   packMode: '',
 };
 

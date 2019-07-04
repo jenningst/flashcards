@@ -16,6 +16,11 @@ module.exports = {
         return { ...pack._doc, _id: pack.id };
       });
     },
+    fetchPack: async function(_, args) {
+      const { id } = args;
+      const pack = await Pack.find({ pack_id: id });
+      return { ...pack._doc, _id: pack.id };
+    },
   },
   Mutation: {
     createPack: async function(_, { input }) {

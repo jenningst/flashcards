@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 
-import { Body } from './Elements/Text';
-import { MediumButton } from './Elements/Button';
+import { Body } from './elements/Text';
+import { MediumButton } from './elements/Button';
 
 Flashcard.propTypes = {
   question: PropTypes.objectOf(PropTypes.shape({

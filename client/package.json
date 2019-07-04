@@ -22,13 +22,29 @@
     "styled-components": "^4.3.2"
   },
   "scripts": {
+    "precommit": "NODE_ENV=production lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "setupFilesAfterEnv": "@testing-library/react/cleanup-after-each"
+  },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "prettier",
+      "prettier/react"
+    ]
+  },
+  "prettierConfig": {
+    "printWidth": "100",
+    "singleQuote": "true",
+    "semi": "true",
+    "trailingComma": "all",
+    "bracketSpacing": "true",
+    "arrowParens": "always"
   },
   "browserslist": {
     "production": [
@@ -43,6 +59,16 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.1"
+    "@testing-library/react": "^8.0.4",
+    "babel-plugin-styled-components": "^1.10.1",
+    "chai": "^4.2.0",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest-dom": "^3.5.0",
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.8.6"
   }
 }

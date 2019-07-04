@@ -1,29 +1,26 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { usePackDispatch } from '../contexts/packContext';
 import ThemeContext from '../contexts/themeContext';
+import { usePackDispatch } from '../contexts/packContext';
+import { slugify } from '../utilities/helpers';
 
-import { Title4, Caption3 } from './Elements/Text';
+import { withRouter } from 'react-router';
+
+import { Title4, Caption3 } from './elements/Text';
+import LinkButton from './elements/LinkButton';
 
 PackCard.propTypes = {
-  props: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    count: PropTypes.number.isRequired,
-    startCollection: PropTypes.func.isRequired,
-  }),
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string,
 };
 
-function PackCard(props){
-  const { _id, name, image, count } = props;
-  // Context
-  const dispatch = usePackDispatch();
+function PackCard({ _id, name, image, match }) {
   const theme = useContext(ThemeContext);
-  // Actions
-  const setCollection = id => dispatch({ type: 'SET_PACK_FILTER', id: _id, name });
+  const dispatch = usePackDispatch();
+  const setPack = () => dispatch({ type: 'SET_PACK_FILTER', id: _id, name: name });
 
-  const PackCardWrapper = styled.button`
+  const PackCardWrapper = styled(LinkButton)`
     padding: .70rem;
     background: ${theme.background.secondary};
     border-radius: 1rem;
@@ -43,19 +40,21 @@ function PackCard(props){
     }
   `;
 
+  // console.log(match);
+
   return (
     <PackCardWrapper
         className="PackCard"
-        type="button"
-        onClick={e => setCollection(name)}
+        to={`/pack/${_id}`}
+        onClick={setPack}
       >
         <Title4 className="PackCard__header">{name}</Title4>
         <div className="PackCard__count-pill">
-          <Caption3 className="PackCard__count-text">{count} CARDS</Caption3>  
+          <Caption3 className="PackCard__count-text">CARDS</Caption3>  
         </div>
       </PackCardWrapper>
   );
 };
 
 
-export default PackCard;
+export default withRouter(PackCard);

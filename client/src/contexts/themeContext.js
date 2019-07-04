@@ -1,40 +1,40 @@
 import React, { useState } from 'react';
 
-const dark = {
-  font: {
-    primary: '#FFFFFF',
-    secondary: '#E0E0E0',
-    tertiary: '#666666',
-  },
-  background: {
-    primary: '#282626',
-    secondary: '#313131',
-    highlight: '#6121BF',
-    special: '#7358F7',
-    inactive: '#b1aeb7',
-  },
-  button: {
-    default: {
-      primary: '#7358F7',
-      border: '#4D18AE',
-      alert: '#D55949',
-      greyed: '#666666',
-    },
-    disabled: {
-      primary: '',
-      secondary: '',
-      border: '',
-    },
-    hover: {
-      primary: '#6121BF',
-      border: '#6121BF',
-    },
-    active: {
-      primary: '#8b90ff',
-      border: '',
-    },
-  },
-};
+// const dark = {
+//   font: {
+//     primary: '#FFFFFF',
+//     secondary: '#E0E0E0',
+//     tertiary: '#666666',
+//   },
+//   background: {
+//     primary: '#282626',
+//     secondary: '#313131',
+//     highlight: '#6121BF',
+//     special: '#7358F7',
+//     inactive: '#b1aeb7',
+//   },
+//   button: {
+//     default: {
+//       primary: '#7358F7',
+//       border: '#4D18AE',
+//       alert: '#D55949',
+//       greyed: '#666666',
+//     },
+//     disabled: {
+//       primary: '',
+//       secondary: '',
+//       border: '',
+//     },
+//     hover: {
+//       primary: '#6121BF',
+//       border: '#6121BF',
+//     },
+//     active: {
+//       primary: '#8b90ff',
+//       border: '',
+//     },
+//   },
+// };
 
 const light = {
   font: {

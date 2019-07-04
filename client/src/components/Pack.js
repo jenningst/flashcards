@@ -9,24 +9,25 @@ import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import { zeroPad } from '../utilities/helpers';
 
-import { Headline, Subhead} from './Elements/Text';
-import { ReactComponent as CancelIcon } from '../icons/error.svg';
-import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
-import { ReactComponent as RightArrow } from '../icons/right-arrow.svg';
-import { ReactComponent as OvalIcon } from '../icons/oval.svg';
-import { MediumButton } from './Elements/Button';
+import { Headline, Subhead} from './elements/Text';
+import { ReactComponent as CancelIcon } from '../components/icons/svg/error.svg';
+import { ReactComponent as LeftArrow } from '../components/icons/svg/left-arrow.svg';
+import { ReactComponent as RightArrow } from '../components/icons/svg/right-arrow.svg';
+import { ReactComponent as OvalIcon } from '../components/icons/svg/oval.svg';
+import { MediumButton } from './elements/Button';
 import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';
 
 Pack.propTypes = {
   mode: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  cards: PropTypes.array.isRequired,
 };
 
-function Pack({ mode, filter, data }) {
+function Pack({ mode, filter, cards }) {
   const theme = useContext(ThemeContext);
   const dispatch = usePackDispatch();
+
   const [index, setIndex] = useState(0);
   const [questionText, setQuestionText] = useState('');
   const [questionAnswer, setQuestionAnswer] = useState('');
@@ -39,15 +40,16 @@ function Pack({ mode, filter, data }) {
   const saveCardAndRefresh = () => {
     setQuestionText('');
     setQuestionAnswer('');
+    setIndex(index + 1);
   }
   const isReviewMode = mode === 'REVIEW_MODE';
   // Setup display counters for REVIEW vs WRITE modes
-  const packTotal = data.length;
+  const packTotal = cards.length;
   const zeroPaddedTotal = isReviewMode ? zeroPad(packTotal) : zeroPad(parseInt(packTotal + 1));
   const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(packTotal + 1));
   
   // Constants for logic
-  const currentQuestion = data[index];
+  const currentQuestion = cards[index];
   // Prettify mode name
   const modeName = mode.replace('_', ' ');
 

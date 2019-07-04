@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ThemeContext from '../contexts/themeContext';
+// import ThemeContext from '../contexts/themeContext';
 
-import { MediumButton } from './Elements/Button';
+import { MediumButton } from './elements/Button';
 
 ComposeFlashcard.propTypes = {
   handleTextChange: PropTypes.func.isRequired,
@@ -16,7 +16,7 @@ function ComposeFlashcard({
   questionText,
   questionAnswer
 }) {
-  const theme = useContext(ThemeContext);
+  // const theme = useContext(ThemeContext);
   const [showAnswer, setShowAnswer] = useState(false); 
   const toggleAnswer = () => setShowAnswer(!showAnswer);
 
