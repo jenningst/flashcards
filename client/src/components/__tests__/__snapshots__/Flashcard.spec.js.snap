@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Flashcard /> spec assert it matches snapshot 1`] = `
+<div
+  className="Flashcard sc-VigVT khszqv"
+>
+  <div
+    className="Flashcard__question"
+  >
+    <p
+      className="Flashcard__question-text sc-EHOje gzeaHE"
+      data-testid="card-text"
+    >
+      What is 2 + 2?
+    </p>
+  </div>
+  <button
+    className="Flashcard__toggle-button sc-gZMcBi bWPJZK"
+    data-testid="card-button"
+    onClick={[Function]}
+    type="button"
+  >
+    SHOW ANSWER
+  </button>
+</div>
+`;

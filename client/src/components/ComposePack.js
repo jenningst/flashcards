@@ -3,9 +3,9 @@ import styled from 'styled-components';
 // import ThemeContext from '../contexts/themeContext';
 import { Mutation } from 'react-apollo';
 import { CREATE_PACK, GET_PACKS } from '../queries';
-import LinkButton from './elements/LinkButton';
+import LinkButton from './Elements/LinkButton';
 import LinkBackIcon from './icons/LinkBackIcon';
-import { Title1 } from './elements/Text';
+import { Title1 } from './Elements/Text';
 
 function ComposePack() {
   // const theme = useContext(ThemeContext);
@@ -20,8 +20,10 @@ function ComposePack() {
       </header>
       <section className="ComposePackWrapper__form">
         <Title1 className="ComposePackWrapper__title">Create a Pack</Title1>
+        <label htmlFor="pack-input-name">New Pack Name: </label>
         <input
           className="ComposePackWrapper__input-name"
+          id="pack-input-name"
           placeholder="Enter a Pack Name"
           name="packname"
           value={packName}

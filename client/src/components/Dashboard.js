@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 import PackCard from './PackCard';
-import LinkButton from './elements/LinkButton';
-import { Title1 } from './elements/Text';
+import LinkButton from './Elements/LinkButton';
+import { Title1 } from './Elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 
 import { GET_PACKS } from '../queries/';
@@ -56,7 +56,7 @@ function Dashboard() {
       grid-gap: 1rem;
     }
 
-    .Dashboard__add-collection {
+    .Dashboard__create-pack {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -84,8 +84,9 @@ function Dashboard() {
       </header>
       <section className="Dashboard__tiled-list">
         <LinkButton
+          className="Dashboard__create-pack"
+          data-testid="create-pack-button"
           to={"/create-pack"}
-          className="Dashboard__add-collection"
         >
           <Title1>+</Title1>
         </LinkButton>

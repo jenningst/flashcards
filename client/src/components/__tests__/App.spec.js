@@ -8,7 +8,7 @@ import App from '../App';
 afterEach(cleanup);
 
 describe('<App /> spec', () => {
-  it('assert it renders correctly', () => {
+  it.skip('assert component matches snapshot', () => {
     const tree = renderer
       .create(<App />)
       .toJSON();

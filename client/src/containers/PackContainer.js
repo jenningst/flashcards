@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
-import Pack from '../components/Pack';
+import Pack from '../components/PackCarousel';
 import { GET_PACK_BY_ID, GET_PACKS } from '../queries/index';
 
 const PackContainer = ({ match }) => {
