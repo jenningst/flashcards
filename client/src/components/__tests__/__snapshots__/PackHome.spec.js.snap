@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PackHome /> specs assert component matches snapshot 1`] = `
+<div
+  className="PackHome sc-VigVT hCZnHJ"
+>
+  <header
+    className="PackHome__header"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "flex",
+          "height": "2rem",
+          "width": "2rem",
+        }
+      }
+    >
+      <svg
+        className="Dashboard__menu-button"
+        style={
+          Object {
+            "height": "100%",
+            "overflow": "hidden",
+            "width": "100%",
+          }
+        }
+      >
+        back.svg
+      </svg>
+    </a>
+  </header>
+  <section
+    className="PackHome__main"
+  >
+    <div
+      className="PackHome__card"
+    >
+      <div
+        className="card-content"
+      >
+        <h1
+          className="sc-bxivhb bUMUXl"
+        >
+          Random
+        </h1>
+        <p
+          className="sc-dnqmqq dlYILN"
+        >
+          2
+           FLASHCARDS
+        </p>
+      </div>
+      <button
+        className="PackHome__button-review card-button sc-bdVaJa iLHgZy"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Begin Review
+      </button>
+    </div>
+  </section>
+  <footer
+    className="PackHome__footer"
+  >
+    <button
+      className="PackHome__button-compose sc-bdVaJa iLHgZy"
+      onClick={[Function]}
+      type="button"
+    >
+      Compose More Cards
+    </button>
+  </footer>
+</div>
+`;
