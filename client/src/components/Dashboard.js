@@ -56,7 +56,7 @@ function Dashboard() {
       grid-gap: 1rem;
     }
 
-    .Dashboard__add-collection {
+    .Dashboard__create-pack {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -84,8 +84,9 @@ function Dashboard() {
       </header>
       <section className="Dashboard__tiled-list">
         <LinkButton
+          className="Dashboard__create-pack"
+          data-testid="create-pack-button"
           to={"/create-pack"}
-          className="Dashboard__add-collection"
         >
           <Title1>+</Title1>
         </LinkButton>
