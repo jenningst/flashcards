@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ThemeContext from '../contexts/themeContext';
 import PackCard from './PackCard';
 import LinkButton from './Elements/LinkButton';
 import { Title1 } from './Elements/Text';
@@ -9,7 +8,7 @@ import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 import { GET_PACKS } from '../queries/';
 import { Query } from 'react-apollo';
 
-const PackList = () => (
+const UserPacks = () => (
   <Query query={GET_PACKS}>
     {({ loading, error, data }) => {
       if (loading) return 'Loading...';
@@ -28,72 +27,77 @@ const PackList = () => (
 );
 
 function Dashboard() {
-  const theme = useContext(ThemeContext);
-
-  const DashboardWrapper = styled.div`
-    box-sizing: border-box;
-    height: 100vh;
-    overflow-y: scroll;
-    padding: 1rem;
-    background: ${theme.background.primary};
-
-    .Dashboard__header {
-      display: flex;
-      justify-content: flex-end;
-      color: ${theme.font.primary};
-      padding: .50rem;
-    }
-
-    .Dashboard__menu-button {
-      height: 2rem;
-      width: 2rem;
-    }
-
-    .Dashboard__tiled-list {
-      display: grid;
-      overflow: scroll;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 45%));
-      grid-gap: 1rem;
-    }
-
-    .Dashboard__create-pack {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-
-      background: ${theme.background.inactive};
-      border: 2px solid ${theme.background.inactive};
-      outline: none;
-      &:hover {
-
-      }
-      &:active {
-
-      }
-    }
-`;
-
   return (
     <DashboardWrapper className="Dashboard">
-      <header className="Dashboard__header">
-        <MenuIcon
-          className="Dashboard__menu-button"
+      <Header className="Dashboard__header">
+        <IconButton
+          className="Dashboard__button-menu"
+          data-testid="button-menu"
           onClick={() => alert('you clicked the menu!')}
         />
-      </header>
-      <section className="Dashboard__tiled-list">
-        <LinkButton
-          className="Dashboard__create-pack"
+      </Header>
+      <PackList className="Dashboard__list">
+        <CreatePackButton
+          className="Dashboard__button-create-pack"
           data-testid="create-pack-button"
+          type="button"
           to={"/create-pack"}
         >
           <Title1>+</Title1>
-        </LinkButton>
-        <PackList />
-      </section>
+        </CreatePackButton>
+        
+        <UserPacks />
+
+      </PackList>
     </DashboardWrapper>
   );
 };
+
+const DashboardWrapper = styled.div`
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 1rem;
+  background: ${props => props.theme.background.primary};
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: flex-end;
+  color: ${props => props.theme.font.primary};
+  padding: .50rem;
+
+`;
+
+// TODO: make this its own component
+const IconButton = styled(MenuIcon)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const PackList = styled.section`
+  display: grid;
+  overflow: scroll;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 45%));
+  grid-gap: 1rem;
+`;
+
+// TODO: finish hover and active states
+const CreatePackButton = styled(LinkButton)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+
+  background: ${props => props.theme.background.primary};
+  border: 2px solid ${props => props.theme.font.primary};
+  outline: none;
+  &:hover {
+
+  }
+  &:active {
+
+  }
+`;
 
 export default Dashboard;

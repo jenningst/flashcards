@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../themes/theme';
 import { PackProvider } from '../contexts/packContext';
-import ThemeContext, { ThemeProvider } from '../contexts/themeContext';
 
 import { ApolloClient, HttpLink } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -17,12 +18,12 @@ const apolloClient = new ApolloClient({
 });
 
 function App() {
-  const theme = useContext(ThemeContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <ApolloProvider client={apolloClient}>
       <PackProvider>
-        <ThemeProvider value={theme}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
           <div className="app">
             <Router>
               <Route path="/" exact component={Dashboard} />
