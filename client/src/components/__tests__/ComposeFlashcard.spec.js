@@ -47,7 +47,7 @@ describe('<ComposeFlashcard /> spec', () => {
       questionAnswer: '',
     });
 
-    expect(getByTestId('question-text')).toHaveValue('');
+    expect(getByTestId('question-text')).toBeEmpty();
   });
 
   it('assert a toggle button is initially rendered with SHOW ANSWER', () => {
@@ -103,7 +103,7 @@ describe('<ComposeFlashcard /> spec', () => {
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
 
-    expect(await findByTestId('question-answer')).toHaveValue('');
+    expect(await findByTestId('question-answer')).toBeEmpty();
   });
 
   it('assert toggle button text changes upon valid input', async () => {
@@ -147,7 +147,7 @@ describe('<ComposeFlashcard /> spec', () => {
     expect(answerSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('assert question text persists after toggle', () => {
+  it('assert question text persists after toggle', async () => {
     // given: the question text and question answer textareas have valid input
     // when: a user toggles from the answer to the question text
     // then: the question text should persist
@@ -155,11 +155,18 @@ describe('<ComposeFlashcard /> spec', () => {
     const answerSpy = jest.fn();
     const newText = 'How do you make holy water?';
     const newAnswer = 'You boil the hell out of it.'
-    const { getByText, getByTestId, findByTestId } = renderComponent({
+    const { getByText, findByTestId } = renderComponent({
       handleTextChange: textSpy,
       handleAnswerChange: answerSpy,
       questionText: newText,
-      questionAnswer: newAnswer,
+      questionAnswer: '',
     });
+
+    fireEvent.click(getByText(/^show answer$/i), { button: 0 });
+    expect(await findByTestId('question-answer')).toBeInTheDocument();
+
+    fireEvent.click(getByText(/^show question$/i), { button: 0 });
+    expect(await findByTestId('question-text')).toBeInTheDocument();
+    expect(await findByTestId('question-text')).toHaveValue(newText);
   });
 });
