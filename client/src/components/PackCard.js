@@ -5,8 +5,8 @@ import ThemeContext from '../contexts/themeContext';
 import { usePackDispatch } from '../contexts/packContext';
 import { withRouter } from 'react-router';
 
-import { Title4, Caption3 } from './elements/Text';
-import LinkButton from './elements/LinkButton';
+import { Title4, Caption3 } from './Elements/Text';
+import LinkButton from './Elements/LinkButton';
 
 PackCard.propTypes = {
   _id: PropTypes.string.isRequired,

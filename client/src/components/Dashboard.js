@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 import PackCard from './PackCard';
-import LinkButton from './elements/LinkButton';
-import { Title1 } from './elements/Text';
+import LinkButton from './Elements/LinkButton';
+import { Title1 } from './Elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 
 import { GET_PACKS } from '../queries/';

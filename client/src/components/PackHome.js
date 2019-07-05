@@ -5,11 +5,11 @@ import { usePackDispatch, usePackState } from '../contexts/packContext';
 import { Query } from 'react-apollo';
 import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
-import LinkButton from './elements/LinkButton';
+import LinkButton from './Elements/LinkButton';
 import Pack from './Pack';
 import LinkBackIcon from './icons/LinkBackIcon';
-import { LargeButton } from './elements/Button';
-import { Title1, Subhead } from './elements/Text';
+import { LargeButton } from './Elements/Button';
+import { Title1, Subhead } from './Elements/Text';
 
 function PackHome({ name, cards }) {
   const dispatch = usePackDispatch();

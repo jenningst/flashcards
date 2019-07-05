@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import ThemeContext from '../contexts/themeContext';
 
-import { MediumButton } from './elements/Button';
+import { MediumButton } from './Elements/Button';
 
 ComposeFlashcard.propTypes = {
   handleTextChange: PropTypes.func.isRequired,
