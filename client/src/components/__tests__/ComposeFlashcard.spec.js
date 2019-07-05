@@ -14,7 +14,7 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-const renderComponent = ({ 
+const renderComponent = ({
   handleTextChange,
   handleAnswerChange ,
   questionText,
@@ -31,6 +31,8 @@ const renderComponent = ({
 
 describe('<ComposeFlashcard /> spec', () => {
   it.todo('assert component matches snapshot');
+
+  // TODO: can we refactor test setup into a better helper function?
 
   it('assert initially renders an empty question text textarea', () => {
     // given: the component has initially rendered
