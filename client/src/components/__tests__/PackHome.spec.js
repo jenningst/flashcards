@@ -57,27 +57,32 @@ describe('<PackHome /> specs', () => {
 
   it('assert a pack name is displayed', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
+
     expect(getByText(mockName)).toBeInTheDocument();
   });
 
   it('assert the correct number of flashcards is displayed', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
     const numberOfCards = mockCards.length;
-    expect(getByText(/FLASHCARDS/i)).toHaveTextContent(`${numberOfCards} FLASHCARDS`);
+
+    expect(getByText(/flashcards/i)).toHaveTextContent(`${numberOfCards} FLASHCARDS`);
   });
 
   it('assert review button is disabled if no cards in pack', () => {
     const { getByText } = renderComponent({ name: mockName, cards: [] });
-    expect(getByText(/begin review/i)).toBeDisabled();
+
+    expect(getByText(/^begin review$/i)).toBeDisabled();
   });
 
   it('assert review button is enabled if 1 or more cards in pack', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
-    expect(getByText(/begin review/i)).not.toBeDisabled();
+
+    expect(getByText(/^begin review$/i)).not.toBeDisabled();
   });
 
   it('assert compose button is present and enabled', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
+
     expect(getByText(/^compose more cards$/i)).toBeEnabled();
   });
 

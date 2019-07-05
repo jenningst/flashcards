@@ -45,23 +45,27 @@ describe('<ComposePack /> spec', () => {
 
   it('assert page greeting is rendered', () => {
     const { getByText } = renderComponent();
+
     expect(getByText(/^create a pack$/i)).toBeInTheDocument();
   });
 
   it('assert new pack name input is rendered with default value', () => {
     const { getByLabelText } = renderComponent();
     const inputElement = getByLabelText(/^new pack name:$/i);
+
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toBeEmpty();
   });
 
   it('assert a submit button is rendered', () => {
     const { getByText } = renderComponent();
+
     expect(getByText(/^submit$/i)).toBeInTheDocument();
   });
 
   it('assert submit button is initially disabled', () => {
     const { getByText } = renderComponent();
+
     expect(getByText(/^submit$/i)).toBeDisabled();
   });
 
@@ -71,10 +75,10 @@ describe('<ComposePack /> spec', () => {
     const { getByLabelText, findByText } = renderComponent();
     
     fireEvent.change(getByLabelText(/^new pack name:$/i), mockEvent);
+
     expect(await findByText(/^submit$/i)).toBeEnabled();
   });
 
   it.todo('assert clicking on submit button calls gql mutation');
-
   it.todo('assert clicking on submit button routes');
 });
