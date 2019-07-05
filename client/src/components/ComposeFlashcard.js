@@ -1,13 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import ThemeContext from '../contexts/themeContext';
 
 import { MediumButton } from './Elements/Button';
 
 ComposeFlashcard.propTypes = {
   handleTextChange: PropTypes.func.isRequired,
   handleAnswerChange: PropTypes.func.isRequired,
+  questionText: PropTypes.string,
+  questionAnswer: PropTypes.string,
 };
 
 function ComposeFlashcard({
@@ -26,11 +27,13 @@ function ComposeFlashcard({
         {!showAnswer
           ? <textarea 
               className="ComposeFlashcard__input--text"
+              data-testid="question-text"
               onChange={handleTextChange}
               value={questionText}
             />
           : <textarea
               className="ComposeFlashcard__input--answer"
+              data-testid="question-answer"
               onChange={handleAnswerChange}
               value={questionAnswer}
             />
@@ -95,17 +98,6 @@ const ComposeFlashcardWrapper = styled.div`
   }
 
   
-`;
-
-const FloatingDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
-  .ComposeFlashcard__save-button {
-
-  }
 `;
 
 export default ComposeFlashcard;

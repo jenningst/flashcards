@@ -66,17 +66,17 @@ describe('<PackHome /> specs', () => {
     expect(getByText(/FLASHCARDS/i)).toHaveTextContent(`${numberOfCards} FLASHCARDS`);
   });
 
-  it('review button is disabled if no cards in pack', () => {
+  it('assert review button is disabled if no cards in pack', () => {
     const { getByText } = renderComponent({ name: mockName, cards: [] });
     expect(getByText(/begin review/i)).toBeDisabled();
   });
 
-  it('review button is enabled if 1 or more cards in pack', () => {
+  it('assert review button is enabled if 1 or more cards in pack', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
     expect(getByText(/begin review/i)).not.toBeDisabled();
   });
 
-  it('compose button is present and enabled', () => {
+  it('assert compose button is present and enabled', () => {
     const { getByText } = renderComponent({ name: mockName, cards: mockCards });
     expect(getByText(/^compose more cards$/i)).toBeEnabled();
   });
