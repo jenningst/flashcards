@@ -20,8 +20,10 @@ function ComposePack() {
       </header>
       <section className="ComposePackWrapper__form">
         <Title1 className="ComposePackWrapper__title">Create a Pack</Title1>
+        <label htmlFor="pack-input-name">New Pack Name: </label>
         <input
           className="ComposePackWrapper__input-name"
+          id="pack-input-name"
           placeholder="Enter a Pack Name"
           name="packname"
           value={packName}

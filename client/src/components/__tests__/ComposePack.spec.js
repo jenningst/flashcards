@@ -1,12 +1,18 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
-import { shallow, mount } from 'enzyme';
-import { StaticRouter } from 'react-router';
+// import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
+
+import {
+  cleanup,
+  fireEvent,
+  render,
+} from '@testing-library/react';
 
 import ComposePack from '../ComposePack';
 import { CREATE_PACK } from '../../queries/index';
 
+// TODO: mock out the gql provider
 const mocks = [
   {
     request: {
@@ -23,55 +29,52 @@ const mocks = [
   },
 ];
 
-describe('<ComposePack />', () => {
-  let wrapper;
+afterEach(cleanup);
 
-  beforeEach(() => {
-    wrapper = mount(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <StaticRouter>
-          <ComposePack />
-        </StaticRouter>
-      </MockedProvider>
-      );
+const renderComponent = () => 
+  render(
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <MemoryRouter initialEntries={['/']}>
+        <ComposePack />
+      </MemoryRouter>
+    </MockedProvider>
+  );
+
+describe('<ComposePack /> spec', () => {
+  it.todo('assert component matches snapshot');
+
+  it('assert page greeting is rendered', () => {
+    const { getByText } = renderComponent();
+    expect(getByText(/^create a pack$/i)).toBeInTheDocument();
   });
 
-  afterEach(() => {
-    wrapper.unmount();
+  it('assert new pack name input is rendered with default value', () => {
+    const { getByLabelText } = renderComponent();
+    const inputElement = getByLabelText(/^new pack name:$/i);
+    expect(inputElement).toBeInTheDocument();
+    expect(inputElement).toBeEmpty();
   });
 
-  it('should render an input box', () => {
-    expect(wrapper.find('input.ComposePackWrapper__input-name')).toHaveLength(1);
+  it('assert a submit button is rendered', () => {
+    const { getByText } = renderComponent();
+    expect(getByText(/^submit$/i)).toBeInTheDocument();
   });
 
-  it('should render a submit button', () => {
-    expect(wrapper.find('button.ComposePackWrapper__button-submit')).toHaveLength(1);
+  it('assert submit button is initially disabled', () => {
+    const { getByText } = renderComponent();
+    expect(getByText(/^submit$/i)).toBeDisabled();
   });
 
-  it('should initially render a disabled button', () => {
-    const button = wrapper.find('button.ComposePackWrapper__button-submit');
-    expect(button.prop('disabled')).toEqual(true);
-  });
-
-  // it('should render an enabled button on non-null input value', () => {
-  //   const button = wrapper.find('button.ComposePackWrapper__button-submit');
-  //   expect(button.prop('disabled')).toEqual(true);
-  //   const input = wrapper.find('input.ComposePackWrapper__input-name');
-  //   input.value = "fuck!";
-  //   ReactTestUtils.Simulate.change(input);
-  //   console.log(input.debug());
-  //   expect(button.prop('disabled')).toEqual(false);
-  // });
-
-  it('should allow a user to submit a new pack', () => {
+  it('assert submit button is enabled upon valid input', async () => {
+    const newValue = 'What do you call a fake noodle?';
+    const mockEvent = { target: { value: newValue}}
+    const { getByLabelText, findByText } = renderComponent();
     
+    fireEvent.change(getByLabelText(/^new pack name:$/i), mockEvent);
+    expect(await findByText(/^submit$/i)).toBeEnabled();
   });
 
-  it('should allow a user to navigate back to the dashboard', () => {
-    
-  });
+  it.todo('assert clicking on submit button calls gql mutation');
 
-  it('should display a button for navigating back to the dashboard', () => {
-    
-  });
+  it.todo('assert clicking on submit button routes');
 });
