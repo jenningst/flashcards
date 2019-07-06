@@ -33,7 +33,16 @@ const renderComponent = ({
   );
 
 describe('<ComposeFlashcard /> spec', () => {
-  it.todo('assert component matches snapshot');
+  it('assert component matches snapshot', () => {
+    const { asFragment } = renderComponent({
+      handleTextChange: jest.fn(),
+      handleAnswerChange: jest.fn(),
+      questionText: '',
+      questionAnswer: '',
+      theme: lightTheme,
+    });
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   // TODO: can we refactor test setup into a better helper function?
 
