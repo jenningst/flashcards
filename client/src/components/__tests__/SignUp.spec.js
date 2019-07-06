@@ -71,4 +71,9 @@ describe('<SignUp /> spec', () => {
     const { getByText } = renderComponent({ theme: lightTheme });
     expect(getByText(/^already have an account/i)).toBeInTheDocument();
   });
+
+  it('assert link redirects to sign up page', () => {
+    const { getByText } = renderComponent({ theme: lightTheme });
+    expect(getByText(/^already have an account/i)).toHaveAttribute('href', '/login');
+  });
 });
