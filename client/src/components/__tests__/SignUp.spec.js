@@ -23,6 +23,11 @@ const renderComponent = ({ theme }) =>
   );
 
 describe('<SignUp /> spec', () => {
+  it('assert component matches snapshot', () => {
+    const { asFragment } = renderComponent({ theme: lightTheme });
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('assert it initially renders an empty input for email', () => {
     const { getByLabelText } = renderComponent({ theme: lightTheme });
     const emailElement = getByLabelText(/^email address$/i);
