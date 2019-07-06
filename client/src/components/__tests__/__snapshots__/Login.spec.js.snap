@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> spec assert component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Login"
+  >
+    <label
+      for="email"
+    >
+      Email Address
+    </label>
+    <input
+      class="Login__input-email"
+      id="email"
+      placeholder="Enter Email Address"
+      value=""
+    />
+    <label
+      for="password-one"
+    >
+      Password
+    </label>
+    <input
+      class="Login__input-password-one"
+      id="password-one"
+      placeholder="Enter Password"
+      value=""
+    />
+    <button
+      class="Login__button-sign-up sc-bwzfXH dVyRhp"
+      disabled=""
+      type="button"
+    >
+      Log In
+    </button>
+    <a
+      href="/signup"
+    >
+      Don't have an account? Sign up here.
+    </a>
+  </div>
+</DocumentFragment>
+`;
