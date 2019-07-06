@@ -1,5 +1,8 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router-dom';
+import { MockedProvider } from 'react-apollo/test-utils';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -9,24 +12,24 @@ import {
 
 import ComposeFlashcard from '../ComposeFlashcard';
 
-beforeEach(() => {
-});
-
 afterEach(cleanup);
 
 const renderComponent = ({
   handleTextChange,
   handleAnswerChange ,
   questionText,
-  questionAnswer
+  questionAnswer,
+  theme
 }) =>
   render(
-    <ComposeFlashcard
-      handleTextChange={handleTextChange}
-      handleAnswerChange={handleAnswerChange}
-      questionText={questionText}
-      questionAnswer={questionAnswer}
-    />
+    <ThemeProvider theme={theme}>
+      <ComposeFlashcard
+        handleTextChange={handleTextChange}
+        handleAnswerChange={handleAnswerChange}
+        questionText={questionText}
+        questionAnswer={questionAnswer}
+      />
+    </ThemeProvider>
   );
 
 describe('<ComposeFlashcard /> spec', () => {
@@ -45,6 +48,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerChange,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     expect(getByTestId('question-text')).toBeEmpty();
@@ -61,6 +65,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerChange,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     expect(getByText('SHOW ANSWER')).toBeEnabled();
@@ -79,6 +84,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
     const textAreaElement = getByTestId('question-text');
 
@@ -99,6 +105,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -118,6 +125,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -139,6 +147,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -160,6 +169,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
