@@ -4,6 +4,7 @@ exports[`<App /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="app"
+    style="height: 100vh; width: 100vw;"
   >
     <div
       class="Dashboard sc-gZMcBi eDycXU"

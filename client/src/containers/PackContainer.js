@@ -7,7 +7,7 @@ import { GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
 import Pack from '../components/PackCarousel';
-import { GET_PACK_BY_ID, GET_PACKS } from '../queries/index';
+import { GET_PACKS } from '../queries/index';
 
 const PackContainer = ({ match }) => {
   const state = usePackState();
@@ -24,11 +24,22 @@ const PackContainer = ({ match }) => {
             if (error) return <div>Error! ${error.message}</div>;
 
             const cards = data.fetchFlashcardsByPack;
+            let packs;
             
-            const packs = apolloClient.readQuery({
-              query: GET_PACKS,
-            });
-
+            try {
+              packs = apolloClient.readQuery({
+                query: GET_PACKS,
+                variables: { id: packId },
+              });
+            } catch (error) {
+              const id = cards[0].pack_id;
+              packs.apolloClient.readQuery({
+                query: GET_FLASHCARDS_BY_PACK,
+                variables: { id: id} 
+              });
+              // throw new Error(error.message);
+            }
+            
             // TODO: breaks when page refreshed here
             const pack = packs.fetchPacks.filter(p => p._id === packId).shift();
 

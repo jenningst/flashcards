@@ -15,11 +15,11 @@ function ComposePack() {
       <Header className="ComposePack__header">
         <IconButton className="ComposePack__button-back" to="/"/>
       </Header>
-      <Form className="ComposePack__form Form">
-        <Title1 className="Form__title">Create a Pack</Title1>
+      <Form className="ComposePack__form form">
+        <Title1 className="form__title">Create a Pack</Title1>
         <label htmlFor="pack-input-name">Pack Name: </label>
         <input
-          className="Form__input"
+          className="form__input"
           id="pack-input-name"
           placeholder="Enter a Pack Name"
           value={packName}
@@ -40,7 +40,7 @@ function ComposePack() {
         >
           {(addPack) => (
             <LinkButton
-              className="Form__button-submit"
+              className="form__button-submit"
               type="submit"
               to={"/"}
               disabled={packName === '' ? true : false}
@@ -76,7 +76,7 @@ const ComposePackWrapper = styled.div`
 
 const IconButton = styled(LinkBackIcon)`
   height: 2rem;
-  widht: 2rem;
+  width: 2rem;
 `;
 
 const Header = styled.header`
@@ -91,17 +91,17 @@ const Form = styled.section`
   justify-content: center;
   align-items: center;
 
-  .Form__title {
+  .form__title {
     margin-bottom: .50rem;
   }
-  .Form__input {
+  .form__input {
     margin: 1rem 0rem 1rem 0rem;
     font-size: 1.25rem;
     text-align: center;
     height: 2rem;
     padding: .25rem;
   }
-  Form__button-submit {
+  .form__button-submit {
     height: 2rem;
     width: 33%;
     path {

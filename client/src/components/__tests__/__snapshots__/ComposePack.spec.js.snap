@@ -13,7 +13,7 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
         style="display: flex; height: 2rem; width: 2rem;"
       >
         <svg
-          class="ComposePack__button-back sc-gZMcBi ipjJzi"
+          class="ComposePack__button-back sc-gZMcBi dcrjLy"
           style="height: 100%; width: 100%; overflow: hidden;"
         >
           back.svg
@@ -21,10 +21,10 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
       </a>
     </header>
     <section
-      class="ComposePack__form Form sc-VigVT ekIds"
+      class="ComposePack__form form sc-VigVT FaJHk"
     >
       <h1
-        class="Form__title sc-bdVaJa beESmM"
+        class="form__title sc-bdVaJa beESmM"
       >
         Create a Pack
       </h1>
@@ -34,13 +34,13 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
         Pack Name: 
       </label>
       <input
-        class="Form__input"
+        class="form__input"
         id="pack-input-name"
         placeholder="Enter a Pack Name"
         value=""
       />
       <button
-        class="Form__button-submit"
+        class="form__button-submit"
         disabled=""
         type="submit"
       >
