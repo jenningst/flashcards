@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dashboard /> spec assert component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Dashboard sc-gZMcBi eDycXU"
+  >
+    <header
+      class="Dashboard__header sc-gqjmRU fTNAVy"
+    >
+      <svg
+        class="Dashboard__button-menu sc-VigVT fCGeOx"
+        data-testid="button-menu"
+      >
+        menu.svg
+      </svg>
+    </header>
+    <section
+      class="Dashboard__list sc-jTzLTM FholT"
+    >
+      <button
+        class="Dashboard__button-create-pack sc-fjdhpX kSPajq"
+        data-testid="create-pack-button"
+        type="button"
+      >
+        <h1
+          class="sc-bdVaJa beESmM"
+        >
+          +
+        </h1>
+      </button>
+      Loading...
+    </section>
+  </div>
+</DocumentFragment>
+`;

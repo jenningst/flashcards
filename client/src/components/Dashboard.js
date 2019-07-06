@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import PackCard from './PackCard';
 import LinkButton from './Elements/LinkButton';
 import { Title1 } from './Elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
+import PackCard from './PackCard';
 
 import { GET_PACKS } from '../queries/';
 import { Query } from 'react-apollo';
@@ -69,7 +69,6 @@ const Header = styled.header`
 
 `;
 
-// TODO: make this its own component
 const IconButton = styled(MenuIcon)`
   height: 2rem;
   width: 2rem;
