@@ -1,5 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -9,40 +10,45 @@ import {
 
 import Flashcard from '../Flashcard';
 
-let mockObject = {};
-
-beforeEach(() => {
-  mockObject = {
-    id: '12',
-    text: 'What is 2 + 2?',
-    answer: '4',
-  };
-})
 afterEach(cleanup);
 
-const renderComponent = ({ card }) =>
+const renderComponent = ({ question, theme }) =>
   render(
-    <Flashcard question={card} />
+    <ThemeProvider theme={theme}>
+      <Flashcard question={question} />
+    </ThemeProvider>
   );
 
 describe('<Flashcard /> spec', () => {
   it('assert it matches snapshot', () => {
-    const tree = renderer
-      .create(
-        <Flashcard question={mockObject} />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const mockObject = {
+      id: '12',
+      text: 'What is 2 + 2?',
+      answer: '4',
+    };
+    const { asFragment } = renderComponent({ question: mockObject, theme: lightTheme});
+
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it('assert it renders question text', () => {
-    const { getByTestId } = renderComponent({ card: mockObject });
+    const mockObject = {
+      id: '12',
+      text: 'What is 2 + 2?',
+      answer: '4',
+    };
+    const { getByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
 
     expect(getByTestId('card-text')).toHaveTextContent('What is 2 + 2?');
   });
 
   it('assert it initially renders a SHOW ALL button', () => {
-    const { getByTestId } = renderComponent({ card: mockObject });
+    const mockObject = {
+      id: '12',
+      text: 'What is 2 + 2?',
+      answer: '4',
+    };
+    const { getByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
     const buttonElement = getByTestId('card-button');
 
     expect(buttonElement).toBeInTheDocument();
@@ -50,7 +56,12 @@ describe('<Flashcard /> spec', () => {
   });
 
   it('assert it displays different text when the button is clicked', async () => {
-    const { getByTestId, findByTestId } = renderComponent({ card: mockObject });
+    const mockObject = {
+      id: '12',
+      text: 'What is 2 + 2?',
+      answer: '4',
+    };
+    const { getByTestId, findByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
 
     expect(getByTestId('card-text')).toHaveTextContent('What is 2 + 2?');
     fireEvent.click(getByTestId('card-button'), { button: 0 });
@@ -59,7 +70,12 @@ describe('<Flashcard /> spec', () => {
   });
 
   it('assert it displays different text when the button is clicked', async () => {
-    const { getByTestId, findByTestId } = renderComponent({ card: mockObject });
+    const mockObject = {
+      id: '12',
+      text: 'What is 2 + 2?',
+      answer: '4',
+    };
+    const { getByTestId, findByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
     const buttonElement = getByTestId('card-button');
 
     expect(buttonElement).toBeInTheDocument();
