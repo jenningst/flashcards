@@ -1,7 +1,8 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -31,40 +32,45 @@ const mocks = [
 
 afterEach(cleanup);
 
-const renderComponent = () => 
+const renderComponent = ({ mocks, theme }) => 
   render(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <MemoryRouter initialEntries={['/']}>
-        <ComposePack />
-      </MemoryRouter>
-    </MockedProvider>
+    <ThemeProvider theme={theme}>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <MemoryRouter initialEntries={['/']}>
+          <ComposePack />
+        </MemoryRouter>
+      </MockedProvider>
+    </ThemeProvider>
   );
 
 describe('<ComposePack /> spec', () => {
-  it.todo('assert component matches snapshot');
+  it('assert component matches snapshot', () => {
+    const { asFragment } = renderComponent({ theme: lightTheme });
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   it('assert page greeting is rendered', () => {
-    const { getByText } = renderComponent();
+    const { getByText } = renderComponent({ theme: lightTheme });
 
     expect(getByText(/^create a pack$/i)).toBeInTheDocument();
   });
 
   it('assert new pack name input is rendered with default value', () => {
-    const { getByLabelText } = renderComponent();
-    const inputElement = getByLabelText(/^new pack name:$/i);
+    const { getByLabelText } = renderComponent({ theme: lightTheme });
+    const inputElement = getByLabelText(/^pack name:$/i);
 
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toBeEmpty();
   });
 
   it('assert a submit button is rendered', () => {
-    const { getByText } = renderComponent();
+    const { getByText } = renderComponent({ theme: lightTheme });
 
     expect(getByText(/^submit$/i)).toBeInTheDocument();
   });
 
   it('assert submit button is initially disabled', () => {
-    const { getByText } = renderComponent();
+    const { getByText } = renderComponent({ theme: lightTheme });
 
     expect(getByText(/^submit$/i)).toBeDisabled();
   });
@@ -72,9 +78,9 @@ describe('<ComposePack /> spec', () => {
   it('assert submit button is enabled upon valid input', async () => {
     const newValue = 'What do you call a fake noodle?';
     const mockEvent = { target: { value: newValue}}
-    const { getByLabelText, findByText } = renderComponent();
+    const { getByLabelText, findByText } = renderComponent({ theme: lightTheme });
     
-    fireEvent.change(getByLabelText(/^new pack name:$/i), mockEvent);
+    fireEvent.change(getByLabelText(/^pack name:$/i), mockEvent);
 
     expect(await findByText(/^submit$/i)).toBeEnabled();
   });

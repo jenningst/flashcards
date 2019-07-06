@@ -1,37 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> spec assert component matches snapshot 1`] = `
-<div
-  className="app"
->
+<DocumentFragment>
   <div
-    className="Dashboard sc-kAzzGY jibxRO"
+    class="app"
   >
-    <header
-      className="Dashboard__header"
+    <div
+      class="Dashboard sc-gZMcBi eDycXU"
     >
-      <svg
-        className="Dashboard__menu-button"
-        onClick={[Function]}
+      <header
+        class="Dashboard__header sc-gqjmRU fTNAVy"
       >
-        menu.svg
-      </svg>
-    </header>
-    <section
-      className="Dashboard__tiled-list"
-    >
-      <button
-        className="Dashboard__add-collection"
-        onClick={[Function]}
-      >
-        <h1
-          className="sc-bdVaJa beESmM"
+        <svg
+          class="Dashboard__button-menu sc-VigVT fCGeOx"
+          data-testid="button-menu"
         >
-          +
-        </h1>
-      </button>
-      Loading...
-    </section>
+          menu.svg
+        </svg>
+      </header>
+      <section
+        class="Dashboard__list sc-jTzLTM FholT"
+      >
+        <button
+          class="Dashboard__button-create-pack sc-fjdhpX kSPajq"
+          data-testid="create-pack-button"
+          type="button"
+        >
+          <h1
+            class="sc-bdVaJa beESmM"
+          >
+            +
+          </h1>
+        </button>
+        Loading...
+      </section>
+    </div>
   </div>
-</div>
+</DocumentFragment>
 `;
