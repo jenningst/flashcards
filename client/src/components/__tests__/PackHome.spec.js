@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { PackProvider } from '../../contexts/packContext';
 import { initialState } from '../../reducers/packReducer';
 import { MemoryRouter } from 'react-router-dom';

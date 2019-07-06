@@ -22,6 +22,4 @@ const renderComponent = () =>
     </MockedProvider>
   );
 
-describe('<PackCarousel /> spec', () => {
-  
-});
+describe.skip('<PackCarousel /> spec');
