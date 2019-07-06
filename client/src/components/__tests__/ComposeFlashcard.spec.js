@@ -1,6 +1,4 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { MockedProvider } from 'react-apollo/test-utils';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../themes/theme';
 
