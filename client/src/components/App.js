@@ -17,23 +17,6 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const mockData = {
-  name: 'JavaScript',
-  image: {
-    alt: 'javascript icon',
-    src: './assets/javascript.svg',
-  },
-  cards: [
-    {
-      _id: '5d1b0ff64d5f0d06f9d06476',
-      text: 'test question',
-      answer: 'test answer',
-      user_id: '1',
-      pack_id: '5d15c13c9d26a305dfce6da9'
-    }
-  ]
-}
-
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 

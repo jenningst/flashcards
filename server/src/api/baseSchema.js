@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 const base = gql`
   type Query {
     fetchPacks: [Pack!]!
-    fetchPack(id: String!): Pack!
+    fetchPackById(id: String!): Pack!
     fetchFlashcards: [Flashcard!]!
     fetchFlashcardsByPack(id: String!): [Flashcard!]!
   }
