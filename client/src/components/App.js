@@ -11,7 +11,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import Dashboard from './Dashboard';
 import ComposePack from './ComposePack';
 import PackContainer from '../containers/PackContainer';
-import PackHome from './PackHome';
 
 const apolloClient = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:4000/graphql" }),
