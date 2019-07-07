@@ -111,7 +111,7 @@ function PackCarousel({ mode, filter, cards }) {
         {isReviewMode
           ? (
               <Flashcard
-                question={currentQuestion}
+                card={currentQuestion}
               />
           ) : (
               <ComposeFlashcard

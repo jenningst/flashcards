@@ -12,10 +12,10 @@ import Flashcard from '../Flashcard';
 
 afterEach(cleanup);
 
-const renderComponent = ({ question, theme }) =>
+const renderComponent = ({ card, theme }) =>
   render(
     <ThemeProvider theme={theme}>
-      <Flashcard question={question} />
+      <Flashcard card={card} />
     </ThemeProvider>
   );
 
@@ -26,7 +26,7 @@ describe('<Flashcard /> spec', () => {
       text: 'What is 2 + 2?',
       answer: '4',
     };
-    const { asFragment } = renderComponent({ question: mockObject, theme: lightTheme});
+    const { asFragment } = renderComponent({ card: mockObject, theme: lightTheme});
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -37,7 +37,7 @@ describe('<Flashcard /> spec', () => {
       text: 'What is 2 + 2?',
       answer: '4',
     };
-    const { getByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
+    const { getByTestId } = renderComponent({ card: mockObject, theme: lightTheme});
 
     expect(getByTestId('card-text')).toHaveTextContent('What is 2 + 2?');
   });
@@ -48,7 +48,7 @@ describe('<Flashcard /> spec', () => {
       text: 'What is 2 + 2?',
       answer: '4',
     };
-    const { getByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
+    const { getByTestId } = renderComponent({ card: mockObject, theme: lightTheme});
     const buttonElement = getByTestId('card-button');
 
     expect(buttonElement).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe('<Flashcard /> spec', () => {
       text: 'What is 2 + 2?',
       answer: '4',
     };
-    const { getByTestId, findByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
+    const { getByTestId, findByTestId } = renderComponent({ card: mockObject, theme: lightTheme});
 
     expect(getByTestId('card-text')).toHaveTextContent('What is 2 + 2?');
     fireEvent.click(getByTestId('card-button'), { button: 0 });
@@ -75,7 +75,7 @@ describe('<Flashcard /> spec', () => {
       text: 'What is 2 + 2?',
       answer: '4',
     };
-    const { getByTestId, findByTestId } = renderComponent({ question: mockObject, theme: lightTheme});
+    const { getByTestId, findByTestId } = renderComponent({ card: mockObject, theme: lightTheme});
     const buttonElement = getByTestId('card-button');
 
     expect(buttonElement).toBeInTheDocument();

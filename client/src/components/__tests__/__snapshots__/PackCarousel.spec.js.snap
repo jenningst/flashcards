@@ -40,7 +40,7 @@ exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
           <p
             class="sc-bZQynM kpviFl"
           >
-            / 002
+            / 004
           </p>
         </div>
         <div
@@ -67,7 +67,7 @@ exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
             class="ContentArea__text sc-EHOje gzeaHE"
             data-testid="card-text"
           >
-            What is 2 + 2?
+            What do you do with a dead chemist
           </p>
         </section>
         <button

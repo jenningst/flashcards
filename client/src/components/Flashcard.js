@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Body } from './Elements/Text';
 import { MediumButton } from './Elements/Button';
 
-function Flashcard({ question }) {
+function Flashcard({ card }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const toggleAnswer = () => setShowAnswer(!showAnswer);
 
@@ -17,8 +17,8 @@ function Flashcard({ question }) {
           data-testid='card-text'
         >
           {!showAnswer
-            ? question.text
-            : question.answer
+            ? card.text
+            : card.answer
           }
         </Body>
       </ContentArea>
@@ -72,7 +72,7 @@ const ToggleButton = styled(MediumButton)`
 `;
 
 Flashcard.propTypes = {
-  question: PropTypes.object.isRequired,
+  card: PropTypes.object.isRequired,
 };
 
 export default Flashcard;
