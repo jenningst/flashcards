@@ -1,5 +1,5 @@
 const seedMockPack = require('../test-utils');
 
-describe('seedMockPack specs', () => {
-  
+describe.skip('seedMockPack specs', () => {
+  it.todo('assert that something happens');
 });
