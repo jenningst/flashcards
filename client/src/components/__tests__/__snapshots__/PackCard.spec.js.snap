@@ -1,25 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PackCard /> spec assert component matches snapshot 1`] = `
-<button
-  className="PackCard sc-iwsKbI htqYNd"
-  data-testid="card"
-  onClick={[Function]}
-  type="button"
->
-  <h4
-    className="PackCard__header sc-bxivhb dSXQHY"
+<DocumentFragment>
+  <button
+    class="PackCard sc-iwsKbI cPNTob"
+    data-testid="card"
+    type="button"
   >
-    JavaScript
-  </h4>
-  <div
-    className="PackCard__count-pill"
-  >
-    <h6
-      className="PackCard__count-text sc-dnqmqq cPuweH"
+    <h4
+      class="PackCard__title sc-bxivhb dSXQHY"
     >
-      CARDS
-    </h6>
-  </div>
-</button>
+      JavaScript
+    </h4>
+  </button>
+</DocumentFragment>
 `;

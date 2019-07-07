@@ -1,5 +1,6 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -9,28 +10,37 @@ import {
 
 import ComposeFlashcard from '../ComposeFlashcard';
 
-beforeEach(() => {
-});
-
 afterEach(cleanup);
 
 const renderComponent = ({
   handleTextChange,
   handleAnswerChange ,
   questionText,
-  questionAnswer
+  questionAnswer,
+  theme
 }) =>
   render(
-    <ComposeFlashcard
-      handleTextChange={handleTextChange}
-      handleAnswerChange={handleAnswerChange}
-      questionText={questionText}
-      questionAnswer={questionAnswer}
-    />
+    <ThemeProvider theme={theme}>
+      <ComposeFlashcard
+        handleTextChange={handleTextChange}
+        handleAnswerChange={handleAnswerChange}
+        questionText={questionText}
+        questionAnswer={questionAnswer}
+      />
+    </ThemeProvider>
   );
 
 describe('<ComposeFlashcard /> spec', () => {
-  it.todo('assert component matches snapshot');
+  it('assert component matches snapshot', () => {
+    const { asFragment } = renderComponent({
+      handleTextChange: jest.fn(),
+      handleAnswerChange: jest.fn(),
+      questionText: '',
+      questionAnswer: '',
+      theme: lightTheme,
+    });
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   // TODO: can we refactor test setup into a better helper function?
 
@@ -45,6 +55,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerChange,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     expect(getByTestId('question-text')).toBeEmpty();
@@ -61,6 +72,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerChange,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     expect(getByText('SHOW ANSWER')).toBeEnabled();
@@ -79,6 +91,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: '',
       questionAnswer: '',
+      theme: lightTheme,
     });
     const textAreaElement = getByTestId('question-text');
 
@@ -99,6 +112,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -118,6 +132,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -139,6 +154,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });
@@ -160,6 +176,7 @@ describe('<ComposeFlashcard /> spec', () => {
       handleAnswerChange: answerSpy,
       questionText: newText,
       questionAnswer: '',
+      theme: lightTheme,
     });
 
     fireEvent.click(getByText(/^show answer$/i), { button: 0 });

@@ -1,7 +1,8 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -10,25 +11,28 @@ import {
 
 import Dashboard from '../Dashboard';
 
-beforeEach(() => {
-});
-
+beforeEach(() => { });
 afterEach(cleanup);
 
-const renderComponent = () =>
+const renderComponent = ({ theme }) =>
   render(
-    <MockedProvider>
-      <MemoryRouter>
-        <Dashboard />
-      </MemoryRouter>
-    </MockedProvider>
+    <ThemeProvider theme={theme}>
+      <MockedProvider>
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>
+      </MockedProvider>
+    </ThemeProvider>
   );
 
 describe('<Dashboard /> spec', () => {
-  it.todo('assert component matches snapshot');
+  it('assert component matches snapshot', () => {
+    const { asFragment } = renderComponent({ theme: lightTheme });
+    expect(asFragment()).toMatchSnapshot();
+  });
   
   it('assert the add collection button renders', () => {
-    const { getByTestId } = renderComponent();
+    const { getByTestId } = renderComponent({ theme: lightTheme });
     expect(getByTestId('create-pack-button')).toBeEnabled();
   });
 

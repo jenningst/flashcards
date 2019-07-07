@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../themes/theme';
 import { PackProvider } from '../contexts/packContext';
-import ThemeContext, { ThemeProvider } from '../contexts/themeContext';
 
 import { ApolloClient, HttpLink } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -16,14 +17,31 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const mockData = {
+  name: 'JavaScript',
+  image: {
+    alt: 'javascript icon',
+    src: './assets/javascript.svg',
+  },
+  cards: [
+    {
+      _id: '5d1b0ff64d5f0d06f9d06476',
+      text: 'test question',
+      answer: 'test answer',
+      user_id: '1',
+      pack_id: '5d15c13c9d26a305dfce6da9'
+    }
+  ]
+}
+
 function App() {
-  const theme = useContext(ThemeContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <ApolloProvider client={apolloClient}>
       <PackProvider>
-        <ThemeProvider value={theme}>
-          <div className="app">
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+          <div className="app" style={{ height: '100vh', width: '100vw' }}>
             <Router>
               <Route path="/" exact component={Dashboard} />
               <Route path="/create-pack" component={ComposePack} />

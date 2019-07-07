@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter, BrowserRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
@@ -11,64 +12,70 @@ import PackCard from '../PackCard';
 
 afterEach(cleanup);
 
-const renderComponent = ({ name, _id }) => 
+const renderComponent = ({ name, _id, theme }) => 
   render(
-    <MemoryRouter initialEntries={['/random-page']}>
-      <BrowserRouter>
-        <PackCard _id={_id} name={name}/>
-      </BrowserRouter>
-    </MemoryRouter>
+    <ThemeProvider theme={theme}>
+      <MemoryRouter initialEntries={['/random-page']}>
+        <BrowserRouter>
+          <PackCard _id={_id} name={name} theme={theme}/>
+        </BrowserRouter>
+      </MemoryRouter>
+    </ThemeProvider>
   );
 
 describe('<PackCard /> spec', () => {
   it('assert component matches snapshot', () => {
-    const name = 'JavaScript';
-    const _id = '1';
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <BrowserRouter>
-            <PackCard _id={_id} name={name}/>
-          </BrowserRouter>
-        </MemoryRouter>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { asFragment } = renderComponent({ 
+      name: 'JavaScript', 
+      _id: '1',
+      theme: lightTheme });
+
+    expect(asFragment()).toMatchSnapshot();
   });
 
-  it('assert the primary button is rendered', () => {
-    const name = 'Vue';
+  it('assert the primary button is rendered', async () => {
+    const initialName = 'Vue';
     const _id = '1';
-    const { getByTestId } = renderComponent({ name, _id });
-    const wrapper = getByTestId('card');
+    const { getByTestId } = renderComponent({ 
+      name: initialName, 
+      _id, 
+      theme: lightTheme });
 
-    expect(wrapper).toBeInTheDocument();
+    expect(await getByTestId('card')).toBeInTheDocument();
   });
 
-  it('assert card name is displayed', () => {
-    const name = 'JavaScript';
+  it('assert card name is displayed', async () => {
+    const initialName = 'JavaScript';
     const _id = '1';
-    const { getByText } = renderComponent({ name, _id });
-    const title = getByText(name);
+    const theme = lightTheme;
+    const { getByText } = renderComponent({ 
+      name: initialName, 
+      _id, 
+      theme: lightTheme });
 
-    expect(title).toBeInTheDocument();
+    expect(await getByText(initialName)).toBeInTheDocument();
   });
 
-  it('assert re-renders with new props', () => {
-    const inititalName = 'JavaScript';
+  it('assert re-renders with new props', async () => {
+    const initialName = 'JavaScript';
     const newName = 'Angular';
+    const theme = lightTheme;
     const _id = '1';
-    const { getByText, rerender } = renderComponent({ name: inititalName, _id });
-    const initialTitle = getByText(inititalName);
+    const { getByText, rerender } = renderComponent({ 
+      name: initialName, 
+      _id, 
+      theme: lightTheme });
 
-    expect(initialTitle).toBeInTheDocument();
+    expect(await getByText(initialName)).toBeInTheDocument();
     rerender(
-      <MemoryRouter>
-        <PackCard _id={_id} name={newName}/>
-      </MemoryRouter>
+      <ThemeProvider theme={lightTheme}>
+        <MemoryRouter>
+          <PackCard _id={_id} name={newName} theme={theme}/>
+        </MemoryRouter>
+      </ThemeProvider>
     );
     const newTitle = getByText(newName);
-    expect(initialTitle).not.toBeInTheDocument();
-    expect(newTitle).toBeInTheDocument();
+
+    expect(await newTitle).toBeInTheDocument();
   });
 });
