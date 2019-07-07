@@ -89,17 +89,18 @@ function PackCarousel({ mode, filter, cards }) {
       <Header className="PackCarousel__header">
         <StyledClose 
           className="PackCarousel__button-close"
+          data-testid="button-close"
           onClick={e => exitToPackHome()}
         />
         <div className="PackCarousel__mode">
-          <Subhead>{prettyModeName}</Subhead>
+          <Subhead data-testid="mode">{prettyModeName}</Subhead>
         </div>
         <Counter className="PackCarousel__counter counter-group">
           <div className="counter-group__current">
-            <Headline>{zeroPaddedIndex}</Headline>
+            <Headline data-testid="current">{zeroPaddedIndex}</Headline>
           </div>
           <div className="counter-group__total">
-            <Subhead>{`/ ${zeroPaddedTotal}`}</Subhead>
+            <Subhead data-testid="total">{`/ ${zeroPaddedTotal}`}</Subhead>
           </div>
           <div className="counter-group__indicator">
             <OvalIcon className="active-dot" />
@@ -131,12 +132,14 @@ function PackCarousel({ mode, filter, cards }) {
           ) : (
             <>
               <LeftArrow 
-                className={`PackCarousel__button-nav${index === 0 ? ' disabled' : ''} back`}
+                className={`PackCarousel__button-nav${index === 0 ? '--disabled' : ''} back`}
                 onClick={priorCard}
+                data-testid="button-back"
               />
               <RightArrow 
-                className={`PackCarousel__button-nav${index === cards.length - 1 ? ' disabled' : ''} forward`}
+                className={`PackCarousel__button-nav${index === cards.length - 1 ? '--disabled' : ''} forward`}
                 onClick={nextCard}
+                data-testid="button-forward"
               />
             </>
           )
@@ -188,13 +191,13 @@ const BottomNav = styled.footer`
         fill: ${props => props.theme.background.special};
       }
     }
+  }
 
-    &.disabled {
+  svg[class*="--disabled"] {
       path {
         fill: ${props => props.theme.button.default.greyed};
       }
       pointer-events: none;
-    }
   }
 `;
 

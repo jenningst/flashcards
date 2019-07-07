@@ -40,7 +40,7 @@ exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
           <p
             class="sc-bZQynM kpviFl"
           >
-            / 004
+            / 001
           </p>
         </div>
         <div
@@ -67,7 +67,7 @@ exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
             class="ContentArea__text sc-EHOje gzeaHE"
             data-testid="card-text"
           >
-            What do you do with a dead chemist
+            Did you hear about the guy who lost the left side of his body
           </p>
         </section>
         <button
@@ -88,7 +88,7 @@ exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
         left-arrow.svg
       </svg>
       <svg
-        class="PackCarousel__button-nav forward"
+        class="PackCarousel__button-nav disabled forward"
       >
         right-arrow.svg
       </svg>
