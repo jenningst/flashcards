@@ -11,7 +11,8 @@ const GET_PACKS = gql`
 
 const GET_PACK_BY_ID = gql`
   query fetchPackById($id: String!) {
-    fetchPack(id: $id) {
+    fetchPackById(id: $id) {
+      _id
       name
     }
   }
