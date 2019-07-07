@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="ComposePack sc-iwsKbI cuTTV"
+  >
+    <header
+      class="ComposePack__header sc-gqjmRU fVwKRL"
+    >
+      <a
+        href="/"
+        style="display: flex; height: 2rem; width: 2rem;"
+      >
+        <svg
+          class="ComposePack__button-back sc-gZMcBi dcrjLy"
+          style="height: 100%; width: 100%; overflow: hidden;"
+        >
+          back.svg
+        </svg>
+      </a>
+    </header>
+    <section
+      class="ComposePack__form form sc-VigVT FaJHk"
+    >
+      <h1
+        class="form__title sc-bdVaJa beESmM"
+      >
+        Create a Pack
+      </h1>
+      <label
+        for="pack-input-name"
+      >
+        Pack Name: 
+      </label>
+      <input
+        class="form__input"
+        id="pack-input-name"
+        placeholder="Enter a Pack Name"
+        value=""
+      />
+      <button
+        class="form__button-submit"
+        disabled=""
+        type="submit"
+      >
+        Submit
+      </button>
+    </section>
+  </div>
+</DocumentFragment>
+`;

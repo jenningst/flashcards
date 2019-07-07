@@ -12,6 +12,7 @@
     "apollo-boost": "^0.4.3",
     "apollo-cache-inmemory": "^1.6.2",
     "graphql": "^14.4.0",
+    "jest-styled-components": "^6.3.3",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-apollo-hooks": "^0.4.5",
@@ -19,7 +20,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "shortid": "^2.2.14",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "precommit": "NODE_ENV=production lint-staged",
@@ -27,9 +29,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "jest": {
-    "setupFilesAfterEnv": "@testing-library/react/cleanup-after-each"
   },
   "eslintConfig": {
     "extends": [

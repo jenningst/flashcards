@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PackHome /> specs assert component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="PackHome sc-VigVT JWJrp"
+  >
+    <header
+      class="PackHome__header sc-jTzLTM djqSfX"
+    >
+      <div
+        class="nav-caption-combo"
+      >
+        <a
+          href="/"
+          style="display: flex; height: 2rem; width: 2rem;"
+        >
+          <svg
+            class="PackHome__button-back sc-fjdhpX eDzEvA"
+            style="height: 100%; width: 100%; overflow: hidden;"
+          >
+            back.svg
+          </svg>
+        </a>
+        <h6
+          class="PackHome__button-caption sc-gqjmRU bUQwPt"
+        >
+          Back
+        </h6>
+      </div>
+      <div
+        class="PackHome__image-card sc-jzJRlG iVMqdL"
+      >
+        <img
+          alt=""
+          src=""
+        />
+      </div>
+    </header>
+    <section
+      class="PackHome__info sc-cSHVUG kaoPbg"
+    >
+      <h1
+        class="PackHome__title sc-bxivhb bUMUXl"
+      >
+        Random
+      </h1>
+      <p
+        class="PackHome__count sc-dnqmqq dlYILN"
+      >
+        2 FLASHCARDS
+      </p>
+    </section>
+    <footer
+      class="PackHome__footer sc-kAzzGY hxseon"
+    >
+      <button
+        class="PackHome__button-review btn sc-htpNat eaVPXN"
+        title="Test yourself"
+        type="button"
+      >
+        Test
+      </button>
+      <button
+        class="PackHome__button-edit btn sc-htpNat eaVPXN"
+        disabled=""
+        title="Edit cards"
+        type="button"
+      >
+        Edit
+      </button>
+      <button
+        class="PackHome__button-compose btn sc-htpNat eaVPXN"
+        title="Create cards"
+        type="button"
+      >
+        Add
+      </button>
+    </footer>
+  </div>
+</DocumentFragment>
+`;

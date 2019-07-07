@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PackCard /> spec assert component matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="PackCard sc-iwsKbI cPNTob"
+    data-testid="card"
+    type="button"
+  >
+    <h4
+      class="PackCard__title sc-bxivhb dSXQHY"
+    >
+      JavaScript
+    </h4>
+  </button>
+</DocumentFragment>
+`;

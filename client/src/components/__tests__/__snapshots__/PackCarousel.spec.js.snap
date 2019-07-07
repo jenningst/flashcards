@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PackCarousel /> spec assert component matches snaptshot 1`] = `
+<DocumentFragment>
+  <div
+    class="PackCarousel sc-chPdSV giOJoI"
+  >
+    <header
+      class="PackCarousel__header sc-kgoBCf fgeGUY"
+    >
+      <svg
+        class="PackCarousel__button-close sc-kpOJdX guAKNK"
+      >
+        error.svg
+      </svg>
+      <div
+        class="PackCarousel__mode"
+      >
+        <p
+          class="sc-bZQynM kpviFl"
+        >
+          REVIEW MODE
+        </p>
+      </div>
+      <div
+        class="PackCarousel__counter counter-group sc-ckVGcZ cCaBEt"
+      >
+        <div
+          class="counter-group__current"
+        >
+          <h1
+            class="sc-ifAKCX fUpSho"
+          >
+            001
+          </h1>
+        </div>
+        <div
+          class="counter-group__total"
+        >
+          <p
+            class="sc-bZQynM kpviFl"
+          >
+            / 001
+          </p>
+        </div>
+        <div
+          class="counter-group__indicator"
+        >
+          <svg
+            class="active-dot"
+          >
+            oval.svg
+          </svg>
+        </div>
+      </div>
+    </header>
+    <section
+      class="PackCarousel__card-viewer sc-dxgOiQ gVmsQE"
+    >
+      <div
+        class="Flashcard sc-VigVT yrdFj"
+      >
+        <section
+          class="Flashcard__content ContentArea sc-jTzLTM kljkwS"
+        >
+          <p
+            class="ContentArea__text sc-EHOje gzeaHE"
+            data-testid="card-text"
+          >
+            Did you hear about the guy who lost the left side of his body
+          </p>
+        </section>
+        <button
+          class="sc-gZMcBi Flashcard__button-toggle sc-fjdhpX jHoKHV"
+          data-testid="card-button"
+          type="button"
+        >
+          SHOW ANSWER
+        </button>
+      </div>
+    </section>
+    <footer
+      class="PackCarousel__nav sc-kGXeez hGClzM"
+    >
+      <svg
+        class="PackCarousel__button-nav disabled back"
+      >
+        left-arrow.svg
+      </svg>
+      <svg
+        class="PackCarousel__button-nav disabled forward"
+      >
+        right-arrow.svg
+      </svg>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
