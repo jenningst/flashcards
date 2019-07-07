@@ -8,11 +8,11 @@ import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD} from '../queries';
 import { zeroPad } from '../utilities/helpers';
 
 import { Headline, Subhead} from './Elements/Text';
+import { MediumButton } from './Elements/Button';
 import { ReactComponent as CancelIcon } from '../components/icons/svg/error.svg';
 import { ReactComponent as LeftArrow } from '../components/icons/svg/left-arrow.svg';
 import { ReactComponent as RightArrow } from '../components/icons/svg/right-arrow.svg';
 import { ReactComponent as OvalIcon } from '../components/icons/svg/oval.svg';
-import { MediumButton } from './Elements/Button';
 import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';
 
@@ -28,22 +28,19 @@ function PackCarousel({ mode, filter, cards }) {
   const exitToPackHome = () => dispatch({ type: 'CLEAR_MODE' });
   const priorCard = () => setIndex(index - 1);
   const nextCard = () => setIndex(index + 1);
+
   const saveCardAndRefresh = () => {
     setQuestionText('');
     setQuestionAnswer('');
     setIndex(index + 1);
-  }
-  const isReviewMode = mode === 'REVIEW_MODE';
-  // Setup display counters for REVIEW vs WRITE modes
-  const packTotal = cards.length;
-  const zeroPaddedTotal = isReviewMode ? zeroPad(packTotal) : zeroPad(parseInt(packTotal + 1));
-  const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(packTotal + 1));
-  
-  // Constants for logic
-  const currentQuestion = cards[index];
-  // Prettify mode name
-  const prettyModeName = mode.replace('_', ' ');
+  };
 
+  const currentQuestion = cards[index];
+  const isReviewMode = mode === 'REVIEW_MODE';
+  const prettyModeName = mode.replace('_', ' ');
+  const zeroPaddedTotal = isReviewMode ? zeroPad(cards.length) : zeroPad(parseInt(cards.length + 1));
+  const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(cards.length + 1));
+  
   const CreateFlashcard = () => {
     return (
       <Mutation
@@ -138,7 +135,7 @@ function PackCarousel({ mode, filter, cards }) {
                 onClick={priorCard}
               />
               <RightArrow 
-                className={`PackCarousel__button-nav${index === packTotal - 1 ? ' disabled' : ''} forward`}
+                className={`PackCarousel__button-nav${index === cards.length - 1 ? ' disabled' : ''} forward`}
                 onClick={nextCard}
               />
             </>
