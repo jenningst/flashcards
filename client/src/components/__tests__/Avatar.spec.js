@@ -4,7 +4,6 @@ import { darkTheme, lightTheme } from '../../themes/theme';
 
 import {
   cleanup,
-  fireEvent,
   render,
 } from '@testing-library/react';
 

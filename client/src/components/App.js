@@ -24,7 +24,7 @@ function App() {
     <ApolloProvider client={apolloClient}>
       <PackProvider>
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-          <div className="app" style={{ height: '100vh', width: '100vw' }}>
+          <div className="app" style={{ height: '100vh', width: '100vw'}}>
             <Router>
               <Route path="/" exact component={Dashboard} />
               <Route path="/create-pack" component={ComposePack} />

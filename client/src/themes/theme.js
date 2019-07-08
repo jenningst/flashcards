@@ -39,8 +39,10 @@ export const lightTheme = {
     main: {
       primary: '#7883E2',
       primaryHover: '#939CE8',
+      secondary: '#e3e5ff',
+      secondaryHover: '#c3d2ff',
       pureWhite: '#ffffff',
-      showWhite: '#fcfbfc',
+      offWhite: '#f2f2f2',
     },
     alerts: {
       notice: '#c0a5ff',
@@ -53,6 +55,8 @@ export const lightTheme = {
     fonts: {
       eerieBlack: '#16171D',
       charleston: '#24252F',
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
     },
     borders: {
       lightGrey: '#',

@@ -4,9 +4,16 @@ import LinkButton from './elements/LinkButton';
 import { Title1 } from './elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 import PackCard from './PackCard';
-
+import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
 import { Query } from 'react-apollo';
+
+// TODO: dynamically get user info
+const user = {
+  id: '1',
+  name: 'Troy Jennings',
+  profilePhotoUrl: './assets/user.svg',
+};
 
 const UserPacks = () => (
   <Query query={GET_PACKS}>
@@ -35,6 +42,7 @@ function Dashboard() {
           data-testid="button-menu"
           onClick={() => alert('you clicked the menu!')}
         />
+        <Avatar />
       </Header>
       <PackList className="Dashboard__list">
         <CreatePackButton
@@ -55,44 +63,48 @@ function Dashboard() {
 
 const DashboardWrapper = styled.div`
   box-sizing: border-box;
-  height: 100vh;
-  overflow-y: scroll;
-  padding: 1rem;
-  background: ${props => props.theme.background.primary};
+  background: ${props => props.theme.color.main.pureWhite};
+  display: grid;
+  grid-template-rows: 15%, 1fr;
 `;
 
 const Header = styled.header`
+  grid-row: 1 / span 1;
   display: flex;
-  justify-content: flex-end;
-  color: ${props => props.theme.font.primary};
-  padding: .50rem;
-
+  justify-content: space-between;
+  align-items: center;
+  color: ${props => props.theme.color.fonts.eerieBlack};
+  padding: 1.5rem 1.5rem 0 1.5rem;
 `;
 
 const IconButton = styled(MenuIcon)`
-  height: 2rem;
-  width: 2rem;
+  height: 1.5rem;
+  width: 1.5rem;
 `;
 
 const PackList = styled.section`
+  grid-row: 2 / span 1;
   display: grid;
-  overflow: scroll;
-  grid-template-columns: repeat(auto-fit, minmax(135px, 45%));
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  grid-gap: .50rem;
+  overflow: auto;
+  padding: 1.5rem;
 `;
 
-// TODO: finish hover and active states
 const CreatePackButton = styled(LinkButton)`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
 
-  background: ${props => props.theme.background.primary};
-  border: 2px solid ${props => props.theme.font.primary};
+  background: ${props => props.theme.color.main.secondary};
+  color: ${props => props.theme.color.main.primaryHover};
   outline: none;
-  &:hover {
+  border: none;
 
+  &:hover {
+    background: ${props => props.theme.color.main.secondaryHover};
+    color: ${props => props.theme.color.main.primary};
   }
   &:active {
 
