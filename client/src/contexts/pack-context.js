@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import reducer, { initialState } from '../reducers/pack-reducer';
+import { reducer, INITIAL_STATE } from '../reducers/pack-reducer';
 
 const PackStateContext = createContext();
 const PackDispatchContext = createContext();
 
 // setup our pack provider
 function PackProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   return (
     <PackStateContext.Provider value={state}>
       <PackDispatchContext.Provider value={dispatch}>
