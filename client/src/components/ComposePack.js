@@ -13,7 +13,11 @@ function ComposePack() {
   return (
     <ComposePackWrapper className="ComposePack">
       <Header className="ComposePack__header">
-        <IconButton className="ComposePack__button-back" to="/"/>
+        <IconButton
+          className="ComposePack__button-back"
+          data-testid="button-back"
+          to="/"
+        />
       </Header>
       <Form className="ComposePack__form form">
         <Title1 className="form__title">Create a Pack</Title1>
