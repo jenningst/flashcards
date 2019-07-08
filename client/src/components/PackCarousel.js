@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { usePackDispatch } from '../contexts/packContext';
+import { usePackDispatch } from '../contexts/pack-context';
 import { Mutation } from  'react-apollo';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD} from '../queries';
 
 import { zeroPad } from '../utilities/helpers';
 
-import { Headline, Subhead} from './Elements/Text';
-import { MediumButton } from './Elements/Button';
+import { Headline, Subhead} from './elements/Text';
+import { MediumButton } from './elements/Button';
 import { ReactComponent as CancelIcon } from '../components/icons/svg/error.svg';
 import { ReactComponent as LeftArrow } from '../components/icons/svg/left-arrow.svg';
 import { ReactComponent as RightArrow } from '../components/icons/svg/right-arrow.svg';

@@ -1,6 +1,6 @@
 import React from 'react';
-import { PackProvider } from '../../contexts/packContext';
-import { initialState } from '../../reducers/packReducer';
+import { PackProvider } from '../../contexts/pack-context';
+import { initialState } from '../../reducers/pack-reducer';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../themes/theme';

@@ -1,5 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
+import { ApolloConsumer} from 'react-apollo';
+import { usePackState } from '../contexts/pack-context';
+
+=======
 import { usePackState } from '../contexts/packContext';
+>>>>>>> 2fcddb823a674a0407672b0430dfe8dca3cd6694
 import { Query } from 'react-apollo';
 import { GET_PACK_BY_ID, GET_FLASHCARDS_BY_PACK } from '../queries';
 
