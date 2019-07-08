@@ -3,7 +3,7 @@
 exports[`<PackHome /> specs assert component matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="PackHome sc-VigVT JWJrp"
+    class="PackHome sc-VigVT bfqtv"
   >
     <header
       class="PackHome__header sc-jTzLTM djqSfX"
@@ -29,7 +29,7 @@ exports[`<PackHome /> specs assert component matches snapshot 1`] = `
         </h6>
       </div>
       <div
-        class="PackHome__image-card sc-jzJRlG iVMqdL"
+        class="PackHome__image-card sc-jzJRlG jEbXkI"
       >
         <img
           alt=""

@@ -3,10 +3,10 @@
 exports[`<Dashboard /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Dashboard sc-gZMcBi eDycXU"
+    class="Dashboard sc-gZMcBi ffKCQX"
   >
     <header
-      class="Dashboard__header sc-gqjmRU fTNAVy"
+      class="Dashboard__header sc-gqjmRU hGzDjA"
     >
       <svg
         class="Dashboard__button-menu sc-VigVT fCGeOx"
@@ -19,7 +19,7 @@ exports[`<Dashboard /> spec assert component matches snapshot 1`] = `
       class="Dashboard__list sc-jTzLTM FholT"
     >
       <button
-        class="Dashboard__button-create-pack sc-fjdhpX kSPajq"
+        class="Dashboard__button-create-pack sc-fjdhpX ddgael"
         data-testid="create-pack-button"
         type="button"
       >

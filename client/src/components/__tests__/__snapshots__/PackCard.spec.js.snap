@@ -3,7 +3,7 @@
 exports[`<PackCard /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="PackCard sc-iwsKbI cPNTob"
+    class="PackCard sc-iwsKbI kIvPKP"
     data-testid="card"
     type="button"
   >

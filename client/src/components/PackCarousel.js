@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { usePackDispatch } from '../contexts/pack-context';
 import { Mutation } from  'react-apollo';
-import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD} from '../queries';
+import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
 
 import { zeroPad } from '../utilities/helpers';
 
@@ -266,7 +266,9 @@ const Counter = styled.div`
 PackCarousel.propTypes = {
   mode: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
-  cards: PropTypes.array.isRequired,
+  cards: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
 };
 
 export default PackCarousel;
