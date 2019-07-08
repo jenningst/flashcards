@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { usePackDispatch } from '../contexts/packContext';
 
 import LinkBackIcon from './icons/LinkBackIcon';
-import { SmallButton } from './Elements/Button';
-import { Title1, Subhead, Caption3 } from './Elements/Text';
+import { SmallButton } from './elements/Button';
+import { Title1, Subhead, Caption3 } from './elements/Text';
 
 function PackHome({ name, cards, image }) {
   const dispatch = usePackDispatch();

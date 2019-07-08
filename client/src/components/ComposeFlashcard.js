@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { MediumButton } from './Elements/Button';
+import { MediumButton } from './elements/Button';
 
 function ComposeFlashcard({
   handleTextChange,

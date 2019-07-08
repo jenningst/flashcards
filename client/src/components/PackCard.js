@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
-import { Title4 } from './Elements/Text';
-import LinkButton from './Elements/LinkButton';
+import { Title4 } from './elements/Text';
+import LinkButton from './elements/LinkButton';
 
 function PackCard({ _id, name }) {
   return (

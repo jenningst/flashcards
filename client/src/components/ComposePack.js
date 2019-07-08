@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
 import { CREATE_PACK, GET_PACKS } from '../queries';
-import LinkButton from './Elements/LinkButton';
+import LinkButton from './elements/LinkButton';
 import LinkBackIcon from './icons/LinkBackIcon';
-import { Title1 } from './Elements/Text';
+import { Title1 } from './elements/Text';
 
 function ComposePack() {
   const [packName, setPackName] = useState('');

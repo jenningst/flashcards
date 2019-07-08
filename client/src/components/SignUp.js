@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MediumButton } from '../components/Elements/Button';
+import { MediumButton } from './elements/Button';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');

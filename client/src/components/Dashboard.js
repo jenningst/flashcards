@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import LinkButton from './Elements/LinkButton';
-import { Title1 } from './Elements/Text';
+import LinkButton from './elements/LinkButton';
+import { Title1 } from './elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 import PackCard from './PackCard';
 

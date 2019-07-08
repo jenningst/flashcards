@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Body } from './Elements/Text';
-import { MediumButton } from './Elements/Button';
+import { Body } from './elements/Text';
+import { MediumButton } from './elements/Button';
 
 function Flashcard({ card }) {
   const [showAnswer, setShowAnswer] = useState(false);
