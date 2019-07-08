@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloConsumer} from 'react-apollo';
-import { usePackState } from '../contexts/packContext';
+import { usePackState } from '../contexts/pack-context';
 
 import { Query } from 'react-apollo';
 import { GET_FLASHCARDS_BY_PACK } from '../queries';

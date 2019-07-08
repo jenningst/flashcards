@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 };
 
 // pack mode reducer
-function packReducer(state = INITIAL_STATE, action) {
+function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case types.SET_REVIEW_MODE:
       return { ...state, mode: 'REVIEW_MODE' };
@@ -24,4 +24,4 @@ function packReducer(state = INITIAL_STATE, action) {
   };
 };
 
-export { INITIAL_STATE, types, packReducer };
+export { INITIAL_STATE, types, reducer };
