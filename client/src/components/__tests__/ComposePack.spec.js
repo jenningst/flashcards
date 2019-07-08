@@ -32,11 +32,11 @@ const mocks = [
 
 afterEach(cleanup);
 
-const renderComponent = ({ mocks, theme }) => 
+const renderComponent = ({ mocks, theme, entries }) => 
   render(
     <ThemeProvider theme={theme}>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={entries}>
           <ComposePack />
         </MemoryRouter>
       </MockedProvider>
@@ -51,27 +51,23 @@ describe('<ComposePack /> spec', () => {
 
   it('assert page greeting is rendered', () => {
     const { getByText } = renderComponent({ theme: lightTheme });
-
     expect(getByText(/^create a pack$/i)).toBeInTheDocument();
   });
 
   it('assert new pack name input is rendered with default value', () => {
     const { getByLabelText } = renderComponent({ theme: lightTheme });
     const inputElement = getByLabelText(/^pack name:$/i);
-
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toBeEmpty();
   });
 
   it('assert a submit button is rendered', () => {
     const { getByText } = renderComponent({ theme: lightTheme });
-
     expect(getByText(/^submit$/i)).toBeInTheDocument();
   });
 
   it('assert submit button is initially disabled', () => {
     const { getByText } = renderComponent({ theme: lightTheme });
-
     expect(getByText(/^submit$/i)).toBeDisabled();
   });
 
@@ -79,12 +75,10 @@ describe('<ComposePack /> spec', () => {
     const newValue = 'What do you call a fake noodle?';
     const mockEvent = { target: { value: newValue}}
     const { getByLabelText, findByText } = renderComponent({ theme: lightTheme });
-    
     fireEvent.change(getByLabelText(/^pack name:$/i), mockEvent);
-
     expect(await findByText(/^submit$/i)).toBeEnabled();
   });
 
-  it.todo('assert clicking on submit button calls gql mutation');
   it.todo('assert clicking on submit button routes');
+  it.todo('assert clicking on submit button calls gql mutation');
 });
