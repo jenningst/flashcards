@@ -47,7 +47,7 @@ const PackCardContent = styled(BaseWrapper)`
   
   margin-right: .50rem;
   padding: .70rem;
-  min-height: 75px;
+  min-height: 100px;
   border: none;
 
   &:hover {

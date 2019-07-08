@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinkButton from './elements/LinkButton';
-import { Title1 } from './elements/Text';
+import { Title1, Title3, Body, Caption3 } from './elements/Text';
 import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
@@ -37,26 +37,38 @@ function Dashboard() {
   return (
     <DashboardWrapper className="Dashboard">
       <Header className="Dashboard__header">
-        <IconButton
-          className="Dashboard__button-menu"
-          data-testid="button-menu"
-          onClick={() => alert('you clicked the menu!')}
-        />
+        <div className="button-label-group">
+          <IconButton
+            className="Dashboard__button-menu"
+            data-testid="button-menu"
+            onClick={() => alert('you clicked the menu!')}
+          />
+          <Caption3>Dashboard</Caption3>
+        </div>
         <Avatar />
       </Header>
-      <PackList className="Dashboard__list">
-        <CreatePackButton
-          className="Dashboard__button-create-pack"
-          data-testid="create-pack-button"
-          type="button"
-          to={"/create-pack"}
-        >
-          <Title1>+</Title1>
-        </CreatePackButton>
-        
-        <UserPacks />
 
-      </PackList>
+      <GreetingSection className="Dashboard__greeting-section">
+        <Caption3>{"October 19th"}</Caption3>
+        <Title3>Ready to learn?</Title3>
+      </GreetingSection>
+
+      <PackSection className="Dashboard__pack-section">
+        <Body>Your Packs</Body>
+        <PackList className="Dashboard__list">
+          <CreatePackButton
+            className="Dashboard__button-create-pack"
+            data-testid="create-pack-button"
+            type="button"
+            to={"/create-pack"}
+          >
+            <Title1>+</Title1>
+          </CreatePackButton>
+          
+          <UserPacks />
+        </PackList>
+
+      </PackSection>
     </DashboardWrapper>
   );
 };
@@ -64,8 +76,9 @@ function Dashboard() {
 const DashboardWrapper = styled.div`
   box-sizing: border-box;
   background: ${props => props.theme.color.main.pureWhite};
+  color: ${props => props.theme.color.fonts.charleston};
   display: grid;
-  grid-template-rows: 15%, 1fr;
+  grid-template-rows: repeat(2, auto) 1fr;
 `;
 
 const Header = styled.header`
@@ -74,7 +87,22 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   color: ${props => props.theme.color.fonts.eerieBlack};
-  padding: 1.5rem 1.5rem 0 1.5rem;
+  padding: 1.5rem;
+
+  .button-label-group {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+      margin-right: 1rem;
+    }
+
+    h6 {
+      color: ${props => props.theme.color.main.primary};
+    }
+  }
 `;
 
 const IconButton = styled(MenuIcon)`
@@ -82,13 +110,42 @@ const IconButton = styled(MenuIcon)`
   width: 1.5rem;
 `;
 
-const PackList = styled.section`
+const GreetingSection = styled.section`
   grid-row: 2 / span 1;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+
+  h6 {
+    color: ${props => props.theme.color.fonts.grey};
+  }
+
+  h3 {
+    font-weight: 500;
+    color: ${props => props.theme.color.main.primary};
+  }
+`;
+
+const PackSection = styled.section`
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 1.5rem;
+
+  p {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+`;
+
+const PackList = styled.div`
+  grid-row: 3 / span 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
   grid-gap: .50rem;
   overflow: auto;
-  padding: 1.5rem;
+
+  p {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
 `;
 
 const CreatePackButton = styled(LinkButton)`

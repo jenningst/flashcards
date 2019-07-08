@@ -54,12 +54,13 @@ export const lightTheme = {
     },
     fonts: {
       eerieBlack: '#16171D',
-      charleston: '#24252F',
+      charleston: '#292b3d',
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
+      grey: '#c4c2c9',
     },
     borders: {
-      lightGrey: '#',
+      lightGrey: '#c4c2c9',
     }
   },
   font: {
