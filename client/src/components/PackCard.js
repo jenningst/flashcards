@@ -52,6 +52,9 @@ const PackCardContent = styled(BaseWrapper)`
 
   &:hover {
     background-color: ${props => props.theme.color.main.primaryHover};
+    h4 {
+      font-weight: 500;
+    }
   }
 
   h4 {

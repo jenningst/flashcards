@@ -13,13 +13,13 @@ const Avatar = user => {
         ? <DefaultAvatar 
             className="Avatar__image--unauth"
             alt="avatar"
-            data-testid="avatar"
+            data-testid="avatar-unauth"
           />
         : <img
             className="Avatar__image--auth"
             src={user.profilePhotoUrl}
             alt="avatar"
-            data-testid="avatar"
+            data-testid="avatar-auth"
           />
       }
     </AvatarWrapper>

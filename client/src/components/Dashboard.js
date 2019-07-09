@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import LinkButton from './elements/LinkButton';
-import { Title1, Title3, Body, Caption3 } from './elements/Text';
-import { ReactComponent as MenuIcon } from '../components/icons/svg/menu.svg';
+import { Title1, Title2, Body, Caption3 } from './elements/Text';
+import { ReactComponent as Menu } from '../components/icons/svg/menu.svg';
+import { ReactComponent as Close } from '../components/icons/svg/error.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
@@ -34,51 +35,91 @@ const UserPacks = () => (
 );
 
 function Dashboard() {
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => setShowMenu(!showMenu);
   return (
-    <DashboardWrapper className="Dashboard">
-      <Header className="Dashboard__header">
-        <div className="button-label-group">
-          <IconButton
-            className="Dashboard__button-menu"
-            data-testid="button-menu"
-            onClick={() => alert('you clicked the menu!')}
-          />
-          <Caption3>Dashboard</Caption3>
-        </div>
-        <Avatar />
-      </Header>
+    <PageWrapper className="Dashboard">
+      {/* <SideNav
+        className={`Dashboard__side-nav${showMenu ? '--hidden' : '--visible'}`}
+      >
+        <CloseIcon
+          className="Dashboard__button-close-menu"
+          data-testid="button-close-menu"
+          onClick={toggleMenu}
+        />
+        <Title1>Hello!</Title1>
+      </SideNav> */}
 
-      <GreetingSection className="Dashboard__greeting-section">
-        <Caption3>{"October 19th"}</Caption3>
-        <Title3>Ready to learn?</Title3>
-      </GreetingSection>
+      <DashboardWrapper className="Dashboard__main">
+        <Header className="Dashboard__header">
+          <ButtonGroup className="button-label-group">
+            <MenuIcon
+              className="Dashboard__button-menu"
+              data-testid="button-menu"
+              onClick={toggleMenu}
+            />
+            <Caption3>Dashboard</Caption3>
+          </ButtonGroup>
+          <Avatar />
+        </Header>
 
-      <PackSection className="Dashboard__pack-section">
-        <Body>Your Packs</Body>
-        <PackList className="Dashboard__list">
-          <CreatePackButton
-            className="Dashboard__button-create-pack"
-            data-testid="create-pack-button"
-            type="button"
-            to={"/create-pack"}
+        <GreetingSection className="Dashboard__greeting-section">
+          <Caption3
+            className="greeting-date"
+            data-testid="greeting-date"
           >
-            <Title1>+</Title1>
-          </CreatePackButton>
-          
-          <UserPacks />
-        </PackList>
+            {"October 19th"}
+          </Caption3>
+          <Title2 className="greeting-title">Ready to learn?</Title2>
+        </GreetingSection>
 
-      </PackSection>
-    </DashboardWrapper>
+        <PackSection className="Dashboard__pack-section">
+          <Body>Your Packs</Body>
+          <PackList className="Dashboard__list">
+            <CreatePackButton
+              className="Dashboard__button-create-pack"
+              data-testid="create-pack-button"
+              type="button"
+              to={"/create-pack"}
+            >
+              <Title1>+</Title1>
+            </CreatePackButton>
+            
+            <UserPacks />
+          </PackList>
+
+        </PackSection>
+      </DashboardWrapper>
+    </PageWrapper>
   );
 };
 
-const DashboardWrapper = styled.div`
+const PageWrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 100%;
+`;
+
+const SideNav = styled.aside`
+  position: absolute;
+  height: 100%;
+
+  &[class*="--hidden"] {
+    z-index: 1
+  }
+
+  transition: all 0.5s ease;
+`;
+
+const DashboardWrapper = styled.section`
+  flex-grow: 1;
   box-sizing: border-box;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.charleston};
   display: grid;
   grid-template-rows: repeat(2, auto) 1fr;
+  height: 100%;
+  overflow: hidden;
 `;
 
 const Header = styled.header`
@@ -88,24 +129,29 @@ const Header = styled.header`
   align-items: center;
   color: ${props => props.theme.color.fonts.eerieBlack};
   padding: 1.5rem;
+`;
 
-  .button-label-group {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
 
-    svg {
-      margin-right: 1rem;
-    }
+  svg {
+    margin-right: 1rem;
+  }
 
-    h6 {
-      color: ${props => props.theme.color.main.primary};
-    }
+  h6 {
+    color: ${props => props.theme.color.main.primary};
   }
 `;
 
-const IconButton = styled(MenuIcon)`
+const MenuIcon = styled(Menu)`
+  height: 1.5rem;
+  width: 1.5rem;
+`;
+
+const CloseIcon = styled(Close)`
   height: 1.5rem;
   width: 1.5rem;
 `;
@@ -114,11 +160,11 @@ const GreetingSection = styled.section`
   grid-row: 2 / span 1;
   padding: 1rem 1.5rem 1rem 1.5rem;
 
-  h6 {
+  .greeting-date {
     color: ${props => props.theme.color.fonts.grey};
   }
 
-  h3 {
+  .greeting-title {
     font-weight: 500;
     color: ${props => props.theme.color.main.primary};
   }
@@ -162,6 +208,9 @@ const CreatePackButton = styled(LinkButton)`
   &:hover {
     background: ${props => props.theme.color.main.secondaryHover};
     color: ${props => props.theme.color.main.primary};
+    h1 {
+      font-weight: 500;
+    }
   }
   &:active {
 

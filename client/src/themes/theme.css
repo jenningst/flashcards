@@ -1,11 +1,13 @@
-/* color: {
+/* 
+
+color: {
   main: {
     primary: '#7883E2',
     primaryHover: '#939CE8',
-    secondary: '#c3d2ff',
-    secondaryHover: '#e3e5ff',
+    secondary: '#e3e5ff',
+    secondaryHover: '#c3d2ff',
     pureWhite: '#ffffff',
-    offWhite: '#f2f2f2',
+    offWhite: '#f5f7fb',
   },
   alerts: {
     notice: '#c0a5ff',
@@ -20,9 +22,10 @@
     charleston: '#292b3d',
     pureWhite: '#ffffff',
     offWhite: '#fcfbfc',
-    grey: '#c4c2c9',
+    grey: '#b1aeb7',
   },
   borders: {
-    lightGrey: '#',
+    lightGrey: '#d8d6db',
   }
-}, */
+
+}*/

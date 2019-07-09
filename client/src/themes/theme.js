@@ -42,7 +42,7 @@ export const lightTheme = {
       secondary: '#e3e5ff',
       secondaryHover: '#c3d2ff',
       pureWhite: '#ffffff',
-      offWhite: '#f2f2f2',
+      offWhite: '#f5f7fb',
     },
     alerts: {
       notice: '#c0a5ff',
@@ -57,10 +57,10 @@ export const lightTheme = {
       charleston: '#292b3d',
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
-      grey: '#c4c2c9',
+      grey: '#b1aeb7',
     },
     borders: {
-      lightGrey: '#c4c2c9',
+      lightGrey: '#d8d6db',
     }
   },
   font: {

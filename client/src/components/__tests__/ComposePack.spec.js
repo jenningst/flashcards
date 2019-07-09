@@ -45,8 +45,8 @@ const renderComponent = ({ mocks, theme, entries }) =>
 
 describe('<ComposePack /> spec', () => {
   it('assert component matches snapshot', () => {
-    const { asFragment } = renderComponent({ theme: lightTheme });
-    expect(asFragment()).toMatchSnapshot();
+    const { container } = renderComponent({ theme: lightTheme });
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('assert page greeting is rendered', () => {
@@ -56,7 +56,7 @@ describe('<ComposePack /> spec', () => {
 
   it('assert new pack name input is rendered with default value', () => {
     const { getByLabelText } = renderComponent({ theme: lightTheme });
-    const inputElement = getByLabelText(/^pack name:$/i);
+    const inputElement = getByLabelText(/^pack name$/i);
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toBeEmpty();
   });
@@ -75,7 +75,7 @@ describe('<ComposePack /> spec', () => {
     const newValue = 'What do you call a fake noodle?';
     const mockEvent = { target: { value: newValue}}
     const { getByLabelText, findByText } = renderComponent({ theme: lightTheme });
-    fireEvent.change(getByLabelText(/^pack name:$/i), mockEvent);
+    fireEvent.change(getByLabelText(/^pack name$/i), mockEvent);
     expect(await findByText(/^submit$/i)).toBeEnabled();
   });
 

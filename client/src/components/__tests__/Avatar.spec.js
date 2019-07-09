@@ -29,6 +29,6 @@ describe('<Avatar /> spec', () => {
       profilePhotoUrl: '../assets/user-avatar.image.jpg',
     };
     const { getByTestId } = renderComponent({ user, theme: lightTheme });
-    expect(getByTestId('avatar-image')).toBeInTheDocument();
+    expect(getByTestId('avatar-unauth')).toBeInTheDocument();
   });
 });
