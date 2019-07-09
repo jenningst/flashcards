@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { usePackDispatch } from '../contexts/pack-context';
-
-import LinkBackIcon from './icons/LinkBackIcon';
-import { SmallButton } from './elements/Button';
-import { Title1, Subhead, Caption3 } from './elements/Text';
+import { ReactComponent as Back } from '../components/icons/svg/back.svg';
+import { ReactComponent as EditIcon } from '../components/icons/svg/pencil.svg';
+import { ReactComponent as TestIcon } from '../components/icons/svg/play-button.svg';
+import { ReactComponent as AddIcon } from '../components/icons/svg/plus.svg';
+import { Title2, Caption3 } from './elements/Text';
 
 function PackHome({ name, cards, image }) {
   const dispatch = usePackDispatch();
@@ -15,47 +17,62 @@ function PackHome({ name, cards, image }) {
   return (
     <PackHomeWrapper className="PackHome">
       <Header className="PackHome__header">
-        <div className="nav-caption-combo">
-          <IconButton className="PackHome__button-back" to="/"/>
+        <ButtonGroup className="btn-lbl-combo">
+          <Link className="btn-lbl-combo__link" to="/">
+            <BackIcon
+              className="PackHome__button-back btn-lbl-combo__icon"
+              data-testid="button-back"
+            />
+          </Link>
           <Caption3 className="PackHome__button-caption">Back</Caption3>
-        </div>
+        </ButtonGroup>
         <CardImage className="PackHome__image-card">
           <img src={image.src} alt={image.alt} />
         </CardImage>
       </Header>
       <PackInfo className="PackHome__info">
-        <Title1 className="PackHome__title">{name}</Title1>
-        <Subhead className="PackHome__count">
+        <Title2 className="PackHome__title">
+          {name}
+        </Title2>
+        <Caption3 className="PackHome__count">
           {cards.length === 1 ? `${cards.length} FLASHCARD` : `${cards.length} FLASHCARDS`}
-        </Subhead>
+        </Caption3>
       </PackInfo>
       <Footer className="PackHome__footer">
-        <SmallButton
-          className="PackHome__button-review btn"
-          type="button"
-          onClick={setReviewMode}
-          title="Test yourself"
-          disabled={cards.length > 0 ? false : true}
-        >
-          Test
-        </SmallButton>
-        <SmallButton
-          className="PackHome__button-edit btn"
-          type="button"
-          onClick={(e) => console.log(e.target.value)}
-          title="Edit cards"
-          disabled
-        >
-          Edit
-        </SmallButton>
-        <SmallButton
-          className="PackHome__button-compose btn"
-          type="button"
+        {
+          cards.length > 0
+          ? (
+              <>
+                <ButtonGroup
+                  className="btn-lbl-combo"
+                  data-testid="test-btn"
+                  onClick={setReviewMode}
+                >
+                  <TestIcon className="PackHome__button-test ico"/>
+                  <Caption3>TEST</Caption3>
+                </ButtonGroup>
+
+                <ButtonGroup
+                  className="btn-lbl-combo"
+                  data-testid="edit-btn"
+                  onClick={(e) => console.log('clicked edit button')}
+                >
+                  <EditIcon className="PackHome__button-edit ico" />
+                  <Caption3>EDIT</Caption3>
+                </ButtonGroup>
+              </>
+          ):(
+            null
+          )
+        }
+        <ButtonGroup
+          className="btn-lbl-combo"
+          data-testid="add-btn"
           onClick={setComposeMode}
-          title="Create cards"
-          >
-          Add
-        </SmallButton>
+        >
+          <AddIcon className="PackHome__button-add ico"/>
+          <Caption3>ADD</Caption3>
+        </ButtonGroup>
       </Footer>
     </PackHomeWrapper>
   );
@@ -64,30 +81,39 @@ function PackHome({ name, cards, image }) {
 const PackHomeWrapper = styled.div`
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) repeat(2, minmax(12%, 15%));
+  grid-template-rows: minmax(0, 1fr) repeat(2, auto);
   grid-row-gap: .50rem;
   height: 100%;
-  padding: 1rem;
-  background: ${props => props.theme.background.primary};
-  color: ${props => props.theme.font.primary};
+  background: ${props => props.theme.color.main.offWhite};
+  color: ${props => props.theme.color.fonts.charleston};
 `;
 
 const Header = styled.header`
   display: flex;
   flex-flow: column nowrap;
+  padding: 1.5rem;
 
-  .nav-caption-combo {
-    display: flex;
+  div[class~="btn-lbl-combo"] {
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 1rem;
 
-    a {
-      margin-right: 1rem;
+    svg {
+      margin-right: .50rem;
+    }
+
+    h6 {
+      color: ${props => props.theme.color.main.primary};
     }
   }
 `;
 
-const IconButton = styled(LinkBackIcon)`
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+`;
+
+const BackIcon = styled(Back)`
   height: 2rem;
   width: 2rem;
 `;
@@ -97,12 +123,9 @@ const CardImage = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  background: ${props => props.theme.color.main.pureWhite};
   border-radius: 2rem;
-  background: ${props => props.theme.background.secondary};
-
-  img {
-    width: 90%;
-  }
+  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
 `;
 
 const PackInfo = styled.section`
@@ -110,26 +133,42 @@ const PackInfo = styled.section`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 
-  h1 {
+  .PackHome__title {
     margin-bottom: .25rem;
+    font-weight: 500;
+    color: ${props => props.theme.color.main.primary};
+  }
+  .PackHome__count {
+    color: ${props => props.theme.color.fonts.grey};
   }
 `;
 
-// TODO: add button theme
 const Footer = styled.footer`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  padding: 1.5rem;
 
-  .btn {
-    height: 3rem;
-    width: 3rem;
-    border-radius: 10px;
-  }
+  div[class~="btn-lbl-combo"] {
+    justify-content: center;
+    align-items: center;
+    background: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.main.pureWhite};
+    padding: .75rem 1rem .75rem 1rem;
+    border-radius: .50rem;
+    box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
 
-  .btn + .btn {
-    margin-left: 2rem;
+    svg {
+      height: 1rem;
+      width: 1rem;
+      margin-right: .50rem;
+      path {
+        fill: ${props => props.theme.color.main.pureWhite};
+      }
+    }
   }
 `;
 
@@ -148,3 +187,4 @@ PackHome.defaultProps = {
 };
 
 export default PackHome;
+

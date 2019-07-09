@@ -11,10 +11,11 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
       class="button-label-group sc-fjdhpX igxUPt"
     >
       <a
+        class="button-label-group__link"
         href="/"
       >
         <svg
-          class="ComposePack__button-back sc-jTzLTM kLosfp"
+          class="ComposePack__button-back button-label-group__icon sc-jTzLTM kLosfp"
           data-testid="button-back"
         >
           back.svg
@@ -28,10 +29,10 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
     </div>
   </header>
   <section
-    class="sc-cSHVUG demSni"
+    class="sc-cSHVUG kLZNWu"
   >
     <form
-      class="ComposePack__form form sc-kAzzGY cqtaOy"
+      class="ComposePack__form form sc-kAzzGY jwPtbk"
     >
       <h2
         class="form__title sc-ifAKCX bcZUfi"
@@ -59,7 +60,7 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
         class="sc-chPdSV hCBDrf"
       >
         <button
-          class="sc-bwzfXH form__button-submit sc-kgoBCf iMqUMH"
+          class="sc-bwzfXH form__button-submit sc-kgoBCf kEKQZq"
           disabled=""
           type="submit"
         >

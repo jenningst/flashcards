@@ -21,9 +21,9 @@ function ComposePack({ history }) {
           to="/"
         /> */}
         <ButtonGroup className="button-label-group">
-          <Link to="/">
+          <Link className="button-label-group__link" to="/">
             <BackIcon
-              className="ComposePack__button-back"
+              className="ComposePack__button-back button-label-group__icon"
               data-testid="button-back"
             />
           </Link>
