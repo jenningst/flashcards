@@ -133,6 +133,7 @@ const MainSection = styled.section`
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  padding: 1.5rem;
 `;
 
 const Form = styled.form`
@@ -160,15 +161,14 @@ const Form = styled.form`
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-bottom: 2rem;
     width: 100%;
+    margin-bottom: 2rem;
 
     .form__input {
-      margin-top: .50rem;
-      font-size: 1rem;
       height: 2rem;
+      margin-top: .50rem;
       padding: .25rem 1rem .25rem 1rem;
-      width: 15rem;
+      font-size: 1rem;
       border: 1px solid ${props => props.theme.color.borders.lightGrey};
       border-radius: .30rem;
 
