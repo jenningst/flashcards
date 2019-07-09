@@ -1,82 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PackHome /> specs assert component matches snapshot 1`] = `
-<DocumentFragment>
-  <div
-    class="PackHome sc-VigVT bfqtv"
+<div
+  class="PackHome sc-iwsKbI eivNFL"
+>
+  <header
+    class="PackHome__header sc-gZMcBi bvxfLq"
   >
-    <header
-      class="PackHome__header sc-jTzLTM djqSfX"
+    <div
+      class="btn-lbl-combo sc-gqjmRU kpjKDM"
     >
-      <div
-        class="nav-caption-combo"
+      <a
+        class="btn-lbl-combo__link"
+        href="/"
       >
-        <a
-          href="/"
-          style="display: flex; height: 2rem; width: 2rem;"
+        <svg
+          class="PackHome__button-back btn-lbl-combo__icon sc-VigVT fCGeOx"
+          data-testid="button-back"
         >
-          <svg
-            class="PackHome__button-back sc-fjdhpX eDzEvA"
-            style="height: 100%; width: 100%; overflow: hidden;"
-          >
-            back.svg
-          </svg>
-        </a>
-        <h6
-          class="PackHome__button-caption sc-gqjmRU bUQwPt"
-        >
-          Back
-        </h6>
-      </div>
-      <div
-        class="PackHome__image-card sc-jzJRlG jEbXkI"
+          back.svg
+        </svg>
+      </a>
+      <h6
+        class="PackHome__button-caption sc-dnqmqq cPuweH"
       >
-        <img
-          alt=""
-          src=""
-        />
-      </div>
-    </header>
-    <section
-      class="PackHome__info sc-cSHVUG kaoPbg"
+        Back
+      </h6>
+    </div>
+    <div
+      class="PackHome__image-card sc-jTzLTM kuOzMv"
     >
-      <h1
-        class="PackHome__title sc-bxivhb bUMUXl"
-      >
-        Random
-      </h1>
-      <p
-        class="PackHome__count sc-dnqmqq dlYILN"
-      >
-        2 FLASHCARDS
-      </p>
-    </section>
-    <footer
-      class="PackHome__footer sc-kAzzGY hxseon"
+      <img
+        alt=""
+        src=""
+      />
+    </div>
+  </header>
+  <section
+    class="PackHome__info sc-fjdhpX ftBcog"
+  >
+    <h2
+      class="PackHome__title sc-bwzfXH hsuEfn"
     >
-      <button
-        class="PackHome__button-review btn sc-htpNat eaVPXN"
-        title="Test yourself"
-        type="button"
+      Random
+    </h2>
+    <h6
+      class="PackHome__count sc-dnqmqq cPuweH"
+    >
+      2 FLASHCARDS
+    </h6>
+  </section>
+  <footer
+    class="PackHome__footer sc-jzJRlG POnLw"
+  >
+    <div
+      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      data-testid="test-btn"
+    >
+      <svg
+        class="PackHome__button-test ico"
       >
-        Test
-      </button>
-      <button
-        class="PackHome__button-edit btn sc-htpNat eaVPXN"
-        disabled=""
-        title="Edit cards"
-        type="button"
+        play-button.svg
+      </svg>
+      <h6
+        class="sc-dnqmqq cPuweH"
       >
-        Edit
-      </button>
-      <button
-        class="PackHome__button-compose btn sc-htpNat eaVPXN"
-        title="Create cards"
-        type="button"
+        TEST
+      </h6>
+    </div>
+    <div
+      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      data-testid="edit-btn"
+    >
+      <svg
+        class="PackHome__button-edit ico"
       >
-        Add
-      </button>
-    </footer>
-  </div>
-</DocumentFragment>
+        pencil.svg
+      </svg>
+      <h6
+        class="sc-dnqmqq cPuweH"
+      >
+        EDIT
+      </h6>
+    </div>
+    <div
+      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      data-testid="add-btn"
+    >
+      <svg
+        class="PackHome__button-add ico"
+      >
+        plus.svg
+      </svg>
+      <h6
+        class="sc-dnqmqq cPuweH"
+      >
+        ADD
+      </h6>
+    </div>
+  </footer>
+</div>
 `;

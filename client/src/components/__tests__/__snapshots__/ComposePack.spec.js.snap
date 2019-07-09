@@ -1,53 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
-<DocumentFragment>
-  <div
-    class="ComposePack sc-iwsKbI dborcn"
+<div
+  class="ComposePack sc-VigVT hBdGBR"
+>
+  <header
+    class="ComposePack__header sc-jzJRlG lezlDT"
   >
-    <header
-      class="ComposePack__header sc-gqjmRU fVwKRL"
+    <div
+      class="button-label-group sc-fjdhpX igxUPt"
     >
       <a
+        class="button-label-group__link"
         href="/"
-        style="display: flex; height: 2rem; width: 2rem;"
       >
         <svg
-          class="ComposePack__button-back sc-gZMcBi dcrjLy"
+          class="ComposePack__button-back button-label-group__icon sc-jTzLTM kLosfp"
           data-testid="button-back"
-          style="height: 100%; width: 100%; overflow: hidden;"
         >
           back.svg
         </svg>
       </a>
-    </header>
-    <section
-      class="ComposePack__form form sc-VigVT FaJHk"
+      <h6
+        class="sc-gqjmRU bUQwPt"
+      >
+        Dashboard
+      </h6>
+    </div>
+  </header>
+  <section
+    class="sc-cSHVUG kLZNWu"
+  >
+    <form
+      class="ComposePack__form form sc-kAzzGY jwPtbk"
     >
-      <h1
-        class="form__title sc-bdVaJa beESmM"
+      <h2
+        class="form__title sc-ifAKCX bcZUfi"
       >
         Create a Pack
-      </h1>
-      <label
-        for="pack-input-name"
+      </h2>
+      <div
+        class="input-group"
       >
-        Pack Name: 
-      </label>
-      <input
-        class="form__input"
-        id="pack-input-name"
-        placeholder="Enter a Pack Name"
-        value=""
-      />
-      <button
-        class="form__button-submit"
-        disabled=""
-        type="submit"
+        <label
+          class="form__label"
+          for="pack-name"
+        >
+          Pack Name
+        </label>
+        <input
+          class="form__input"
+          id="pack-name"
+          maxlength="30"
+          name="pack-name"
+          value=""
+        />
+      </div>
+      <div
+        class="sc-chPdSV hCBDrf"
       >
-        Submit
-      </button>
-    </section>
-  </div>
-</DocumentFragment>
+        <button
+          class="sc-bwzfXH form__button-submit sc-kgoBCf kEKQZq"
+          disabled=""
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
 `;

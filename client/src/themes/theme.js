@@ -39,8 +39,10 @@ export const lightTheme = {
     main: {
       primary: '#7883E2',
       primaryHover: '#939CE8',
+      secondary: '#e3e5ff',
+      secondaryHover: '#c3d2ff',
       pureWhite: '#ffffff',
-      showWhite: '#fcfbfc',
+      offWhite: '#f5f7fb',
     },
     alerts: {
       notice: '#c0a5ff',
@@ -52,10 +54,13 @@ export const lightTheme = {
     },
     fonts: {
       eerieBlack: '#16171D',
-      charleston: '#24252F',
+      charleston: '#292b3d',
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+      grey: '#b1aeb7',
     },
     borders: {
-      lightGrey: '#',
+      lightGrey: '#d8d6db',
     }
   },
   font: {
