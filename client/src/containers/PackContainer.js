@@ -1,14 +1,16 @@
 import React from 'react';
-import { usePackState } from '../contexts/packContext';
+import PropTypes from 'prop-types';
+import { usePackState } from '../contexts/pack-context';
+
 import { Query } from 'react-apollo';
 import { GET_PACK_BY_ID, GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
-import Pack from '../components/PackCarousel';
+import PackCarousel from '../components/PackCarousel';
 
 const PackContainer = ({ match }) => {
   const state = usePackState();
-  const { packMode } = state;
+  const { mode } = state;
 
   return (
     <Query query={GET_PACK_BY_ID} variables={ { id: match.params.id }} >
@@ -23,9 +25,9 @@ const PackContainer = ({ match }) => {
 
               return (
                 <>
-                  {packMode === ''
+                  {mode === ''
                     ? <PackHome name={pack.name} cards={cards} />
-                    : <Pack mode={packMode} filter={pack._id} cards={cards} />
+                    : <PackCarousel mode={mode} filter={pack._id} cards={cards} />
                   }
                 </>
               );
@@ -34,6 +36,10 @@ const PackContainer = ({ match }) => {
         )}}
     </Query>
   );
+};
+
+PackContainer.propTypes = {
+  match: PropTypes.object.isRequired,
 };
 
 export default PackContainer;

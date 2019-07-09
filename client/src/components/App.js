@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../themes/theme';
-import { PackProvider } from '../contexts/packContext';
+import { PackProvider } from '../contexts/pack-context';
 
 import { ApolloClient, HttpLink } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -24,7 +24,7 @@ function App() {
     <ApolloProvider client={apolloClient}>
       <PackProvider>
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-          <div className="app" style={{ height: '100vh', width: '100vw' }}>
+          <div className="app" style={{ height: '100vh', width: '100vw'}}>
             <Router>
               <Route path="/" exact component={Dashboard} />
               <Route path="/create-pack" component={ComposePack} />

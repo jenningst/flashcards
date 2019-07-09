@@ -35,16 +35,45 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
+  color: {
+    main: {
+      primary: '#7883E2',
+      primaryHover: '#939CE8',
+      secondary: '#e3e5ff',
+      secondaryHover: '#c3d2ff',
+      pureWhite: '#ffffff',
+      offWhite: '#f5f7fb',
+    },
+    alerts: {
+      notice: '#c0a5ff',
+      success: '#50cdff',
+      successHover: '#6FD6FF',
+      warning: '#FFCB17',
+      warningBg: '#FFDA5C',
+      danger: '#DE6A60',
+    },
+    fonts: {
+      eerieBlack: '#16171D',
+      charleston: '#292b3d',
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+      grey: '#b1aeb7',
+    },
+    borders: {
+      lightGrey: '#d8d6db',
+    }
+  },
   font: {
-    primary: '#0d0d0d',
+    primary: '#4e5167',
     secondary: '#262626',
     tertiary: '#666666',
   },
   background: {
-    primary: '#f2f2f2',
-    secondary: '#ffffff',
-    highlight: '#6121BF',
-    special: '#7358F7',
+    primary: '#ffffff',
+    secondary: '#fcfbfc',
+    highlight: '#9388ff',
+
+    special: '#50cdff',
     inactive: '#b1aeb7',
   },
   button: {

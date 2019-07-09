@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import packReducer, { initialState } from '../reducers/packReducer';
+import { reducer, INITIAL_STATE } from '../reducers/pack-reducer';
 
 const PackStateContext = createContext();
 const PackDispatchContext = createContext();
 
+// setup our pack provider
 function PackProvider({ children }) {
-  const [state, dispatch] = useReducer(packReducer, initialState);
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   return (
     <PackStateContext.Provider value={state}>
       <PackDispatchContext.Provider value={dispatch}>
@@ -15,6 +16,7 @@ function PackProvider({ children }) {
   );
 };
 
+// setup our hook to use pack state
 function usePackState() {
   const context = useContext(PackStateContext);
   if (context === undefined) {
@@ -23,6 +25,7 @@ function usePackState() {
   return context;
 };
 
+// setup our hook to use state dispatch
 function usePackDispatch() {
   const context = useContext(PackDispatchContext);
   if (context === undefined) {

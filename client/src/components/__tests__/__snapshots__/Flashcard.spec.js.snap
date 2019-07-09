@@ -3,7 +3,7 @@
 exports[`<Flashcard /> spec assert it matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Flashcard sc-VigVT yrdFj"
+    class="Flashcard sc-VigVT gUkRHx"
   >
     <section
       class="Flashcard__content ContentArea sc-jTzLTM kljkwS"
@@ -16,7 +16,7 @@ exports[`<Flashcard /> spec assert it matches snapshot 1`] = `
       </p>
     </section>
     <button
-      class="sc-gZMcBi Flashcard__button-toggle sc-fjdhpX jHoKHV"
+      class="sc-gZMcBi Flashcard__button-toggle sc-fjdhpX dkairF"
       data-testid="card-button"
       type="button"
     >

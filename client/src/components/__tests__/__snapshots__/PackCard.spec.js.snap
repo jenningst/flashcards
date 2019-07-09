@@ -2,16 +2,25 @@
 
 exports[`<PackCard /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
-  <button
-    class="PackCard sc-iwsKbI cPNTob"
-    data-testid="card"
-    type="button"
+  <a
+    class="sc-iwsKbI kBaOMJ"
+    href="/pack/1"
   >
-    <h4
-      class="PackCard__title sc-bxivhb dSXQHY"
+    <div
+      class="sc-gZMcBi sc-gqjmRU gaiMMo"
     >
-      JavaScript
-    </h4>
-  </button>
+      <div
+        class="sc-gZMcBi PackCard sc-VigVT eYUWSB"
+        data-testid="card"
+        type="button"
+      >
+        <h4
+          class="PackCard__title sc-bxivhb dSXQHY"
+        >
+          JavaScript
+        </h4>
+      </div>
+    </div>
+  </a>
 </DocumentFragment>
 `;

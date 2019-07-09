@@ -1,6 +1,6 @@
 import React from 'react';
-import { PackProvider } from '../../contexts/packContext';
-import { initialState } from '../../reducers/packReducer';
+import { PackProvider } from '../../contexts/pack-context';
+import { initialState } from '../../reducers/pack-reducer';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../themes/theme';
@@ -27,7 +27,7 @@ const renderComponent = ({ name, cards, theme }) =>
 
 describe('<PackHome /> specs', () => {
   it('assert component matches snapshot', () => {
-    const { asFragment } = renderComponent({
+    const { container } = renderComponent({
       name: 'Random',
       cards: [
         {
@@ -43,7 +43,7 @@ describe('<PackHome /> specs', () => {
       ],
       theme: lightTheme,
     });
-    expect(asFragment()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('assert a pack name is displayed', () => {
@@ -64,7 +64,6 @@ describe('<PackHome /> specs', () => {
       ],
       theme: lightTheme,
     });
-
     expect(getByText(mockName)).toBeInTheDocument();
   });
 
@@ -87,21 +86,77 @@ describe('<PackHome /> specs', () => {
       theme: lightTheme,
     });
     const numberOfCards = mockCards.length;
-
     expect(getByText(/flashcard/i)).toHaveTextContent(`${numberOfCards} FLASHCARD`);
   });
 
-  it('assert test button is disabled if no cards in pack', () => {
+  it('assert test button is not visibile if no cards in pack', () => {
+    const { queryByTestId } = renderComponent({
+      name: 'Random',
+      cards: [],
+      theme: lightTheme,
+    });
+    expect(queryByTestId('test-btn')).not.toBeInTheDocument();
+  });
+
+  it('assert edit button is not visibile if no cards in pack', () => {
+    const { queryByTestId } = renderComponent({
+      name: 'Random',
+      cards: [],
+      theme: lightTheme,
+    });
+    expect(queryByTestId('edit-btn')).not.toBeInTheDocument();
+  });
+
+  it('assert test button is visible if 1 or more cards in pack', () => {
+    const { getByText } = renderComponent({
+      name: 'Random',
+      cards: [
+        {
+          id: '12',
+          text: 'What is 2 + 2?',
+          answer: '4',
+        },
+        {
+          id: '85',
+          text: 'What is the capitol of Sweden?',
+          answer: 'Stockholm',
+        },
+      ],
+      theme: lightTheme,
+    });
+    expect(getByText(/^test$/i)).toBeInTheDocument();
+  });
+
+  it('assert edit button is visible if 1 or more cards in pack', () => {
+    const { getByText } = renderComponent({
+      name: 'Random',
+      cards: [
+        {
+          id: '12',
+          text: 'What is 2 + 2?',
+          answer: '4',
+        },
+        {
+          id: '85',
+          text: 'What is the capitol of Sweden?',
+          answer: 'Stockholm',
+        },
+      ],
+      theme: lightTheme,
+    });
+    expect(getByText(/^edit$/i)).toBeInTheDocument();
+  });
+
+  it('assert add button is visibile if no cards in pack', () => {
     const { getByText } = renderComponent({
       name: 'Random',
       cards: [],
       theme: lightTheme,
     });
-
-    expect(getByText(/^test$/i)).toBeDisabled();
+    expect(getByText(/^add$/i)).toBeInTheDocument()
   });
 
-  it('assert test button is enabled if 1 or more cards in pack', () => {
+  it('assert add button is visibile if 1 or more cards in pack', () => {
     const { getByText } = renderComponent({
       name: 'Random',
       cards: [
@@ -118,29 +173,7 @@ describe('<PackHome /> specs', () => {
       ],
       theme: lightTheme,
     });
-
-    expect(getByText(/^test$/i)).not.toBeDisabled();
-  });
-
-  it('assert compose button is present and enabled', () => {
-    const { getByText } = renderComponent({
-      name: 'Random',
-      cards: [
-        {
-          id: '12',
-          text: 'What is 2 + 2?',
-          answer: '4',
-        },
-        {
-          id: '85',
-          text: 'What is the capitol of Sweden?',
-          answer: 'Stockholm',
-        },
-      ],
-      theme: lightTheme,
-    });
-
-    expect(getByText(/^add$/i)).toBeEnabled();
+    expect(getByText(/^add$/i)).toBeInTheDocument()
   });
 
   it.todo('assert clicking `Begin Review` button sends dispatch');

@@ -14,7 +14,7 @@ exports[`<ComposeFlashcard /> spec assert component matches snapshot 1`] = `
       />
     </div>
     <button
-      class="sc-bwzfXH ComposeFlashcard__button-toggle sc-EHOje kydZMA"
+      class="sc-bwzfXH ComposeFlashcard__button-toggle sc-EHOje dYtATZ"
       type="button"
     >
       SHOW ANSWER

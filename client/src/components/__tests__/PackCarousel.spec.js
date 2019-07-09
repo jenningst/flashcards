@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { PackProvider } from '../../contexts/packContext';
+import { PackProvider } from '../../contexts/pack-context';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../themes/theme';
