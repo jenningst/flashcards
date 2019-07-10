@@ -58,6 +58,7 @@ export const lightTheme = {
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
       grey: '#b1aeb7',
+      lightGrey: '#eff0f1'
     },
     borders: {
       lightGrey: '#d8d6db',

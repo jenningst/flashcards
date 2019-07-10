@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../themes/theme';
@@ -24,17 +25,23 @@ function App() {
     <ApolloProvider client={apolloClient}>
       <PackProvider>
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-          <div className="app" style={{ height: '100vh', width: '100vw'}}>
+          <AppWrapper className="App">
             <Router>
               <Route path="/" exact component={Dashboard} />
               <Route path="/create-pack" component={ComposePack} />
               <Route path="/pack/:id" component={PackContainer} />
             </Router>
-          </div>
+          </AppWrapper>
         </ThemeProvider>
       </PackProvider>
     </ApolloProvider>
   );
 };
+
+const AppWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: ${props => props.theme.color.main.offWhite};
+`;
 
 export default App;
