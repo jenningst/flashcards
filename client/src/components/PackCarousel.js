@@ -7,8 +7,10 @@ import { Mutation } from  'react-apollo';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
 
 import { Subhead, Caption3 } from './elements/Text';
-import { MediumButton } from './elements/Button';
+import { MediumButton, SmallButton } from './elements/Button';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
+import { ReactComponent as Left } from '../components/icons/svg/left-arrow.svg';
+import { ReactComponent as Right } from '../components/icons/svg/right-arrow.svg';
 import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';
 
@@ -22,9 +24,10 @@ function PackCarousel({ mode, filter, cards }) {
   const handleAnswerChange = e => setQuestionAnswer(e.target.value);
 
   const exitToPackHome = () => dispatch({ type: 'RESET_MODE' });
+  const priorCard = () => setIndex(index - 1);
+  const nextCard = () => setIndex(index + 1);
   const backPress = useKeyPress(37);
   const forwardPress = useKeyPress(39);
-  const spacebarPress = useKeyPress(32)
 
   useEffect(() => {
     if (backPress && index > 0) {
@@ -37,25 +40,6 @@ function PackCarousel({ mode, filter, cards }) {
       setIndex(index + 1);
     }
   }, [forwardPress]);
-
-  // console.log(`cards: ${cards.length}`);
-  // console.log(`index: ${index}`);
-
-  // const priorCard = () => {
-  //   if (index > 0) { // question is not the first
-  //     if (backPress) { // useKeyPress hook returns true
-  //       setIndex(index - 1);
-  //     }
-  //   }
-  // };
-
-  // const nextCard = () => {
-  //   if (index < cards.length) { // question is not the last
-  //     if (backPress) { // useKeyPress hook returns true
-  //       setIndex(index + 1);
-  //     }
-  //   }
-  // };
 
   const saveCardAndRefresh = () => {
     setQuestionText('');
@@ -110,7 +94,6 @@ function PackCarousel({ mode, filter, cards }) {
 
   return (
     <PackCarouselWrapper className="PackCarousel">
-
       <Header className="PackCarousel__header">
         <ButtonGroup className="btn-lbl-combo">
           <BackIcon
@@ -120,8 +103,14 @@ function PackCarousel({ mode, filter, cards }) {
           />
           <Caption3 className="PackHome__button-caption btn-lbl-combo__text">Back</Caption3>
         </ButtonGroup>
+        {isReviewMode
+          ? (
+            <SummaryButton className="PackCarousel__button-summary">
+              QUIZ SUMMARY
+            </SummaryButton>
+          ): null
+        }
       </Header>
-
       <Counter className="PackCarousel__counter">
         <CounterBody className="counter-container">
           <Subhead className="counter-content">
@@ -129,7 +118,6 @@ function PackCarousel({ mode, filter, cards }) {
           </Subhead>
         </CounterBody>
       </Counter>
-
       <CardViewer className="PackCarousel__card-viewer">
         {isReviewMode
           ? (
@@ -146,28 +134,26 @@ function PackCarousel({ mode, filter, cards }) {
           )
         }
       </CardViewer>
-
       <CardNavigation className="PackCarousel__nav">
         {!isReviewMode
           ? (
             <CreateFlashcard />
           ) : (
             <>
-              <BackIcon 
+              <LeftIcon 
                 className={`PackCarousel__button-nav${index === 0 ? '--disabled' : ''} back`}
-                onClick={null}
+                onClick={priorCard}
                 data-testid="button-back"
               />
-              <BackIcon 
+              <RightIcon 
                 className={`PackCarousel__button-nav${index === cards.length - 1 ? '--disabled' : ''} forward`}
-                onClick={null}
+                onClick={nextCard}
                 data-testid="button-forward"
               />
             </>
           )
         }
       </CardNavigation>
-
     </PackCarouselWrapper>
   );
 };
@@ -176,7 +162,7 @@ const PackCarouselWrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(3, auto) minmax(0, 1fr);
   height: 100%;
-  background: orange;
+  background: ${props => props.theme.color.main.offWhite};
 `;
 
 const Header = styled.header`
@@ -208,6 +194,15 @@ const ButtonGroup = styled.div`
   }
 `;
 
+const SummaryButton = styled(SmallButton)`
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: ${props => props.theme.color.main.primary};
+  color: ${props => props.theme.color.main.pureWhite};
+  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+`;
+
 const Counter = styled.section`
   grid-row: 3 / span 1;
   padding: 0rem 1.5rem 0rem 1.5rem;
@@ -219,37 +214,34 @@ const CounterBody = styled.div`
   align-items: center;
   height: 100%;
   padding: .50rem;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
   background: black;
   color: white;
+  `;
+
+const CardViewer = styled.section`
+  grid-row: 4 / span 1;
+  box-sizing: border-box;
+  padding: 0rem 1.5rem 1.5rem 1.5rem;
 `;
 
-const CardNavigation = styled.footer`
+const CardNavigation = styled.section`
   grid-row: 2 / span 1;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  padding: 1rem;
-
-  svg[class~="PackCarousel__button-nav"] {
-    height: 2rem;
-    path {
-      fill: ${props => props.theme.background.special};
-    }
-
-    &:hover {
-      path {
-        fill: ${props => props.theme.background.special};
-      }
-    }
-  }
+  padding: .50rem 1rem 1rem 1rem;
 
   svg[class*="--disabled"] {
       path {
-        fill: ${props => props.theme.button.default.greyed};
+        fill: ${props => props.theme.color.main.secondary};
       }
       pointer-events: none;
+  }
+
+  svg + svg {
+    margin-left: 1rem;
   }
 `;
 
@@ -263,9 +255,20 @@ const BackIcon = styled(Back)`
   }
 `;
 
-const CardViewer = styled.section`
-  grid-row: 4 / span 1;
-  padding-bottom: 1rem;
+const LeftIcon = styled(Left)`
+  height: 2rem;
+
+  path {
+    fill: ${props => props.theme.color.main.primary};
+  }
+`;
+
+const RightIcon = styled(Right)`
+  height: 2rem;
+
+  path {
+    fill: ${props => props.theme.color.main.primary};
+  }
 `;
 
 
