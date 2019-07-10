@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Mutation } from  'react-apollo';
+// our dependencies
 import { usePackDispatch } from '../contexts/pack-context';
 import { useKeyPress } from '../hooks/use-key-press';
-import { Mutation } from  'react-apollo';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
-
 import { Subhead, Caption3 } from './elements/Text';
 import { MediumButton, SmallButton } from './elements/Button';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
@@ -16,36 +16,37 @@ import ComposeFlashcard from './ComposeFlashcard';
 
 function PackCarousel({ mode, filter, cards }) {
   const dispatch = usePackDispatch();
-
   const [index, setIndex] = useState(0);
   const [questionText, setQuestionText] = useState('');
   const [questionAnswer, setQuestionAnswer] = useState('');
-  const handleTextChange = e => setQuestionText(e.target.value);
-  const handleAnswerChange = e => setQuestionAnswer(e.target.value);
-
-  const exitToPackHome = () => dispatch({ type: 'RESET_MODE' });
-  const priorCard = () => setIndex(index - 1);
-  const nextCard = () => setIndex(index + 1);
   const backPress = useKeyPress(37);
   const forwardPress = useKeyPress(39);
 
-  useEffect(() => {
-    if (backPress && index > 0) {
-      setIndex(index - 1);
-    }
-  }, [backPress]);
-
-  useEffect(() => {
-    if (forwardPress && index < cards.length - 1) {
-      setIndex(index + 1);
-    }
-  }, [forwardPress]);
-
+  const handleTextChange = e => setQuestionText(e.target.value);
+  const handleAnswerChange = e => setQuestionAnswer(e.target.value);
+  const exitToPackHome = () => dispatch({ type: 'RESET_MODE' });
+  
   const saveCardAndRefresh = () => {
     setQuestionText('');
     setQuestionAnswer('');
     setIndex(index + 1);
   };
+
+  // effect for left-arrow keypress and click handler for prior-card navigation
+  useEffect(() => {
+    if (backPress && index > 0) {
+      setIndex(index - 1);
+    }
+  }, [backPress]);
+  const priorCard = () => setIndex(index - 1);
+
+  // effect for right-arrow keypress and click handler for next-card navigation
+  useEffect(() => {
+    if (forwardPress && index < cards.length - 1) {
+      setIndex(index + 1);
+    }
+  }, [forwardPress]);
+  const nextCard = () => setIndex(index + 1);
 
   const currentQuestion = cards[index];
   const isReviewMode = mode === 'REVIEW_MODE';
@@ -114,7 +115,10 @@ function PackCarousel({ mode, filter, cards }) {
       <Counter className="PackCarousel__counter">
         <CounterBody className="counter-container">
           <Subhead className="counter-content">
-            {`${index + 1} of ${cards.length}`}
+            {isReviewMode
+              ? `${index + 1} of ${cards.length}`
+              : `${cards.length + 1} of ${cards.length + 1}`
+            }
           </Subhead>
         </CounterBody>
       </Counter>
