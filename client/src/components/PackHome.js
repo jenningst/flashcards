@@ -38,7 +38,7 @@ function PackHome({ name, cards, image }) {
           {cards.length === 1 ? `${cards.length} FLASHCARD` : `${cards.length} FLASHCARDS`}
         </Caption3>
       </PackInfo>
-      <Footer className="PackHome__footer">
+      <PackControls className="PackHome__controls">
         {
           cards.length > 0
           ? (
@@ -73,7 +73,7 @@ function PackHome({ name, cards, image }) {
           <AddIcon className="PackHome__button-add ico"/>
           <Caption3>ADD</Caption3>
         </ButtonGroup>
-      </Footer>
+      </PackControls>
     </PackHomeWrapper>
   );
 };
@@ -151,7 +151,7 @@ const PackInfo = styled.section`
   }
 `;
 
-const Footer = styled.footer`
+const PackControls = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
