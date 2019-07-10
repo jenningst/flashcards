@@ -174,6 +174,7 @@ const PackSection = styled.section`
   display: flex;
   flex-flow: column nowrap;
   padding: 1.5rem;
+  height: 100%;
 
   p {
     font-weight: 500;

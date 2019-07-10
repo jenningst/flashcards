@@ -153,7 +153,7 @@ describe('<PackHome /> specs', () => {
       cards: [],
       theme: lightTheme,
     });
-    expect(getByText(/^add$/i)).toBeInTheDocument()
+    expect(getByText(/^add$/i)).toBeInTheDocument();
   });
 
   it('assert add button is visibile if 1 or more cards in pack', () => {
@@ -173,7 +173,7 @@ describe('<PackHome /> specs', () => {
       ],
       theme: lightTheme,
     });
-    expect(getByText(/^add$/i)).toBeInTheDocument()
+    expect(getByText(/^add$/i)).toBeInTheDocument();
   });
 
   it.todo('assert clicking `Begin Review` button sends dispatch');

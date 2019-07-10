@@ -19,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-spinners-kit": "^1.9.0",
     "shortid": "^2.2.14",
     "styled-components": "^4.3.2",
     "uuid": "^3.3.2"
