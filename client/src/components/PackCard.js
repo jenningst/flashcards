@@ -36,19 +36,18 @@ const BaseWrapper = styled.div`
 
 const OuterWrapper = styled(BaseWrapper)`
   background: #6E78CE;
+  padding-bottom: .50rem;
 `;
 
 const PackCardContent = styled(BaseWrapper)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.color.main.primary};
-  color: ${props => props.theme.color.fonts.offWhite};
-  
-  margin-right: .50rem;
   padding: .70rem;
   min-height: 100px;
   border: none;
+  background: ${props => props.theme.color.main.primary};
+  color: ${props => props.theme.color.fonts.offWhite};
 
   &:hover {
     background-color: ${props => props.theme.color.main.primaryHover};
