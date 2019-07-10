@@ -112,13 +112,13 @@ const SideNav = styled.aside`
 `;
 
 const DashboardWrapper = styled.section`
-  flex-grow: 1;
+  flex-grow: 2;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(2, auto) minmax(0, 1fr);
+  height: 100%;
   background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.charleston};
-  display: grid;
-  grid-template-rows: repeat(2, auto) 1fr;
-  height: 100%;
   overflow: hidden;
 `;
 
@@ -128,6 +128,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
+  background: ${props => props.theme.color.main.pureWhite};
   color: ${props => props.theme.color.fonts.eerieBlack};
 `;
 
