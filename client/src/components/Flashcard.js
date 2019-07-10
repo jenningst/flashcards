@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useKeyPress } from '../hooks/use-key-press';
 
 import { Body } from './elements/Text';
 import { MediumButton } from './elements/Button';
@@ -8,6 +9,13 @@ import { MediumButton } from './elements/Button';
 function Flashcard({ card }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const toggleAnswer = () => setShowAnswer(!showAnswer);
+  const spacebarPressed = useKeyPress(32);
+
+  useEffect(() => {
+    if (spacebarPressed) {
+      setShowAnswer(!showAnswer);
+    }
+  }, [spacebarPressed]);
 
   return (
     <FlashcardWrapper className="Flashcard">
@@ -41,11 +49,11 @@ const FlashcardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  padding: 1.5rem;
   
-  border-radius: 20px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1.5rem 1rem 1rem 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
   background: ${props => props.theme.background.secondary};
   color: ${props => props.theme.font.secondary};
 `;
@@ -53,21 +61,30 @@ const FlashcardWrapper = styled.div`
 const ContentArea = styled.section`
   flex-grow: 1;
   width: 100%;
+  margin: 0rem 1.5rem 1.5rem 1.5rem;
+
+  p {
+    font-weight: 300;
+    font-style: italic;
+  }
 `;
 
 const ToggleButton = styled(MediumButton)`
   width: 100%;
-  background: ${props => props.theme.button.default.primary};
-  border: 2px solid ${props => props.theme.button.default.primary};
+  background: ${props => props.theme.color.main.primary};
+  border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};
   border-radius: 15px;
-  color: ${props => props.theme.font.primary};
+  color: ${props => props.theme.color.fonts.pureWhite};
   outline: none;
+  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+
   &:hover {
-    background: ${props => props.theme.button.hover.primary};
-    border: 2px solid ${props => props.theme.button.hover.primary};
+    background: ${props => props.theme.color.main.primaryHover};
+    border-bottom: 3px solid ${props => props.theme.color.main.primary};
   }
+  
   &:active {
-    border: 2px solid ${props => props.theme.button.active.primary};
+    background: ${props => props.theme.color.main.secondaryHover};
   }
 `;
 
