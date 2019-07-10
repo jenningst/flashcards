@@ -6,11 +6,11 @@ import { WaveSpinner } from 'react-spinners-kit';
 const Loading = ({ loading }) => {
   return (
     <LoaderPageWrapper className="Loading">
-      <StyledWaveSpinner
+      <WaveSpinner
         className="Loading__spinner"
         size={50}
         loading={loading}
-        color={props => props.theme.color.main.secondary}
+        color={'#939CE8'}
       />
     </LoaderPageWrapper>
   );
@@ -22,10 +22,6 @@ const LoaderPageWrapper = styled.div`
   align-items: center;
   height: 100%;
   background: ${props => props.theme.color.main.offWhite};
-`;
-
-const StyledWaveSpinner = styled(WaveSpinner)`
-  color: ${props => props.theme.color.main.primary};
 `;
 
 Loading.propTypes = {

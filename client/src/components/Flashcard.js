@@ -13,6 +13,7 @@ function Flashcard({ card }) {
 
   useEffect(() => {
     if (spacebarPressed) {
+      console.log('down');
       setShowAnswer(!showAnswer);
     }
   }, [spacebarPressed]);
