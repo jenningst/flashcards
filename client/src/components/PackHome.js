@@ -111,6 +111,11 @@ const Header = styled.header`
 const ButtonGroup = styled.div`
   display: flex;
   flex-flow: row nowrap;
+
+  a {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const BackIcon = styled(Back)`

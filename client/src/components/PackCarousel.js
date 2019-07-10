@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { usePackDispatch } from '../contexts/pack-context';
+import { useKeyPress } from '../hooks/use-key-press';
 import { Mutation } from  'react-apollo';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
 
-import { zeroPad } from '../utilities/helpers';
-
-import { Headline, Subhead} from './elements/Text';
+import { Subhead, Caption3 } from './elements/Text';
 import { MediumButton } from './elements/Button';
-import { ReactComponent as CancelIcon } from '../components/icons/svg/error.svg';
-import { ReactComponent as LeftArrow } from '../components/icons/svg/left-arrow.svg';
-import { ReactComponent as RightArrow } from '../components/icons/svg/right-arrow.svg';
-import { ReactComponent as OvalIcon } from '../components/icons/svg/oval.svg';
+import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';
 
@@ -25,9 +21,41 @@ function PackCarousel({ mode, filter, cards }) {
   const handleTextChange = e => setQuestionText(e.target.value);
   const handleAnswerChange = e => setQuestionAnswer(e.target.value);
 
-  const exitToPackHome = () => dispatch({ type: 'CLEAR_MODE' });
-  const priorCard = () => setIndex(index - 1);
-  const nextCard = () => setIndex(index + 1);
+  const exitToPackHome = () => dispatch({ type: 'RESET_MODE' });
+  const backPress = useKeyPress(37);
+  const forwardPress = useKeyPress(39);
+  const spacebarPress = useKeyPress(32)
+
+  useEffect(() => {
+    if (backPress && index > 0) {
+      setIndex(index - 1);
+    }
+  }, [backPress]);
+
+  useEffect(() => {
+    if (forwardPress && index < cards.length - 1) {
+      setIndex(index + 1);
+    }
+  }, [forwardPress]);
+
+  // console.log(`cards: ${cards.length}`);
+  // console.log(`index: ${index}`);
+
+  // const priorCard = () => {
+  //   if (index > 0) { // question is not the first
+  //     if (backPress) { // useKeyPress hook returns true
+  //       setIndex(index - 1);
+  //     }
+  //   }
+  // };
+
+  // const nextCard = () => {
+  //   if (index < cards.length) { // question is not the last
+  //     if (backPress) { // useKeyPress hook returns true
+  //       setIndex(index + 1);
+  //     }
+  //   }
+  // };
 
   const saveCardAndRefresh = () => {
     setQuestionText('');
@@ -37,9 +65,6 @@ function PackCarousel({ mode, filter, cards }) {
 
   const currentQuestion = cards[index];
   const isReviewMode = mode === 'REVIEW_MODE';
-  const prettyModeName = mode.replace('_', ' ');
-  const zeroPaddedTotal = isReviewMode ? zeroPad(cards.length) : zeroPad(parseInt(cards.length + 1));
-  const zeroPaddedIndex = isReviewMode ? zeroPad(index + 1) : zeroPad(parseInt(cards.length + 1));
   
   const CreateFlashcard = () => {
     return (
@@ -87,26 +112,23 @@ function PackCarousel({ mode, filter, cards }) {
     <PackCarouselWrapper className="PackCarousel">
 
       <Header className="PackCarousel__header">
-        <StyledClose 
-          className="PackCarousel__button-close"
-          data-testid="button-close"
-          onClick={e => exitToPackHome()}
-        />
-        <div className="PackCarousel__mode">
-          <Subhead data-testid="mode">{prettyModeName}</Subhead>
-        </div>
-        <Counter className="PackCarousel__counter counter-group">
-          <div className="counter-group__current">
-            <Headline data-testid="current">{zeroPaddedIndex}</Headline>
-          </div>
-          <div className="counter-group__total">
-            <Subhead data-testid="total">{`/ ${zeroPaddedTotal}`}</Subhead>
-          </div>
-          <div className="counter-group__indicator">
-            <OvalIcon className="active-dot" />
-          </div>
-        </Counter>
+        <ButtonGroup className="btn-lbl-combo">
+          <BackIcon
+            className="PackCarousel__button-back btn-lbl-combo__icon"
+            data-testid="button-back"
+            onClick={e => exitToPackHome()}
+          />
+          <Caption3 className="PackHome__button-caption btn-lbl-combo__text">Back</Caption3>
+        </ButtonGroup>
       </Header>
+
+      <Counter className="PackCarousel__counter">
+        <CounterBody className="counter-container">
+          <Subhead className="counter-content">
+            {`${index + 1} of ${cards.length}`}
+          </Subhead>
+        </CounterBody>
+      </Counter>
 
       <CardViewer className="PackCarousel__card-viewer">
         {isReviewMode
@@ -125,56 +147,86 @@ function PackCarousel({ mode, filter, cards }) {
         }
       </CardViewer>
 
-      <BottomNav className="PackCarousel__nav">
+      <CardNavigation className="PackCarousel__nav">
         {!isReviewMode
           ? (
             <CreateFlashcard />
           ) : (
             <>
-              <LeftArrow 
+              <BackIcon 
                 className={`PackCarousel__button-nav${index === 0 ? '--disabled' : ''} back`}
-                onClick={priorCard}
+                onClick={null}
                 data-testid="button-back"
               />
-              <RightArrow 
+              <BackIcon 
                 className={`PackCarousel__button-nav${index === cards.length - 1 ? '--disabled' : ''} forward`}
-                onClick={nextCard}
+                onClick={null}
                 data-testid="button-forward"
               />
             </>
           )
         }
-      </BottomNav>
+      </CardNavigation>
+
     </PackCarouselWrapper>
   );
 };
 
 const PackCarouselWrapper = styled.div`
   display: grid;
-  grid-template-rows: minmax(11%, 13%) 1fr auto;
-  grid-template-areas:
-    "header"
-    "card"
-    "carousel";
+  grid-template-rows: repeat(3, auto) minmax(0, 1fr);
   height: 100%;
-
-  background: ${props => props.theme.background.primary};
+  background: orange;
 `;
 
 const Header = styled.header`
-  grid-area: header;
-
+  grid-row: 1 / span 1;
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
   color: ${props => props.theme.font.primary};
-  padding: 1rem 1.5rem 0rem 1.5rem;
 `;
 
-const BottomNav = styled.footer`
-  grid-area: carousel;
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .btn-lbl-combo__icon {
+    height: 2rem;
+    width: 2rem;
+    margin-right: .50rem;
+
+    path {
+      fill: ${props => props.theme.color.fonts.eerieBlack};
+    }
+  }
+
+  .btn-lbl-combo__text {
+    color: ${props => props.theme.color.main.primary};
+  }
+`;
+
+const Counter = styled.section`
+  grid-row: 3 / span 1;
+  padding: 0rem 1.5rem 0rem 1.5rem;
+`;
+
+const CounterBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: .50rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  background: black;
+  color: white;
+`;
+
+const CardNavigation = styled.footer`
+  grid-row: 2 / span 1;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -201,12 +253,8 @@ const BottomNav = styled.footer`
   }
 `;
 
-const StyledClose = styled(CancelIcon)`
+const BackIcon = styled(Back)`
   height: 2rem;
-
-  path {
-    fill: ${props => props.theme.button.default.greyed};
-  }
 
   &:hover {
     path {
@@ -216,52 +264,10 @@ const StyledClose = styled(CancelIcon)`
 `;
 
 const CardViewer = styled.section`
-  grid-area: card;
+  grid-row: 4 / span 1;
   padding-bottom: 1rem;
 `;
 
-const Counter = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "aside current"
-    "unused total";
-
-  p {
-    color: ${props => props.theme.font.tertiary}
-  }
-
-  .counter-group__current {
-    grid-area: current;
-    width: 4rem;
-    height: 2.25rem;
-  }
-
-  .counter-group__total{
-    grid-area: total;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .counter-group__indicator {
-    grid-area: aside;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding-right: .3rem;
-
-    svg {
-      height: .50rem;
-    }
-
-    path {
-      fill: ${props => props.theme.background.special};
-    }
-  }
-`;
 
 PackCarousel.propTypes = {
   mode: PropTypes.string.isRequired,

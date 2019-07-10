@@ -127,8 +127,8 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${props => props.theme.color.fonts.eerieBlack};
   padding: 1.5rem;
+  color: ${props => props.theme.color.fonts.eerieBlack};
 `;
 
 const ButtonGroup = styled.div`
