@@ -214,11 +214,11 @@ const CounterBody = styled.div`
   align-items: center;
   height: 100%;
   padding: .50rem;
-  border-top-left-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-  background: black;
-  color: white;
-  `;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background: ${props => props.theme.color.main.secondary};
+  color: ${props => props.theme.color.fonts.charleston};
+`;
 
 const CardViewer = styled.section`
   grid-row: 4 / span 1;
