@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo';
 import { CREATE_PACK, GET_PACKS } from '../queries';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { Link, withRouter } from 'react-router-dom';
-import { MediumButton } from '../components/elements/Button';
+import { PrimaryButton } from '../components/elements/Button';
 import { Title2, Caption3 } from './elements/Text';
 
 function ComposePack({ history }) {
@@ -185,7 +185,7 @@ const FormFooter = styled.div`
   align-items: center;
 `;
 
-const StyledSubmit = styled(MediumButton)`
+const StyledSubmit = styled(PrimaryButton)`
   max-width: 20rem;
   padding-left: 2rem;
   padding-right: 2rem;

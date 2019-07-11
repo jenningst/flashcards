@@ -15,6 +15,7 @@ import ComposePack from './ComposePack';
 import PackContainer from '../containers/PackContainer';
 import Login from './Login';
 import SignUp from './SignUp';
+import ButtonViewer from './ButtonViewer';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:4000/graphql" }),
@@ -38,6 +39,7 @@ function App() {
                   <Route path="/home" exact component={Dashboard} />
                   <Route path="/create-pack" component={ComposePack} />
                   <Route path="/pack/:id" component={PackContainer} />
+                  <Route path='/btn-tester' component={ButtonViewer} />
                 </Switch>
               </Router>
             </AppWrapper>

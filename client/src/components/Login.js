@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Title2, Caption3 } from '../components/elements/Text';
-import { MediumButton } from './elements/Button';
+import { Input } from '../components/elements/Input';
+import { PrimaryButton } from './elements/Button';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ const Login = () => {
       <FormWrapper className="form-wrapper">
         <LoginForm className="Login__form">
           <Title2 className="Login__title form-title">Login</Title2>
-          <FormInput
+          <Input
             className="Login__input-email"
             aria-label="email"
             id="email"
@@ -31,7 +32,7 @@ const Login = () => {
             placeholder="Email Address"
             value={email}
           />
-          <FormInput
+          <Input
             className="Login__input-password"
             aria-label="password"
             id="password"
@@ -57,9 +58,9 @@ const Login = () => {
             Log In
           </LoginButton>
         </LoginForm>
-        <SignUpLinkSpan>
+        <span>
           <Caption3>New to Flashcards? <Link to={"/signup"}>Sign up</Link></Caption3>
-        </SignUpLinkSpan>
+        </span>
       </FormWrapper>
     </LoginPageWrapper>
   );
@@ -85,7 +86,18 @@ const FormWrapper = styled.div`
   height: 100%;
   padding: 2rem;
   background: ${props => props.theme.color.main.pureWhite};
-  
+
+  a {
+    color: ${props => props.theme.color.main.primary};
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      transition: color .2s ease-out, border-bottom-color .2s ease-out;
+      border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
+    }
+  }
 
   @media(min-width: 376px) {
     min-width: 320px;
@@ -116,60 +128,12 @@ const LoginForm = styled.form`
     justify-content: space-between;
     width: 100%;
     margin-top: 2rem;
-
-    a {
-      color: ${props => props.theme.color.main.primary};
-      text-decoration: none;
-      outline: none;
-      border-bottom: 1px solid transparent;
-      &:hover {
-        transition: color .2s ease-out, border-bottom-color .2s ease-out;
-        border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
-      }
-    }
   }
 `;
 
-const FormInput = styled.input`
-  box-sizing: border-box;
-  width: 100%;
-  margin: .50rem;
-  padding: .50rem;
-  font-family: 'Rubik', sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 20px;
-  border-bottom: 2px solid #e9eaf0;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-
-  &::placeholder {
-    color: #e9eaf0;
-  }
-
-  &:focus {
-    border-bottom: 2px solid ${props => props.theme.color.main.primaryHover};
-    outline: none;
-  }
-`;
-
-const LoginButton = styled(MediumButton)`
+const LoginButton = styled(PrimaryButton)`
   margin: 1.5rem;
   width: 100%;
-`;
-
-const SignUpLinkSpan = styled.span`
-  a {
-    color: ${props => props.theme.color.main.primary};
-    text-decoration: none;
-    outline: none;
-    border-bottom: 1px solid transparent;
-    &:hover {
-      transition: color .2s ease-out, border-bottom-color .2s ease-out;
-      border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
-    }
-  }
 `;
 
 export default Login;
