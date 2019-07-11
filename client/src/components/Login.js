@@ -9,7 +9,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordOneChange = e => setPassword(e.target.value);
-  const handleLogin = () => {};
+  const handleLogin = (e) => {
+    e.preventDefault();
+    alert('you tried to log in!');
+  };
 
   // TODO: provide tooltip for password requirements
   // TODO: probably shouldn't be validating their passwords just yet...
@@ -45,9 +48,10 @@ const Login = () => {
             <Link to={"/forgot-password"}><Caption3>Forgot Password</Caption3></Link>
           </div>
           <LoginButton
-            className="Login__button-sign-up"
-            type="button"
-            onClick={handleLogin}
+            className="Login__btn-submit"
+            type="primary"
+            ripple
+            onClick={e => handleLogin(e)}
             disabled={invalidInputs ? true : false}
           >
             Log In
@@ -114,9 +118,15 @@ const LoginForm = styled.form`
     margin-top: 2rem;
 
     a {
-    color: ${props => props.theme.color.main.primary};
-    text-decoration: none;
-  }
+      color: ${props => props.theme.color.main.primary};
+      text-decoration: none;
+      outline: none;
+      border-bottom: 1px solid transparent;
+      &:hover {
+        transition: color .2s ease-out, border-bottom-color .2s ease-out;
+        border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
+      }
+    }
   }
 `;
 
@@ -153,6 +163,12 @@ const SignUpLinkSpan = styled.span`
   a {
     color: ${props => props.theme.color.main.primary};
     text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid transparent;
+    &:hover {
+      transition: color .2s ease-out, border-bottom-color .2s ease-out;
+      border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
+    }
   }
 `;
 

@@ -32,8 +32,9 @@ function App() {
             <AppWrapper className="App">
               <Router>
                 <Switch>
-                  <Route path="/" component={Login} />
+                  <Route path="/login" component={Login} />
                   <Route path="/signup" component={SignUp} />
+                  <Route path="/forgot-password" component={SignUp} />
                   <Route path="/home" exact component={Dashboard} />
                   <Route path="/create-pack" component={ComposePack} />
                   <Route path="/pack/:id" component={PackContainer} />

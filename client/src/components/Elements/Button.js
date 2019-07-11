@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Awesomebutton } from 'react-awesome-button';
-import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 
 export const LargeButton = styled.button`
   text-transform: uppercase;
@@ -30,15 +28,5 @@ export const SmallButton = styled.button`
   border-radius: 6px;
   border: none;
 `;
-
-const PrimaryButton = ({ children }) => (
-  <Awesomebutton
-    type="primary"
-    ripple
-    onPress={() => alert('you clicked me!')}
-  >
-    {children}
-  </Awesomebutton>
-);
 
 export default { LargeButton, MediumButton, SmallButton };
