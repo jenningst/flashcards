@@ -13,19 +13,19 @@ const CONFIG = {
 
 class Firebase {
   constructor() {
-    app.initializeApp(CONFIG); // create instance of firebase
-    this.auth = app.auth(); // bind auth
-    this.db = app.database(); // bind db
+    app.initializeApp(CONFIG);
+    this.auth = app.auth();
+    this.db = app.database();
   }
 
   // auth api methods
   doCreateUserWithEmailAndPassword = (email, password) => 
     this.auth.createUserWithEmailAndPassword(email, password);
-    doSignInWithEmailAndPassword = (email, password) =>
+  doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
   doSignOut = () => this.auth.signOut();
-  resetPassword = email => this.auth.sendPasswordResetEmail(email);
-  updatePassword = password => this.auth.currentUser.updatePassword(password);
+  doResetPassword = (email) => this.auth.sendPasswordResetEmail(email);
+  doUpdatePassword = (password) => this.auth.currentUser.updatePassword(password);
 
   // user api methods
   getUser = (user) => this.db.ref(`users/${user.uid}`);
