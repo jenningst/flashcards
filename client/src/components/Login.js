@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Title2, Caption3 } from '../components/elements/Text';
 import { Input } from '../components/elements/Input';
 import { PrimaryButton } from './elements/Button';
+import { useAuth } from '../contexts/auth-context';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,8 @@ const Login = () => {
     e.preventDefault();
     alert('you tried to log in!');
   };
+
+  const context = useAuth();
 
   // TODO: provide tooltip for password requirements
   // TODO: probably shouldn't be validating their passwords just yet...

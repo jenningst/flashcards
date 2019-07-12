@@ -1,25 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { useAuth } from '../contexts/auth-context';
 import { PrimaryButton } from './elements/Button';
 import { Input } from './elements/Input';
 import { Title2, Caption3 } from './elements/Text';
 
-const SignUp = () => {
+const SignUp = ({ history }) => {
+  const { register } = useAuth();
   const [email, setEmail] = useState('');
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
+  const [error, setError] = useState(null);
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordOneChange = e => setPasswordOne(e.target.value);
   const handlePasswordTwoChange = e => setPasswordTwo(e.target.value);
-  const handleSignUp = () => {};
+
+  const signUpUser = async () => {
+    let newUser;
+    try {
+      newUser = await register(email, passwordOne);
+      history.push('/home');
+      console.log(newUser);
+    } catch (err) {
+      // log error to state so we can display it to the user
+      setError(err.message);
+      console.log(err.message);
+    }
+  }
+
+  const handleSignUp = (e) => {
+    // validate form...
+    // if invalid:
+    // leave email but provide error message if improperly formatted
+    // leave passwords but provide error message if not matching
+    //
+    // if valid:
+    // doCreateUser
+    signUpUser();
+    // start a session
+    // route to dashboard
+    
+    e.preventDefault();
+  };
+
 
   // TODO: provide tooltip for password requirements
   // TODO: probably shouldn't be validating their passwords just yet...
   const invalidInputs = 
     passwordOne !== passwordTwo ||
     !passwordOne ||
-    !passwordTwo;
+    email === '';
 
   return (
     <SignUpPageWrapper className="SignUp">
@@ -29,6 +61,7 @@ const SignUp = () => {
           <Input
             className="SignUp__input-email"
             aria-label="email"
+            type="email"
             id="email"
             onChange={e => handleEmailChange(e)}
             placeholder="Email Address"
@@ -54,7 +87,7 @@ const SignUp = () => {
             className="SignUp__button-sign-up"
             type="button"
             onClick={e => handleSignUp(e)}
-            disabled={invalidInputs ? true : false}
+            disabled={invalidInputs}
           >
             Sign Up
           </SignUpButton>
@@ -137,4 +170,8 @@ const SignUpButton = styled(PrimaryButton)`
   width: 100%;
 `;
 
-export default SignUp;
+SignUp.propTypes = {
+  firebase: PropTypes.object,
+}
+
+export default withRouter(SignUp);

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { WaveSpinner } from 'react-spinners-kit';
 
-const Loading = ({ loading }) => {
+const FullPageSpinner = ({ loading }) => {
   return (
-    <LoaderPageWrapper className="Loading">
+    <LoaderPageWrapper className="FullPageSpinner">
       <WaveSpinner
-        className="Loading__spinner"
+        className="FullPageSpinner__spinner"
         size={50}
         loading={loading}
         color={'#939CE8'}
@@ -24,8 +24,8 @@ const LoaderPageWrapper = styled.div`
   background: ${props => props.theme.color.main.offWhite};
 `;
 
-Loading.propTypes = {
+FullPageSpinner.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-export default Loading;
+export default FullPageSpinner;

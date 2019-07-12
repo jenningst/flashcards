@@ -12,6 +12,38 @@ function AuthProvider(props) {
   const signOut = () => firebase.doSignOut();
   const resetPasswordWithEmail = (email) => firebase.doResetPassword(email);
   const updatePasswordWithEmail = (password) => firebase.doUpdatePassword(password);
+  // TODO: getToken
+  /* 
+  function handleUserResponse({ user: {token, ...user}}) {
+    window.localStorage.setItem(localStorageKey, token);
+  }
+
+  const localStorageKey = '__pack_token__';
+  function getToken() {
+    // get token from local storage
+    return window.localStorage.getItem(localStorageKey);
+  }
+
+  function logout() {
+    // remove token from local storage
+    window.localStorage.removeItem(localStorageKey);
+  }
+
+  async function getUser() {
+    const token = getToken();
+    if (!token) {
+      return Promise.resolve(null);
+    }
+    
+    try {
+      let user = await firebase.getUser(user);
+      return user;
+    } catch(err) {
+      return Promise.reject(err);
+    }
+    
+  }
+  */
 
   return (
     <AuthContext.Provider value={

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Query } from 'react-apollo';
+import { useUser } from '../contexts/user-context';
 import LinkButton from './elements/LinkButton';
 import { Title1, Title2, Body, Caption3 } from './elements/Text';
 import { ReactComponent as Menu } from '../components/icons/svg/menu.svg';
@@ -7,14 +9,6 @@ import { ReactComponent as Close } from '../components/icons/svg/error.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
-import { Query } from 'react-apollo';
-
-// TODO: dynamically get user info
-const user = {
-  id: '1',
-  name: 'Troy Jennings',
-  profilePhotoUrl: './assets/user.svg',
-};
 
 const UserPacks = () => (
   <Query query={GET_PACKS}>
@@ -37,6 +31,7 @@ const UserPacks = () => (
 function Dashboard() {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+
   return (
     <PageWrapper className="Dashboard">
       {/* <SideNav
@@ -86,6 +81,7 @@ function Dashboard() {
             </CreatePackButton>
             
             <UserPacks />
+            
           </PackList>
 
         </PackSection>

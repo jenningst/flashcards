@@ -14,7 +14,7 @@ import ButtonViewer from './ButtonViewer';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const user = useUser();
+  const user = useUser(); // do we have an user?
 
   return (
     <PackProvider>
