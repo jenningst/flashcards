@@ -1,22 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { WaveSpinner } from 'react-spinners-kit';
 import { Title2, Caption3 } from '../components/elements/Text';
 import { Input } from '../components/elements/Input';
 import { PrimaryButton } from './elements/Button';
-import { useAuth } from '../contexts/auth-context';
+import { loginWithEmail } from '../contexts/auth-context';
 
-const Login = () => {
+const Login = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordOneChange = e => setPassword(e.target.value);
-  const handleLogin = (e) => {
-    e.preventDefault();
-    alert('you tried to log in!');
-  };
 
-  const context = useAuth();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // see if we get any errors from firebase
+    setSubmitting(true);
+    try {
+      await loginWithEmail(email, password);
+      history.push('/home');
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/user-not-found':
+          setError(`No user found for email ${email}`);
+          setPassword('');
+          setSubmitting(false);
+          break;
+        case 'auth/wrong-password':
+          setError(`Oops! The password you entered is incorrect.`);
+          setPassword('');
+          setSubmitting(false);
+        default:
+          break;
+      }
+    }
+  };
 
   // TODO: provide tooltip for password requirements
   // TODO: probably shouldn't be validating their passwords just yet...
@@ -24,9 +45,14 @@ const Login = () => {
 
   return (
     <LoginPageWrapper className="Login">
-      <FormWrapper className="form-wrapper">
+      <FormWrapper 
+        className={`form-wrapper${submitting ? '--submitting' : ''}`}
+      >
         <LoginForm className="Login__form">
           <Title2 className="Login__title form-title">Login</Title2>
+          <ErrorMessageBox className="Login__errors">
+            <Caption3>{error}</Caption3>
+          </ErrorMessageBox>
           <Input
             className="Login__input-email"
             aria-label="email"
@@ -65,6 +91,22 @@ const Login = () => {
           <Caption3>New to Flashcards? <Link to={"/signup"}>Sign up</Link></Caption3>
         </span>
       </FormWrapper>
+      <SpinnerWrapper
+        className={`loading-spinner-wrapper${submitting ? '--visible' : 'hidden'}`}
+      >
+        {submitting
+          ? <>
+              <WaveSpinner
+                className="Login__spinner"
+                size={30}
+                loading={submitting}
+                color={'#939CE8'}
+              />
+              <Title2>Logging In</Title2>
+            </>
+          : null
+        }
+      </SpinnerWrapper>
     </LoginPageWrapper>
   );
 };
@@ -76,6 +118,28 @@ const LoginPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+`;
+
+const SpinnerWrapper= styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.9;
+
+  &[class*="hidden"] {
+    z-index: -1;
+  }
+
+  &[class*="visible"] {
+    z-index: 99999;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -109,6 +173,15 @@ const FormWrapper = styled.div`
     box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
     border-radius: 1rem;
   }
+
+  &[class*="submitting"] {
+    opacity: 0.2;
+  }
+`;
+
+const ErrorMessageBox = styled.span`
+  width: 100%;
+  color: ${props => props.theme.color.font.danger};
 `;
 
 const LoginForm = styled.form`
@@ -139,4 +212,4 @@ const LoginButton = styled(PrimaryButton)`
   width: 100%;
 `;
 
-export default Login;
+export default withRouter(Login);

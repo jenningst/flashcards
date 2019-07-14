@@ -11,25 +11,6 @@ const CONFIG = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-class Firebase {
-  constructor() {
-    app.initializeApp(CONFIG);
-    this.auth = app.auth();
-    this.db = app.database();
-  }
+const firebase = app.initializeApp(CONFIG);
 
-  // auth api methods
-  doCreateUserWithEmailAndPassword = (email, password) => 
-    this.auth.createUserWithEmailAndPassword(email, password);
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password);
-  doSignOut = () => this.auth.signOut();
-  doResetPassword = (email) => this.auth.sendPasswordResetEmail(email);
-  doUpdatePassword = (password) => this.auth.currentUser.updatePassword(password);
-
-  // user api methods
-  getUser = (user) => this.db.ref(`users/${user.uid}`);
-  getUsers = () => this.db.ref('users');
-};
-
-export default Firebase;
+export default firebase;

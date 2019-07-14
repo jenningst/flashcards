@@ -1,31 +1,35 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { WaveSpinner } from 'react-spinners-kit';
 
 const FullPageSpinner = ({ loading }) => {
   return (
-    <LoaderPageWrapper className="FullPageSpinner">
+    <div
+      className="FullPageSpinner"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: '#fcfbfc'
+      }}
+    >
       <WaveSpinner
         className="FullPageSpinner__spinner"
-        size={50}
+        size={30}
         loading={loading}
         color={'#939CE8'}
       />
-    </LoaderPageWrapper>
+    </div>
   );
 };
 
-const LoaderPageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background: ${props => props.theme.color.main.offWhite};
-`;
-
 FullPageSpinner.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
 };
+
+FullPageSpinner.defaultProps = {
+  loading: true,
+}
 
 export default FullPageSpinner;

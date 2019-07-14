@@ -4,7 +4,7 @@ const InputBase = styled.input`
   box-sizing: border-box;
   width: 100%;
   margin: .50rem;
-  padding: .50rem;
+  padding: .50rem 0rem .50rem 0rem;
   font-family: 'Rubik', sans-serif;
   font-size: 15px;
   font-weight: 300;

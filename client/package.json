@@ -20,6 +20,7 @@
     "react-apollo-hooks": "^0.4.5",
     "react-awesome-button": "^6.1.2",
     "react-dom": "^16.8.6",
+    "react-firebase-hooks": "^2.0.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-spinners-kit": "^1.9.0",

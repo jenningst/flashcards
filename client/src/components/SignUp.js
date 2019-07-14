@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { useAuth } from '../contexts/auth-context';
+import { createUserWithEmail } from '../contexts/auth-context';
 import { PrimaryButton } from './elements/Button';
 import { Input } from './elements/Input';
 import { Title2, Caption3 } from './elements/Text';
 
 const SignUp = ({ history }) => {
-  const { register } = useAuth();
+  const { registerWithEmail } = useAuth();
   const [email, setEmail] = useState('');
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
@@ -17,31 +18,18 @@ const SignUp = ({ history }) => {
   const handlePasswordOneChange = e => setPasswordOne(e.target.value);
   const handlePasswordTwoChange = e => setPasswordTwo(e.target.value);
 
-  const signUpUser = async () => {
-    let newUser;
-    try {
-      newUser = await register(email, passwordOne);
-      history.push('/home');
-      console.log(newUser);
-    } catch (err) {
-      // log error to state so we can display it to the user
-      setError(err.message);
-      console.log(err.message);
-    }
-  }
-
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     // validate form...
     // if invalid:
     // leave email but provide error message if improperly formatted
     // leave passwords but provide error message if not matching
     //
     // if valid:
-    // doCreateUser
-    signUpUser();
-    // start a session
-    // route to dashboard
-    
+    try {
+      await createUserWithEmail(email, passwordOne);
+    } catch (err) {
+      setError(err.message);
+    }
     e.preventDefault();
   };
 
@@ -58,6 +46,9 @@ const SignUp = ({ history }) => {
       <FormWrapper className="form-wrapper">
         <SignUpForm className="SignUp__form">
           <Title2 className="SignUp__title form-title">Sign Up</Title2>
+          <ErrorMessageBox className="SignUp__errors">
+            <Caption3>errors: {error}</Caption3>
+          </ErrorMessageBox>
           <Input
             className="SignUp__input-email"
             aria-label="email"
@@ -142,6 +133,11 @@ const FormWrapper = styled.div`
   }
 `;
 
+const ErrorMessageBox = styled.span`
+  width: 100%;
+  color: ${props => props.theme.color.font.danger};
+`;
+
 const SignUpForm = styled.form`
   box-sizing: border-box;
   flex-grow: 1;
@@ -171,7 +167,7 @@ const SignUpButton = styled(PrimaryButton)`
 `;
 
 SignUp.propTypes = {
-  firebase: PropTypes.object,
+  history: PropTypes.object,
 }
 
 export default withRouter(SignUp);

@@ -50,6 +50,7 @@ export const lightTheme = {
       grey: '#b1aeb7',
       lightGrey: '#eff0f1',
       placeholder: '#e9eaf0',
+      danger: '#DE6A60',
     },
     border: {
       primary: '#5860A5',
@@ -58,6 +59,10 @@ export const lightTheme = {
       inputDefault: '#e9eaf0',
       transparent: '#0000ffff',
     }, // TODO: consolidate everything below; using the above
+    background: {
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+    },
     main: {
       primary: '#7883E2',
       primaryHover: '#939CE8',

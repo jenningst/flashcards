@@ -7,7 +7,7 @@ import { GET_PACK_BY_ID, GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
 import PackCarousel from '../components/PackCarousel';
-import Loading from '../components/Loading';
+import Loading from '../components/FullPageSpinner';
 
 const PackContainer = ({ match }) => {
   const state = usePackState();

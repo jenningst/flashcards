@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
-import { useUser } from '../contexts/user-context';
+import { useSession } from '../contexts/user-context';
+
 import LinkButton from './elements/LinkButton';
 import { Title1, Title2, Body, Caption3 } from './elements/Text';
 import { ReactComponent as Menu } from '../components/icons/svg/menu.svg';
@@ -31,6 +32,7 @@ const UserPacks = () => (
 function Dashboard() {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+  const user = useSession();
 
   return (
     <PageWrapper className="Dashboard">
