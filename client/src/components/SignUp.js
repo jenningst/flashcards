@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { WaveSpinner } from 'react-spinners-kit';
-import { useAuth } from '../contexts/auth-context';
 import { createUserWithEmail } from '../contexts/auth-context';
 import { PrimaryButton } from './elements/Button';
 import { Input } from './elements/Input';
 import { Title2, Caption3 } from './elements/Text';
 import ROUTE_CONFIG from '../constants/route-config';
 
-const SignUp = ({ history }) => {
-  const { registerWithEmail } = useAuth();
+SignUp.propTypes = {
+  history: PropTypes.object,
+};
+
+function SignUp({ history }) {
   const [email, setEmail] = useState('');
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
@@ -24,10 +26,8 @@ const SignUp = ({ history }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     // validate form...
-    // if invalid:
-    // leave email but provide error message if improperly formatted
-    // leave passwords but provide error message if not matching
 
+    // render spinner and attempt user signup
     setSubmitting(true);
     try {
       await createUserWithEmail(email, passwordOne);
@@ -234,9 +234,5 @@ const SignUpButton = styled(PrimaryButton)`
   margin: 1.5rem;
   width: 100%;
 `;
-
-SignUp.propTypes = {
-  history: PropTypes.object,
-}
 
 export default withRouter(SignUp);

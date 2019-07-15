@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { WaveSpinner } from 'react-spinners-kit';
@@ -8,7 +9,11 @@ import { PrimaryButton } from './elements/Button';
 import { loginWithEmail } from '../contexts/auth-context';
 import ROUTE_CONFIG from '../constants/route-config';
 
-const Login = ({ history }) => {
+Login.propTypes = {
+  history: PropTypes.object,
+};
+
+function Login({ history }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
