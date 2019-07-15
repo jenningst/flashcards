@@ -7,6 +7,7 @@ import { GET_PACK_BY_ID, GET_FLASHCARDS_BY_PACK } from '../queries';
 
 import PackHome from '../components/PackHome';
 import PackCarousel from '../components/PackCarousel';
+import Loading from '../components/FullPageSpinner';
 
 const PackContainer = ({ match }) => {
   const state = usePackState();
@@ -19,7 +20,9 @@ const PackContainer = ({ match }) => {
         return (
           <Query query={GET_FLASHCARDS_BY_PACK} variables={ { id: match.params.id }} >
             {({ loading: cardLoading, error: cardError, data: cardData }) => {
-              if (packLoading || cardLoading) return <div>Loading Flashcards...</div>;
+              if (packLoading || cardLoading) {
+                return <Loading loading={packLoading || cardLoading}/>;
+              }
               if (packError || cardError) return <div>Errors!</div>;
               const cards = cardData.fetchFlashcardsByPack;
 

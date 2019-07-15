@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Query } from 'react-apollo';
+import { useSession } from '../contexts/user-context';
+
 import LinkButton from './elements/LinkButton';
 import { Title1, Title2, Body, Caption3 } from './elements/Text';
 import { ReactComponent as Menu } from '../components/icons/svg/menu.svg';
@@ -7,14 +10,6 @@ import { ReactComponent as Close } from '../components/icons/svg/error.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
-import { Query } from 'react-apollo';
-
-// TODO: dynamically get user info
-const user = {
-  id: '1',
-  name: 'Troy Jennings',
-  profilePhotoUrl: './assets/user.svg',
-};
 
 const UserPacks = () => (
   <Query query={GET_PACKS}>
@@ -37,6 +32,8 @@ const UserPacks = () => (
 function Dashboard() {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+  const user = useSession();
+
   return (
     <PageWrapper className="Dashboard">
       {/* <SideNav
@@ -86,6 +83,7 @@ function Dashboard() {
             </CreatePackButton>
             
             <UserPacks />
+            
           </PackList>
 
         </PackSection>
@@ -112,13 +110,13 @@ const SideNav = styled.aside`
 `;
 
 const DashboardWrapper = styled.section`
-  flex-grow: 1;
+  flex-grow: 2;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(2, auto) minmax(0, 1fr);
+  height: 100%;
   background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.charleston};
-  display: grid;
-  grid-template-rows: repeat(2, auto) 1fr;
-  height: 100%;
   overflow: hidden;
 `;
 
@@ -127,8 +125,9 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${props => props.theme.color.fonts.eerieBlack};
   padding: 1.5rem;
+  background: ${props => props.theme.color.main.pureWhite};
+  color: ${props => props.theme.color.fonts.eerieBlack};
 `;
 
 const ButtonGroup = styled.div`
@@ -174,6 +173,7 @@ const PackSection = styled.section`
   display: flex;
   flex-flow: column nowrap;
   padding: 1.5rem;
+  height: 100%;
 
   p {
     font-weight: 500;
