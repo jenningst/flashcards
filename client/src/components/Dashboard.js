@@ -11,8 +11,8 @@ import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
 
-const UserPacks = () => (
-  <Query query={GET_PACKS}>
+const UserPacks = ({ uid }) => (
+  <Query query={GET_PACKS} variables={{ owner: uid }}>
     {({ loading, error, data }) => {
       if (loading) return 'Loading...';
       if (error) return `Error! ${error.message}`;
@@ -82,7 +82,7 @@ function Dashboard() {
               <Title1>+</Title1>
             </CreatePackButton>
             
-            <UserPacks />
+            <UserPacks uid={user.uid}/>
             
           </PackList>
 

@@ -11,7 +11,7 @@ const GET_PACKS = gql`
 
 const GET_PACK_BY_ID = gql`
   query fetchPackByPackId($owner: String!, $pack_id: String!) {
-    fetchPackByPackId(owner: $owner, pack_id: $id) {
+    fetchPackByPackId(owner: $owner, pack_id: $pack_id) {
       _id
       name
     }
@@ -20,7 +20,7 @@ const GET_PACK_BY_ID = gql`
 
 const GET_FLASHCARDS_BY_PACK = gql`
   query fetchFlashcardsByPackId($owner: String!, $pack_id: String!) {
-    fetchFlashcardsByPackId(owner: $owner, pack_id: $id) {
+    fetchFlashcardsByPackId(owner: $owner, pack_id: $pack_id) {
       _id
       text
       answer

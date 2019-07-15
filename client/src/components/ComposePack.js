@@ -7,10 +7,13 @@ import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { Link, withRouter } from 'react-router-dom';
 import { PrimaryButton } from '../components/elements/Button';
 import { Title2, Caption3 } from './elements/Text';
+import { useSession } from '../contexts/user-context';
+import ROUTE_CONFIG from '../constants/route-config';
 
 function ComposePack({ history }) {
   const [packName, setPackName] = useState('');
   const handleNameChange = (e) => setPackName(e.target.value);
+  const user = useSession();
 
   return (
     <ComposePackWrapper className="ComposePack">
@@ -54,13 +57,28 @@ function ComposePack({ history }) {
           <Mutation
             mutation={CREATE_PACK}
             update={(cache, { data }) => {
-              // get our current packs from cache
-              const { fetchPacks } = cache.readQuery({ query: GET_PACKS });
-              // write back to the cache
-              cache.writeQuery({
-                query: GET_PACKS,
-                data: { fetchPacks: [...fetchPacks, data.createPack.pack] },
-              });
+              // data; response payload from createPack
+              if (data.createPack.details.success) {
+                // get our current packs from cache
+                const currentPacks = cache.readQuery({
+                  query: GET_PACKS,
+                  variables: { owner: user.uid }
+                });
+                // write back to the cache
+                // destructure query name from cache
+                const { fetchPacks } = currentPacks;
+                console.log(`fetchPacks: ${JSON.stringify(currentPacks, null, 2)}`);
+                console.log([...fetchPacks]);
+                console.log(data.createPack.pack);
+                cache.writeQuery({
+                  query: GET_PACKS,
+                  data: { fetchPacks: [...fetchPacks, data.createPack.pack ] },
+                });
+              }
+              else {
+                // TODO: provide error message to UI
+                setPackName('');
+              }
             }}
           >
             {(addPack) => (
@@ -72,9 +90,10 @@ function ComposePack({ history }) {
                   onClick={e => {
                     if (packName !== '') {
                       addPack({ variables: { input: {
-                        name: packName
+                        name: packName,
+                        owner: user.uid,
                       }}});
-                      history.push("/"); // go home
+                      history.push(ROUTE_CONFIG.auth.DASHBOARD);
                     }
                   }}
                 >
