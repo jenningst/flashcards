@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ROUTE_CONFIG from '../constants/route-config';
 import { PackProvider } from '../contexts/pack-context';
 import PackContainer from '../containers/PackContainer';
@@ -8,7 +8,7 @@ import Dashboard from './Dashboard';
 import ComposePack from './ComposePack';
 import NoMatch from './NoMatch';
 
-function AuthenticatedApp({ history }) {
+function AuthenticatedApp() {
   return (
     <PackProvider>
       <AppWrapper className="AuthenticatedApp">
@@ -31,4 +31,4 @@ const AppWrapper = styled.div`
   background: ${props => props.theme.color.main.offWhite};
 `;
 
-export default withRouter(AuthenticatedApp);
+export default AuthenticatedApp;

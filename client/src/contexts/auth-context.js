@@ -54,7 +54,7 @@ async function createUserWithEmail(email, password) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
   } catch (err) {
     console.log(err);
-    throw new Error(`Error during createUserWithEmail: ${err.message}`);
+    return Promise.reject(err);
   }
 };
 

@@ -2,35 +2,59 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
+import { WaveSpinner } from 'react-spinners-kit';
 import { useAuth } from '../contexts/auth-context';
 import { createUserWithEmail } from '../contexts/auth-context';
 import { PrimaryButton } from './elements/Button';
 import { Input } from './elements/Input';
 import { Title2, Caption3 } from './elements/Text';
+import ROUTE_CONFIG from '../constants/route-config';
 
 const SignUp = ({ history }) => {
   const { registerWithEmail } = useAuth();
   const [email, setEmail] = useState('');
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordOneChange = e => setPasswordOne(e.target.value);
   const handlePasswordTwoChange = e => setPasswordTwo(e.target.value);
 
   const handleSignUp = async (e) => {
+    e.preventDefault();
     // validate form...
     // if invalid:
     // leave email but provide error message if improperly formatted
     // leave passwords but provide error message if not matching
-    //
-    // if valid:
+
+    setSubmitting(true);
     try {
       await createUserWithEmail(email, passwordOne);
+      history.push(ROUTE_CONFIG.auth.DASHBOARD);
     } catch (err) {
-      setError(err.message);
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          setError(`It looks like ${email} is already in use. Try using a different email address or logging in.`);
+          setEmail('');
+          setPasswordOne('');
+          setPasswordTwo('');
+          setSubmitting(false);
+          break;
+        case 'auth/weak-password':
+          setError(`The password you used is too short. Please use a password with a length of at least 6 characters.`);
+          setPasswordOne('');
+          setPasswordTwo('');
+          setSubmitting(false);
+          break;
+        default:
+          setError(err.message);
+          setPasswordOne('');
+          setPasswordTwo('');
+          setSubmitting(false);
+          break;
+      }
     }
-    e.preventDefault();
   };
 
 
@@ -43,11 +67,13 @@ const SignUp = ({ history }) => {
 
   return (
     <SignUpPageWrapper className="SignUp">
-      <FormWrapper className="form-wrapper">
+      <FormWrapper 
+        className={`form-wrapper${submitting ? '--submitting' : ''}`}
+      >
         <SignUpForm className="SignUp__form">
           <Title2 className="SignUp__title form-title">Sign Up</Title2>
           <ErrorMessageBox className="SignUp__errors">
-            <Caption3>errors: {error}</Caption3>
+            <Caption3>{error}</Caption3>
           </ErrorMessageBox>
           <Input
             className="SignUp__input-email"
@@ -87,6 +113,22 @@ const SignUp = ({ history }) => {
           <Caption3>Already have an account? <Link to={"/login"}>Log in</Link></Caption3>
         </span>
       </FormWrapper>
+      <SpinnerWrapper
+        className={`loading-spinner-wrapper${submitting ? '--visible' : 'hidden'}`}
+      >
+        {submitting
+          ? <>
+              <WaveSpinner
+                className="Login__spinner"
+                size={30}
+                loading={submitting}
+                color={'#939CE8'}
+              />
+              <Title2>Logging In</Title2>
+            </>
+          : null
+        }
+      </SpinnerWrapper>
     </SignUpPageWrapper>
   );
 };
@@ -98,6 +140,28 @@ const SignUpPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+`;
+
+const SpinnerWrapper= styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.9;
+
+  &[class*="hidden"] {
+    z-index: -1;
+  }
+
+  &[class*="visible"] {
+    z-index: 99999;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -131,10 +195,15 @@ const FormWrapper = styled.div`
     box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
     border-radius: 1rem;
   }
+
+  &[class*="submitting"] {
+    opacity: 0.2;
+  }
 `;
 
 const ErrorMessageBox = styled.span`
   width: 100%;
+  height: 2rem;
   color: ${props => props.theme.color.font.danger};
 `;
 

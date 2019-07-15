@@ -6,6 +6,7 @@ import { Title2, Caption3 } from '../components/elements/Text';
 import { Input } from '../components/elements/Input';
 import { PrimaryButton } from './elements/Button';
 import { loginWithEmail } from '../contexts/auth-context';
+import ROUTE_CONFIG from '../constants/route-config';
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -17,15 +18,15 @@ const Login = ({ history }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // see if we get any errors from firebase
+    // render spinner and attempt user login
     setSubmitting(true);
     try {
       await loginWithEmail(email, password);
-      history.push('/home');
-    } catch (error) {
-      switch (error.code) {
+      history.push(ROUTE_CONFIG.auth.DASHBOARD);
+    } catch (err) {
+      switch (err.code) {
         case 'auth/user-not-found':
-          setError(`No user found for email ${email}`);
+          setError(`No account found for email ${email}`);
           setPassword('');
           setSubmitting(false);
           break;
@@ -33,7 +34,11 @@ const Login = ({ history }) => {
           setError(`Oops! The password you entered is incorrect.`);
           setPassword('');
           setSubmitting(false);
+          break;
         default:
+          setError(err.message);
+          setPassword('');
+          setSubmitting(false);
           break;
       }
     }
@@ -181,6 +186,7 @@ const FormWrapper = styled.div`
 
 const ErrorMessageBox = styled.span`
   width: 100%;
+  height: 2rem;
   color: ${props => props.theme.color.font.danger};
 `;
 

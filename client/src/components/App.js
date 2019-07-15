@@ -10,7 +10,7 @@ const UnAuthenticatedApp = lazy(() => import('./UnAuthenticatedApp'));
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { user, initiasing } = useAuth();
+  const { user } = useAuth();
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
