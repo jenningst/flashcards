@@ -10,28 +10,27 @@ module.exports = {
     }
   },
   Query: {
-    fetchFlashcards: async function() {
-      const cards = await Flashcard.find({});
-      return cards.map(card => {
-        return { ...card._doc, _id: card.id };
-      });
-    },
-    fetchFlashcardsByPack: async function(parent, args, context) {
-      const { id } = args;
-      const cards = await Flashcard.find({ pack_id: id });
-      return cards.map(card => {
-        return { ...card._doc, _id: card.id };
-      });
+    fetchFlashcardsByPackId: async function(_, { owner, pack_id }) {
+      const cards = await Flashcard
+        .find({ pack_id })
+        .where('owner').equals(owner);
+      if (cards) {
+        return cards.map(card => {
+          return { ...card._doc, _id: card.id };
+        });
+      } else {
+        return [];
+      }
     },
   },
   Mutation: {
     createFlashcard: async function(_, { input }) {
-      const { text, answer, user_id, pack_id } = input;
+      const { text, answer, owner, pack_id } = input;
       let response = { card: null, details: {} };
       const newFlashcard = new Flashcard({
         text, 
         answer,
-        user_id,
+        owner,
         pack_id,
       });
 
