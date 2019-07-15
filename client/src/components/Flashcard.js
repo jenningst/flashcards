@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useKeyPress } from '../hooks/use-key-press';
 
 import { Body } from './elements/Text';
-import { MediumButton } from './elements/Button';
+import { PrimaryButton } from './elements/Button';
 
 function Flashcard({ card }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -70,7 +70,7 @@ const ContentArea = styled.section`
   }
 `;
 
-const ToggleButton = styled(MediumButton)`
+const ToggleButton = styled(PrimaryButton)`
   width: 100%;
   background: ${props => props.theme.color.main.primary};
   border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};

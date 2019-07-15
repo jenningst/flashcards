@@ -7,7 +7,7 @@ import { usePackDispatch } from '../contexts/pack-context';
 import { useKeyPress } from '../hooks/use-key-press';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
 import { Subhead, Caption3 } from './elements/Text';
-import { MediumButton, SmallButton } from './elements/Button';
+import { PrimaryButton } from './elements/Button';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { ReactComponent as Left } from '../components/icons/svg/left-arrow.svg';
 import { ReactComponent as Right } from '../components/icons/svg/right-arrow.svg';
@@ -73,7 +73,7 @@ function PackCarousel({ mode, filter, cards }) {
         }}
       >
         {(addFlashcard) => (
-          <MediumButton
+          <PrimaryButton
             className="PackCarousel__button-save"
             disabled={questionText && questionAnswer ? false : true}
             onClick={e => {
@@ -87,7 +87,7 @@ function PackCarousel({ mode, filter, cards }) {
             }}
             >
               SAVE CARD
-            </MediumButton>
+            </PrimaryButton>
         )}
       </Mutation>
     )
@@ -198,7 +198,7 @@ const ButtonGroup = styled.div`
   }
 `;
 
-const SummaryButton = styled(SmallButton)`
+const SummaryButton = styled(PrimaryButton)`
   height: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;

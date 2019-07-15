@@ -7,16 +7,16 @@ import {
   cleanup
 } from '@testing-library/react';
 
-import Loading from '../Loading';
+import FullPageSpinner from '../FullPageSpinner';
 
 const renderComponent = ({ theme, loading }) =>
   render(
     <ThemeProvider theme={theme}>
-      <Loading loading={loading} />
+      <FullPageSpinner loading={loading} />
     </ThemeProvider>
   );
 
-describe('<Loading /> spec', () => {
+describe('<FullPageSpinner /> spec', () => {
   it.todo('assert component matches snapshot');
   it.todo('assert spinner is rendered');
 });

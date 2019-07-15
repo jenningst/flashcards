@@ -1,6 +1,25 @@
 /* 
 
-color: {
+button: {
+      primary: '#7883E2',
+      primaryHover: '#939CE8',
+      active: '#5860A5',
+      disabled: '#e0e0eb',
+    },
+    font: {
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+      eerieBlack: '#16171D',
+      charleston: '#292b3d',
+      grey: '#b1aeb7',
+      lightGrey: '#eff0f1'
+    },
+    border: {
+      primary: '#42487C',
+      active: '#939CE8'
+      disabled: '#b1aeb7',
+      input: '#e9eaf0',
+    }, // TODO: consolidate everything below; using the above
     main: {
       primary: '#7883E2',
       primaryHover: '#939CE8',
@@ -23,6 +42,7 @@ color: {
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
       grey: '#b1aeb7',
+      lightGrey: '#eff0f1'
     },
     borders: {
       lightGrey: '#d8d6db',

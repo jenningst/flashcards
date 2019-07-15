@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { MediumButton } from './elements/Button';
+import { PrimaryButton } from './elements/Button';
 
 function ComposeFlashcard({
   handleTextChange,
@@ -93,7 +93,7 @@ const QuestionTextInput = styled.div`
   }
 `;
 
-const ToggleButton = styled(MediumButton)`
+const ToggleButton = styled(PrimaryButton)`
   width: 100%;
   background: ${props => props.theme.color.main.primary};
   border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};
