@@ -46,7 +46,8 @@ export const lightTheme = {
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
       eerieBlack: '#16171D',
-      charleston: '#292b3d',
+      charleston: '#33364d',
+      blackCoral: '#585A6D',
       grey: '#b1aeb7',
       lightGrey: '#eff0f1',
       placeholder: '#e9eaf0',
@@ -58,6 +59,8 @@ export const lightTheme = {
       disabled: '#b1aeb7',
       inputDefault: '#e9eaf0',
       transparent: '#0000ffff',
+      eerieBlack: '#16171D',
+      charleston: '#33364d',
     }, // TODO: consolidate everything below; using the above
     background: {
       pureWhite: '#ffffff',
