@@ -25,7 +25,6 @@ function PackCard({ _id, name }) {
 
 const LinkWrapper = styled(Link)`
   text-decoration: none;
-  width: 100%;
 `;
 
 const PackCardContent = styled.div`
@@ -36,6 +35,7 @@ const PackCardContent = styled.div`
   align-items: center;
   padding: .70rem;
   min-height: 100px;
+  
   border: none;
   background: ${props => props.theme.color.main.primary};
   color: ${props => props.theme.color.fonts.offWhite};
@@ -51,6 +51,7 @@ const PackCardContent = styled.div`
   h4 {
     text-align: center;
     font-weight: 400;
+    word-break: break-word;
   }
 `;
 

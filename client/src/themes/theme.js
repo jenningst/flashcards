@@ -95,9 +95,9 @@ export const lightTheme = {
     }
   },
   spacing: {
-    smallScreen: '1rem',
-    mediumScreen: '1.5rem',
-    largeScreen: '2rem',
+    compact: '1rem',
+    comfortable: '1.5rem',
+    generous: '2rem',
   },
   font: {
     primary: '#4e5167',

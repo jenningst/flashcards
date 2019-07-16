@@ -10,7 +10,6 @@ import { ReactComponent as Close } from '../components/icons/svg/error.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
-import Sidebar from './Sidebar';
 
 const UserPacks = ({ uid }) => (
   <Query query={GET_PACKS} variables={{ owner: uid }}>
@@ -69,18 +68,18 @@ function Dashboard() {
 
         <PackSection className='Dashboard__packs pack-section'>
           <Title4 className='pack-section__title'>Your Packs</Title4>
-          <CreatePackButton
-            className='Dashboard__button-create-pack'
-            data-testid='create-pack-button'
-            type='button'
-            to={'/create-pack'}
-          >
-            <Title1>+</Title1>
-          </CreatePackButton>
-          
-          <UserPacks uid={user.uid}/>
-          {/* <PackList className='Dashboard__pack-list'>
-          </PackList> */}
+          <PackWrapper className="pack-section__list">
+            <CreatePackButton
+              className='Dashboard__button-create-pack'
+              data-testid='create-pack-button'
+              type='button'
+              to={'/create-pack'}
+            >
+              <Title1>+</Title1>
+            </CreatePackButton>
+            
+            <UserPacks uid={user.uid}/>
+          </PackWrapper>
         </PackSection>
 
       </Main>
@@ -99,7 +98,6 @@ const DashboardWrapper = styled.div`
     'main';
 
   height: 100%;
-  /* overflow: hidden; */
 
   background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.charleston};
@@ -123,16 +121,21 @@ const Main = styled.main`
 
   display: grid;
   grid-template-rows: repeat(2, auto) 1fr;
-  grid-row-gap: 1rem;
+  grid-gap: 1rem;
 
   padding: 1rem;
 
   background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.eerieBlack};
 
-  /* @media screen and (min-width: 321px) {
-    
-  } */
+  @media screen and (min-width: 769px) {
+   /* change to full-page layout */
+   grid-template-rows: auto 1fr;
+   grid-template-columns: 1fr 33%;
+   grid-template-areas:
+    'greeting greeting'
+    'packs stats';
+  }
 `;
 
 const GreetingSection = styled.section`
@@ -146,6 +149,10 @@ const GreetingSection = styled.section`
   .greeting-title {
     font-weight: 500;
     color: ${props => props.theme.color.fonts.charleston};
+  }
+
+  @media screen and (min-width: 769px) {
+   grid-area: greeting;
   }
 `;
 
@@ -166,9 +173,14 @@ const StatsSection = styled.section`
     margin-bottom: 1rem;
     color: ${props => props.theme.color.fonts.blackCoral};
   }
+
+  @media screen and (min-width: 769px) {
+   grid-area: stats;
+  }
 `;
 
 const PackSection = styled.section`
+  box-sizing: border-box;
   grid-row: 3 / span 1;
   display: flex;
   flex-flow: column nowrap;
@@ -186,12 +198,21 @@ const PackSection = styled.section`
     color: ${props => props.theme.color.fonts.blackCoral};
   }
 
-  & button:first-of-type {
-    margin-bottom: 1rem;
+  @media screen and (min-width: 769px) {
+   grid-area: packs;
   }
+`;
 
-  & a:not(:last-child) {
-    margin-bottom: 1rem;
+const PackWrapper = styled.div`
+  grid-row: 2 / span 1;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  grid-row-gap: 1rem;
+  width: 100%;
+
+  @media screen and (min-width: 769px) {
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-gap: 1rem;
   }
 `;
 
