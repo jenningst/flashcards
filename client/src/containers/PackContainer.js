@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { usePackState } from '../contexts/pack-context';
 
 import { Query } from 'react-apollo';
@@ -12,8 +13,8 @@ import { useSession } from '../contexts/user-context';
 
 const PackContainer = ({ match }) => {
   const state = usePackState();
-  const { mode } = state;
   const user = useSession();
+  const { mode } = state;
 
   return (
     <Query query={GET_PACK_BY_ID} variables={
@@ -27,7 +28,7 @@ const PackContainer = ({ match }) => {
           }>
             {({ loading: cardLoading, error: cardError, data: cardData }) => {
               if (packLoading || cardLoading) {
-                return <Loading loading={packLoading || cardLoading}/>;
+                return <FullPageSpinner loading={packLoading || cardLoading}/>;
               }
               if (packError || cardError) return <div>Errors!</div>;
 
@@ -52,4 +53,4 @@ PackContainer.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-export default PackContainer;
+export default withRouter(PackContainer);
