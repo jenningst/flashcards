@@ -114,7 +114,7 @@ const Header = styled.header`
   margin-bottom: 1rem;
 
   background: ${props => props.theme.color.main.pureWhite};
-  box-shadow: 0px 6px 10px 0px rgba(133,133,133,0.3);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   color: ${props => props.theme.color.fonts.eerieBlack};
 `;
 
@@ -157,7 +157,7 @@ const StatsSection = styled.section`
   align-items: center;
   padding: 1rem;
   background: ${props => props.theme.color.main.pureWhite};
-  box-shadow: 0px 6px 10px 0px rgba(133,133,133,0.3);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   border-radius: .50em;
 
   .stat-section__title {
@@ -172,7 +172,7 @@ const PackSection = styled.section`
   grid-row: 3 / span 1;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   background: ${props => props.theme.color.main.pureWhite};
@@ -227,7 +227,7 @@ const StatCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5rem;
+  height: 8rem;
   width: 100%;
 
   border: 1px dashed ${props => props.theme.color.border.charleston};

@@ -94,6 +94,11 @@ export const lightTheme = {
       lightGrey: '#d8d6db',
     }
   },
+  spacing: {
+    smallScreen: '1rem',
+    mediumScreen: '1.5rem',
+    largeScreen: '2rem',
+  },
   font: {
     primary: '#4e5167',
     secondary: '#262626',
