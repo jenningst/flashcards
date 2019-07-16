@@ -45,11 +45,14 @@ function Flashcard({ card }) {
 
 const FlashcardWrapper = styled.div`
   box-sizing: border-box;
+  flex-grow: 1;
+  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-width: 800px;
   padding: 1.5rem;
   
   border-bottom-left-radius: 1rem;
@@ -71,22 +74,8 @@ const ContentArea = styled.section`
 `;
 
 const ToggleButton = styled(PrimaryButton)`
-  width: 100%;
-  background: ${props => props.theme.color.main.primary};
-  border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};
-  border-radius: 15px;
-  color: ${props => props.theme.color.fonts.pureWhite};
-  outline: none;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-
-  &:hover {
-    background: ${props => props.theme.color.main.primaryHover};
-    border-bottom: 3px solid ${props => props.theme.color.main.primary};
-  }
-  
-  &:active {
-    background: ${props => props.theme.color.main.secondaryHover};
-  }
+  min-width: 224px;
+  max-width: 500px;
 `;
 
 Flashcard.propTypes = {

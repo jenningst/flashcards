@@ -7,7 +7,7 @@ import { useSession } from '../contexts/user-context';
 import { usePackDispatch } from '../contexts/pack-context';
 import { useKeyPress } from '../hooks/use-key-press';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
-import { Subhead, Caption3 } from './elements/Text';
+import { Title4, Caption3 } from './elements/Text';
 import { PrimaryButton } from './elements/Button';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { ReactComponent as Left } from '../components/icons/svg/left-arrow.svg';
@@ -115,32 +115,6 @@ function PackCarousel({ mode, filter, cards }) {
           ): null
         }
       </Header>
-      <Counter className="PackCarousel__counter">
-        <CounterBody className="counter-container">
-          <Subhead className="counter-content">
-            {isReviewMode
-              ? `${index + 1} of ${cards.length}`
-              : `${cards.length + 1} of ${cards.length + 1}`
-            }
-          </Subhead>
-        </CounterBody>
-      </Counter>
-      <CardViewer className="PackCarousel__card-viewer">
-        {isReviewMode
-          ? (
-              <Flashcard
-                card={currentQuestion}
-              />
-          ) : (
-              <ComposeFlashcard
-                handleTextChange={handleTextChange}
-                handleAnswerChange={handleAnswerChange}
-                questionText={questionText}
-                questionAnswer={questionAnswer}
-              />
-          )
-        }
-      </CardViewer>
       <CardNavigation className="PackCarousel__nav">
         {!isReviewMode
           ? (
@@ -161,6 +135,32 @@ function PackCarousel({ mode, filter, cards }) {
           )
         }
       </CardNavigation>
+      <Counter className="PackCarousel__counter">
+        <CounterBody className="counter-container">
+          <Title4 className="counter-content">
+            {isReviewMode
+              ? `Question ${index + 1} of ${cards.length}`
+              : `Question ${cards.length + 1} of ${cards.length + 1}`
+            }
+          </Title4>
+        </CounterBody>
+      </Counter>
+      <CardViewer className="PackCarousel__card-viewer">
+        {isReviewMode
+          ? (
+              <Flashcard
+                card={currentQuestion}
+              />
+          ) : (
+              <ComposeFlashcard
+                handleTextChange={handleTextChange}
+                handleAnswerChange={handleAnswerChange}
+                questionText={questionText}
+                questionAnswer={questionAnswer}
+              />
+          )
+        }
+      </CardViewer>
     </PackCarouselWrapper>
   );
 };
@@ -205,32 +205,7 @@ const SummaryButton = styled(PrimaryButton)`
   height: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background: ${props => props.theme.color.main.primary};
-  color: ${props => props.theme.color.main.pureWhite};
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-`;
-
-const Counter = styled.section`
-  grid-row: 3 / span 1;
-  padding: 0rem 1.5rem 0rem 1.5rem;
-`;
-
-const CounterBody = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: .50rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  background: ${props => props.theme.color.main.secondary};
-  color: ${props => props.theme.color.fonts.charleston};
-`;
-
-const CardViewer = styled.section`
-  grid-row: 4 / span 1;
-  box-sizing: border-box;
-  padding: 0rem 1.5rem 1.5rem 1.5rem;
+  font-size: 12px;
 `;
 
 const CardNavigation = styled.section`
@@ -250,6 +225,40 @@ const CardNavigation = styled.section`
   svg + svg {
     margin-left: 1rem;
   }
+`;
+
+const Counter = styled.section`
+  box-sizing: border-box;
+  grid-row: 3 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1.5rem 0rem 1.5rem;
+`;
+
+const CounterBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 800px;
+  flex-grow: 1;
+  padding-top: .50rem;
+  padding-bottom: .50rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background: ${props => props.theme.color.main.secondary};
+  color: ${props => props.theme.color.fonts.charleston};
+`;
+
+const CardViewer = styled.section`
+  box-sizing: border-box;
+  grid-row: 4 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 750px;
+  padding: 0rem 1.5rem 1.5rem 1.5rem;
 `;
 
 const BackIcon = styled(Back)`
