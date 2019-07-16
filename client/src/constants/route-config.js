@@ -5,7 +5,7 @@ const ROUTE_CONFIG = {
     FORGOT_PASSWORD: '/forgot-password',
   },
   auth: {
-    DASHBOARD: '/home',
+    DASHBOARD: '/',
     CREATE_PACK: '/create-pack',
     PACK_CONTAINER: '/pack/:id',
   }

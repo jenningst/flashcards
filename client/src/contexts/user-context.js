@@ -7,9 +7,9 @@ const UserContext = createContext(null);
 /* ** IMPLEMENTED IN AppProvider ** */
 function UserProvider(props) {
   const { user } = useAuth();
-  console.log(user.email);
-  console.log(user.uid);
-  console.log(user.emailVerified);
+  // console.log(user.email);
+  // console.log(user.uid);
+  // console.log(user.emailVerified);
   return <UserContext.Provider value={user} {...props} />;
 };
 

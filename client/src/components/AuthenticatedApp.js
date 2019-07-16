@@ -17,7 +17,6 @@ function AuthenticatedApp() {
             <Route path={ROUTE_CONFIG.auth.CREATE_PACK} component={ComposePack} />
             <Route path={ROUTE_CONFIG.auth.PACK_CONTAINER} component={PackContainer} />
             <Route path={ROUTE_CONFIG.auth.DASHBOARD} component={Dashboard} />
-            <Route component={NoMatch} />
           </Switch>
         </Router>
       </AppWrapper>

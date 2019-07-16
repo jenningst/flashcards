@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { logOut } from '../contexts/auth-context';
 import { ReactComponent as DefaultAvatar } from '../components/icons/svg/user.svg';
 
-const Avatar = ({ user, history }) => {
+const Avatar = ({ user, history, toggleMenu }) => {
   const handleLogout = () => {
     console.log('logout');
     logOut();
@@ -15,7 +15,7 @@ const Avatar = ({ user, history }) => {
   return (
     <AvatarWrapper
       className="Avatar"
-      onClick={handleLogout}
+      onClick={toggleMenu}
     >
       <DefaultAvatar 
         className="Avatar__image--unauth"

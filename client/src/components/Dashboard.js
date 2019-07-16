@@ -10,9 +10,10 @@ import { ReactComponent as Close } from '../components/icons/svg/error.svg';
 import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
+import Sidebar from './Sidebar';
 
-const UserPacks = () => (
-  <Query query={GET_PACKS}>
+const UserPacks = ({ uid }) => (
+  <Query query={GET_PACKS} variables={{ owner: uid }}>
     {({ loading, error, data }) => {
       if (loading) return 'Loading...';
       if (error) return `Error! ${error.message}`;
@@ -36,17 +37,6 @@ function Dashboard() {
 
   return (
     <PageWrapper className="Dashboard">
-      {/* <SideNav
-        className={`Dashboard__side-nav${showMenu ? '--hidden' : '--visible'}`}
-      >
-        <CloseIcon
-          className="Dashboard__button-close-menu"
-          data-testid="button-close-menu"
-          onClick={toggleMenu}
-        />
-        <Title1>Hello!</Title1>
-      </SideNav> */}
-
       <DashboardWrapper className="Dashboard__main">
         <Header className="Dashboard__header">
           <ButtonGroup className="button-label-group">
@@ -57,7 +47,7 @@ function Dashboard() {
             />
             <Caption3>Dashboard</Caption3>
           </ButtonGroup>
-          <Avatar />
+          <Avatar toggleMenu={toggleMenu}/>
         </Header>
 
         <GreetingSection className="Dashboard__greeting-section">
@@ -82,12 +72,13 @@ function Dashboard() {
               <Title1>+</Title1>
             </CreatePackButton>
             
-            <UserPacks />
+            <UserPacks uid={user.uid}/>
             
           </PackList>
 
         </PackSection>
       </DashboardWrapper>
+      <Sidebar isOpen={showMenu} toggleOpen={toggleMenu} />
     </PageWrapper>
   );
 };
@@ -96,17 +87,6 @@ const PageWrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   min-height: 100%;
-`;
-
-const SideNav = styled.aside`
-  position: absolute;
-  height: 100%;
-
-  &[class*="--hidden"] {
-    z-index: 1
-  }
-
-  transition: all 0.5s ease;
 `;
 
 const DashboardWrapper = styled.section`

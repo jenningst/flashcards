@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Mutation } from  'react-apollo';
 // our dependencies
+import { useSession } from '../contexts/user-context';
 import { usePackDispatch } from '../contexts/pack-context';
 import { useKeyPress } from '../hooks/use-key-press';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
@@ -15,6 +16,7 @@ import Flashcard from './Flashcard';
 import ComposeFlashcard from './ComposeFlashcard';
 
 function PackCarousel({ mode, filter, cards }) {
+  const user = useSession();
   const dispatch = usePackDispatch();
   const [index, setIndex] = useState(0);
   const [questionText, setQuestionText] = useState('');
@@ -55,17 +57,18 @@ function PackCarousel({ mode, filter, cards }) {
     return (
       <Mutation
         mutation={CREATE_FLASHCARD}
+        variables={{ owner: user.uid, pack_id: filter }}
         update={(cache, { data }) => {
           // get our current cards from the cache
           const { fetchFlashcardsByPack } = cache.readQuery({ 
             query: GET_FLASHCARDS_BY_PACK,
-            variables: { id: filter },
+            variables: { owner: user.uid, pack_id: filter },
           });
 
           // write back to the cache, updating the data
           cache.writeQuery({
             query: GET_FLASHCARDS_BY_PACK,
-            variables: { id: filter },
+            variables: { owner: user.uid, pack_id: filter },
             data: { 
               fetchFlashcardsByPack: [...fetchFlashcardsByPack, data.createFlashcard.card]
             },
@@ -80,7 +83,7 @@ function PackCarousel({ mode, filter, cards }) {
               addFlashcard({ variables: { input: {
                 text: questionText,
                 answer: questionAnswer,
-                user_id: "1",
+                owner: user.uid,
                 pack_id: filter,
               }}});
               saveCardAndRefresh();

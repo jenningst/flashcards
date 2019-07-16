@@ -10,23 +10,34 @@ module.exports = {
     },
   },
   Query: {
-    fetchPacks: async function() {
-      const packs = await Pack.find({});
-      return packs.map(pack => {
-        return { ...pack._doc, _id: pack.id };
-      });
+    fetchPacks: async function(_, { owner }) {
+      const packs = await Pack.find({ owner });
+      if (packs) {
+        return packs.map(pack => {
+          return { ...pack._doc, _id: pack.id };
+        });
+      } else {
+        return [];
+      }
     },
-    fetchPackById: async function(_, args) {
-      const { id } = args;
-      const pack = await Pack.findById(id);
-      return { ...pack._doc, _id: pack.id };
+    fetchPackByPackId: async function(_, { owner, pack_id }) {
+      const pack = await Pack
+        .findById(pack_id)
+        .where('owner').equals(owner);
+      if (pack) {
+        return { ...pack._doc, _id: pack.id };
+      } else {
+        return null;
+      }
     },
   },
   Mutation: {
     createPack: async function(_, { input }) {
+      const { name, owner } = input;
       let response = { pack: null, details: {} };
       const newPack = new Pack({
-        name: input.name,
+        name,
+        owner,
       });
 
       try {

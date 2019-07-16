@@ -6,10 +6,12 @@ const pack = gql`
   type Pack {
     _id: ID!
     name: String!
+    owner: String!
   }
 
   input CreatePackInput {
     name: String!
+    owner: String!
   }
 
   interface PackPayload {

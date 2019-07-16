@@ -7,14 +7,14 @@ const flashcard = gql`
     _id: ID!
     text: String!
     answer: String!
-    user_id: String
+    owner: String
     pack_id: String
   }
 
   input CreateFlashcardInput {
     text: String!
     answer: String!
-    user_id: String
+    owner: String
     pack_id: String
   }
 
