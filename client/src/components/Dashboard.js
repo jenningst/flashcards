@@ -78,7 +78,7 @@ function Dashboard() {
 
         </PackSection>
       </DashboardWrapper>
-      <Sidebar isOpen={showMenu} toggleOpen={toggleMenu} />
+      {/* <Sidebar isOpen={showMenu} toggleOpen={toggleMenu} /> */}
     </PageWrapper>
   );
 };
