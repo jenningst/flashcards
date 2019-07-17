@@ -40,6 +40,8 @@ export const lightTheme = {
       primary: '#939CE8',
       primaryHover: '#7883E2',
       active: '#5860A5',
+      secondary: '#50cdff',
+      secondaryHover: '#6FD6FF',
       disabled: '#e0e0eb',
     },
     font: {

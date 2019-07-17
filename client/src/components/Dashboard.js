@@ -113,7 +113,6 @@ const Header = styled.header`
 
   background: ${props => props.theme.color.main.pureWhite};
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-  color: ${props => props.theme.color.fonts.eerieBlack};
 `;
 
 const Main = styled.main`
@@ -254,19 +253,6 @@ const StatCard = styled.div`
   border: 1px dashed ${props => props.theme.color.border.charleston};
   border-radius: .50rem;
   color: ${props => props.theme.color.fonts.grey};
-`;
-
-const PackList = styled.div`
-  grid-row: 3 / span 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
-  grid-gap: .50rem;
-  overflow: auto;
-
-  p {
-    font-weight: 500;
-    margin-bottom: 1rem;
-  }
 `;
 
 const CreatePackButton = styled(LinkButton)`
