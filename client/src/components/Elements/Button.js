@@ -10,7 +10,7 @@ const ButtonBase = styled.button`
   outline: none;
   
   background: ${props => props.theme.color.button.primary};
-  color: ${props => props.theme.color.main.pureWhite};
+  color: ${props => props.theme.color.font.pureWhite};
   border-top: none;
   border-left: none;
   border-right: none;

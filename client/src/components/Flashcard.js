@@ -58,8 +58,8 @@ const FlashcardWrapper = styled.div`
   border-bottom-left-radius: .50rem;
   border-bottom-right-radius: .50rem;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-  background: ${props => props.theme.background.secondary};
-  color: ${props => props.theme.font.secondary};
+  background: ${props => props.theme.color.background.pureWhite};
+  color: ${props => props.theme.color.font.secondary};
 `;
 
 const ContentArea = styled.section`

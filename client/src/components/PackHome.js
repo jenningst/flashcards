@@ -94,8 +94,8 @@ const PackHomeWrapper = styled.div`
   grid-template-rows: auto 1fr repeat(2, auto);
   grid-row-gap: 1rem;
   height: 100%;
-  background: ${props => props.theme.color.main.offWhite};
-  color: ${props => props.theme.color.fonts.charleston};
+  background: ${props => props.theme.color.background.offWhite};
+  color: ${props => props.theme.color.font.charleston};
 `;
 
 const Header = styled.header`
@@ -107,7 +107,7 @@ const Header = styled.header`
   align-items: center;
   padding: 1rem;
 
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 
   div[class~="btn-lbl-combo"] {
@@ -119,7 +119,7 @@ const Header = styled.header`
     }
 
     h6 {
-      color: ${props => props.theme.color.main.primary};
+      color: ${props => props.theme.color.font.primary};
     }
   }
 `;
@@ -209,7 +209,7 @@ const CounterPill = styled.div`
   padding: .25rem 1rem .25rem 1rem;
 
   h6 {
-    color: ${props => props.theme.color.fonts.pureWhite};
+    color: ${props => props.theme.color.font.pureWhite};
   }
 `;
 

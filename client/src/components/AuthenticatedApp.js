@@ -27,7 +27,7 @@ function AuthenticatedApp() {
 const AppWrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  background: ${props => props.theme.color.main.offWhite};
+  background: ${props => props.theme.color.background.offWhite};
 `;
 
 export default AuthenticatedApp;
