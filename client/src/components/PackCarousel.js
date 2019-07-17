@@ -59,27 +59,30 @@ function PackCarousel({ mode, filter, cards }) {
         mutation={CREATE_FLASHCARD}
         variables={{ owner: user.uid, pack_id: filter }}
         update={(cache, { data }) => {
-          // get our current cards from the cache
-          const { fetchFlashcardsByPack } = cache.readQuery({ 
-            query: GET_FLASHCARDS_BY_PACK,
-            variables: { owner: user.uid, pack_id: filter },
-          });
-
-          // write back to the cache, updating the data
-          cache.writeQuery({
-            query: GET_FLASHCARDS_BY_PACK,
-            variables: { owner: user.uid, pack_id: filter },
-            data: { 
-              fetchFlashcardsByPack: [...fetchFlashcardsByPack, data.createFlashcard.card]
-            },
-          });
+          if (data.createFlashcard.details.success) {
+            // get current flashcards from cache
+            const { fetchFlashcardsByPackId } = cache.readQuery({ 
+              query: GET_FLASHCARDS_BY_PACK,
+              variables: { owner: user.uid, pack_id: filter },
+            });
+            // write back to the cache
+            cache.writeQuery({
+              query: GET_FLASHCARDS_BY_PACK,
+              variables: { owner: user.uid, pack_id: filter },
+              data: { 
+                fetchFlashcardsByPackId: [...fetchFlashcardsByPackId, data.createFlashcard.card]
+              },
+            });
+          } else {
+            // TODO: provide error message to UI
+          }
         }}
       >
         {(addFlashcard) => (
           <PrimaryButton
             className="PackCarousel__button-save"
             disabled={questionText && questionAnswer ? false : true}
-            onClick={e => {
+            onClick={() => {
               addFlashcard({ variables: { input: {
                 text: questionText,
                 answer: questionAnswer,

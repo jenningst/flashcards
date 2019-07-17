@@ -70,8 +70,7 @@ async function logOut() {
   try {
     await firebase.auth().signOut(); 
   } catch (err) {
-    console.log(err);
-    throw new Error(`Error during logOut: ${err.message}`);
+    return Promise.reject(err);
   }
 };
 
@@ -79,8 +78,7 @@ async function sendPasswordWithEmail(email) {
   try {
     await firebase.auth().sendPasswordResetEmail(email);
   } catch (err) {
-    console.log(err);
-    throw new Error(`Error during sendPasswordWithEmail: ${err.message}`);
+    return Promise.reject(err);
   }
 };
 
@@ -88,8 +86,7 @@ async function confirmPasswordReset(code, newPassword) {
   try {
     await firebase.auth().Auth.confirmPasswordReset(code, newPassword);
   } catch (err) {
-    console.log(err);
-    throw new Error(`Error during confirmPasswordReset: ${err.message}`);
+    return Promise.reject(err);
   }
 };
 
