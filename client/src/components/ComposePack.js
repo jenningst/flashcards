@@ -57,22 +57,19 @@ function ComposePack({ history }) {
           <Mutation
             mutation={CREATE_PACK}
             update={(cache, { data }) => {
-              // data; response payload from createPack
               if (data.createPack.details.success) {
                 // get our current packs from cache
-                const currentPacks = cache.readQuery({
+                const { fetchPacks } = cache.readQuery({
                   query: GET_PACKS,
                   variables: { owner: user.uid }
                 });
                 // write back to the cache
-                // destructure query name from cache
-                const { fetchPacks } = currentPacks;
-                console.log(`fetchPacks: ${JSON.stringify(currentPacks, null, 2)}`);
-                console.log([...fetchPacks]);
-                console.log(data.createPack.pack);
                 cache.writeQuery({
                   query: GET_PACKS,
-                  data: { fetchPacks: [...fetchPacks, data.createPack.pack ] },
+                  variables: { owner: user.uid },
+                  data: { 
+                    fetchPacks: [...fetchPacks, data.createPack.pack ]
+                  },
                 });
               }
               else {

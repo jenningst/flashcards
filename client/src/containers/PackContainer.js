@@ -17,15 +17,17 @@ const PackContainer = ({ match }) => {
   const { mode } = state;
 
   return (
-    <Query query={GET_PACK_BY_ID} variables={
-      { owner: user.uid, pack_id: match.params.id }
-    }>
+    <Query
+      query={GET_PACK_BY_ID}
+      variables={ { owner: user.uid, pack_id: match.params.id } }
+    >
       {({ loading: packLoading, error: packError, data: packData }) => {
         const pack = packData.fetchPackByPackId;
         return (
-          <Query query={GET_FLASHCARDS_BY_PACK} variables={
-            { owner: user.uid, pack_id: match.params.id }
-          }>
+          <Query
+            query={GET_FLASHCARDS_BY_PACK}
+            variables={ { owner: user.uid, pack_id: match.params.id } }
+          >
             {({ loading: cardLoading, error: cardError, data: cardData }) => {
               if (packLoading || cardLoading) {
                 return <FullPageSpinner loading={packLoading || cardLoading}/>;
@@ -33,7 +35,6 @@ const PackContainer = ({ match }) => {
               if (packError || cardError) return <div>Errors!</div>;
 
               const cards = cardData.fetchFlashcardsByPackId;
-
               return (
                 <>
                   {mode === ''
