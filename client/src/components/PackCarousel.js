@@ -179,7 +179,7 @@ const PackCarouselWrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(2, auto) minmax(0, 1fr) auto;
   height: 100%;
-  background: ${props => props.theme.color.main.offWhite};
+  background: ${props => props.theme.color.background.offWhite};
 `;
 
 const Header = styled.header`
@@ -188,9 +188,9 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-  color: ${props => props.theme.font.primary};
+  color: ${props => props.theme.color.font.primary};
 `;
 
 const Counter = styled.section`
@@ -246,12 +246,12 @@ const ButtonGroup = styled.div`
     margin-right: .50rem;
 
     path {
-      fill: ${props => props.theme.color.fonts.eerieBlack};
+      fill: ${props => props.theme.color.font.eerieBlack};
     }
   }
 
   .btn-lbl-combo__text {
-    color: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.font.primary};
   }
 `;
 
@@ -273,20 +273,13 @@ const CounterBody = styled.div`
   padding-bottom: .50rem;
   border-top-left-radius: .50rem;
   border-top-right-radius: .50rem;
-  background: ${props => props.theme.color.main.secondary};
-  color: ${props => props.theme.color.fonts.charleston};
+  background: ${props => props.theme.color.background.offWhite};
+  color: ${props => props.theme.color.font.charleston};
 `;
 
 const BackIcon = styled(Back)`
   height: 2rem;
-
-  &:hover {
-    path {
-      fill: ${props => props.theme.button.default.alert};
-    }
-  }
 `;
-
 
 PackCarousel.propTypes = {
   mode: PropTypes.string.isRequired,
