@@ -7,7 +7,7 @@ import { useSession } from '../contexts/user-context';
 import { usePackDispatch } from '../contexts/pack-context';
 import { useKeyPress } from '../hooks/use-key-press';
 import { GET_FLASHCARDS_BY_PACK, CREATE_FLASHCARD } from '../queries';
-import { Subhead, Caption3 } from './elements/Text';
+import { Title4, Caption3 } from './elements/Text';
 import { PrimaryButton } from './elements/Button';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { ReactComponent as Left } from '../components/icons/svg/left-arrow.svg';
@@ -115,14 +115,15 @@ function PackCarousel({ mode, filter, cards }) {
           ): null
         }
       </Header>
+      
       <Counter className="PackCarousel__counter">
         <CounterBody className="counter-container">
-          <Subhead className="counter-content">
+          <Title4 className="counter-content">
             {isReviewMode
-              ? `${index + 1} of ${cards.length}`
-              : `${cards.length + 1} of ${cards.length + 1}`
+              ? `Question ${index + 1} of ${cards.length}`
+              : `Question ${cards.length + 1} of ${cards.length + 1}`
             }
-          </Subhead>
+          </Title4>
         </CounterBody>
       </Counter>
       <CardViewer className="PackCarousel__card-viewer">
@@ -141,22 +142,29 @@ function PackCarousel({ mode, filter, cards }) {
           )
         }
       </CardViewer>
+
       <CardNavigation className="PackCarousel__nav">
         {!isReviewMode
           ? (
             <CreateFlashcard />
           ) : (
             <>
-              <LeftIcon 
-                className={`PackCarousel__button-nav${index === 0 ? '--disabled' : ''} back`}
+              <PrimaryButton
+                className='PackCarousel__button-back'
                 onClick={priorCard}
                 data-testid="button-back"
-              />
-              <RightIcon 
-                className={`PackCarousel__button-nav${index === cards.length - 1 ? '--disabled' : ''} forward`}
+                disabled={index === 0 ? true : false}
+              >
+                PRIOR
+              </PrimaryButton>
+              <PrimaryButton
+                className='PackCarousel__button-forward'
                 onClick={nextCard}
                 data-testid="button-forward"
-              />
+                disabled={index === cards.length - 1 ? true : false}
+              >
+                NEXT
+              </PrimaryButton>
             </>
           )
         }
@@ -165,9 +173,11 @@ function PackCarousel({ mode, filter, cards }) {
   );
 };
 
+/* BLOCKS */
+
 const PackCarouselWrapper = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, auto) minmax(0, 1fr);
+  grid-template-rows: repeat(2, auto) minmax(0, 1fr) auto;
   height: 100%;
   background: ${props => props.theme.color.main.offWhite};
 `;
@@ -177,9 +187,53 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  padding: 1rem;
+  background: ${props => props.theme.color.main.pureWhite};
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   color: ${props => props.theme.font.primary};
 `;
+
+const Counter = styled.section`
+  box-sizing: border-box;
+  grid-row: 2 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem 0rem 1rem;
+`;
+
+const CardViewer = styled.section`
+  box-sizing: border-box;
+  grid-row: 3 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 750px;
+  padding: 0rem 1rem 1.5rem 1rem;
+`;
+
+const CardNavigation = styled.section`
+  grid-row: 4 / span 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: .50rem 1rem 1rem 1rem;
+
+  button {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @media screen and (min-width: 376px){
+    justify-content: center;
+
+    button + button {
+      margin-left: 2rem;
+    }
+  }
+`;
+
+/* ELEMENTS */
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -205,14 +259,7 @@ const SummaryButton = styled(PrimaryButton)`
   height: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background: ${props => props.theme.color.main.primary};
-  color: ${props => props.theme.color.main.pureWhite};
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-`;
-
-const Counter = styled.section`
-  grid-row: 3 / span 1;
-  padding: 0rem 1.5rem 0rem 1.5rem;
+  font-size: 12px;
 `;
 
 const CounterBody = styled.div`
@@ -220,36 +267,14 @@ const CounterBody = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: .50rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  max-width: 500px;
+  flex-grow: 1;
+  padding-top: .50rem;
+  padding-bottom: .50rem;
+  border-top-left-radius: .50rem;
+  border-top-right-radius: .50rem;
   background: ${props => props.theme.color.main.secondary};
   color: ${props => props.theme.color.fonts.charleston};
-`;
-
-const CardViewer = styled.section`
-  grid-row: 4 / span 1;
-  box-sizing: border-box;
-  padding: 0rem 1.5rem 1.5rem 1.5rem;
-`;
-
-const CardNavigation = styled.section`
-  grid-row: 2 / span 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: .50rem 1rem 1rem 1rem;
-
-  svg[class*="--disabled"] {
-      path {
-        fill: ${props => props.theme.color.main.secondary};
-      }
-      pointer-events: none;
-  }
-
-  svg + svg {
-    margin-left: 1rem;
-  }
 `;
 
 const BackIcon = styled(Back)`
@@ -259,22 +284,6 @@ const BackIcon = styled(Back)`
     path {
       fill: ${props => props.theme.button.default.alert};
     }
-  }
-`;
-
-const LeftIcon = styled(Left)`
-  height: 2rem;
-
-  path {
-    fill: ${props => props.theme.color.main.primary};
-  }
-`;
-
-const RightIcon = styled(Right)`
-  height: 2rem;
-
-  path {
-    fill: ${props => props.theme.color.main.primary};
   }
 `;
 

@@ -46,16 +46,18 @@ function ComposeFlashcard({
 
 const ComposeFlashcardWrapper = styled.div`
   box-sizing: border-box;
+  flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 1.5rem;
+  max-width: 500px;
+  padding: 1rem;
 
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+  border-bottom-left-radius: .50rem;
+  border-bottom-right-radius: .50rem;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   background: ${props => props.theme.color.main.pureWhite};
   color: ${props => props.theme.color.fonts.charleston};
 `;
@@ -67,8 +69,8 @@ const QuestionTextInput = styled.div`
 
   textarea {
     box-sizing: border-box;
-    width: 100%;
     height: 100%;
+    width: 100%;
     padding: .50rem;
     resize: none;
     font-family: 'Rubik', sans-serif;
