@@ -58,8 +58,8 @@ const ComposeFlashcardWrapper = styled.div`
   border-bottom-left-radius: .50rem;
   border-bottom-right-radius: .50rem;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-  background: ${props => props.theme.color.main.pureWhite};
-  color: ${props => props.theme.color.fonts.charleston};
+  background: ${props => props.theme.color.background.pureWhite};
+  color: ${props => props.theme.color.font.charleston};
 `;
 
 const QuestionTextInput = styled.div`
@@ -77,16 +77,16 @@ const QuestionTextInput = styled.div`
     font-size: 15px;
     font-weight: 300;
     line-height: 20px;
-    outline: 1px dashed ${props => props.theme.color.fonts.lightGrey};
+    outline: 1px dashed ${props => props.theme.color.font.lightGrey};
 
     :focus {
-      background-color: ${props => props.theme.color.fonts.lightGrey};
-      outline: 1px dashed ${props => props.theme.color.fonts.charleston};
+      background-color: ${props => props.theme.color.font.lightGrey};
+      outline: 1px dashed ${props => props.theme.color.font.charleston};
       border: none;
     }
 
     ::placeholder {
-      color: ${props => props.theme.color.fonts.lightGrey};
+      color: ${props => props.theme.color.font.lightGrey};
       font-family: 'Rubik', sans-serif;
       font-size: 15px;
       font-weight: 300;
@@ -97,21 +97,6 @@ const QuestionTextInput = styled.div`
 
 const ToggleButton = styled(PrimaryButton)`
   width: 100%;
-  background: ${props => props.theme.color.main.primary};
-  border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};
-  border-radius: 15px;
-  color: ${props => props.theme.color.fonts.pureWhite};
-  outline: none;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-
-  &:hover {
-    background: ${props => props.theme.color.main.primaryHover};
-    border-bottom: 3px solid ${props => props.theme.color.main.primary};
-  }
-  
-  &:active {
-    background: ${props => props.theme.color.main.secondaryHover};
-  }
 `;
 
 ComposeFlashcard.propTypes = {

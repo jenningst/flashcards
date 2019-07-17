@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import { useSession } from '../contexts/user-context';
+import { logOut } from '../contexts/auth-context';
 
 import LinkButton from './elements/LinkButton';
 import { Title1, Title3, Body, Caption3, Title4 } from './elements/Text';
 import { ReactComponent as Menu } from '../components/icons/svg/menu.svg';
-import { ReactComponent as Close } from '../components/icons/svg/error.svg';
-import PackCard from './PackCard';
 import Avatar from './Avatar';
 import { GET_PACKS } from '../queries/';
 
@@ -21,7 +20,13 @@ const UserPacks = ({ uid }) => (
       return (
         <React.Fragment>
           {packs.map(pack => {
-            return <PackCard key={pack._id} {...pack} />
+            return <PackCardContent
+              key={pack._id}
+              to={`/pack/${pack._id}`}
+              {...pack} 
+            >
+              {pack.name}
+            </PackCardContent>
           })}
         </React.Fragment>
       );
@@ -31,7 +36,7 @@ const UserPacks = ({ uid }) => (
 
 function Dashboard() {
   const [showMenu, setShowMenu] = useState(false);
-  const toggleMenu = () => setShowMenu(!showMenu);
+  // const toggleMenu = () => setShowMenu(!showMenu);
   const user = useSession();
 
   return (
@@ -41,11 +46,11 @@ function Dashboard() {
           <MenuIcon
             className='Dashboard__button-menu'
             data-testid='button-menu'
-            onClick={toggleMenu}
+            onClick={logOut}
           />
           <Caption3>Dashboard</Caption3>
         </ButtonGroup>
-        <Avatar toggleMenu={toggleMenu}/>
+        <Avatar toggleMenu={logOut} />
       </Header>
 
       <Main className='Dashboard__main'>
@@ -99,8 +104,8 @@ const DashboardWrapper = styled.div`
 
   height: 100%;
 
-  background: ${props => props.theme.color.main.offWhite};
-  color: ${props => props.theme.color.fonts.charleston};
+  background: ${props => props.theme.color.background.offWhite};
+  color: ${props => props.theme.color.font.charleston};
 `;
 
 const Header = styled.header`
@@ -111,7 +116,7 @@ const Header = styled.header`
   padding: 1rem;
   margin-bottom: 1rem;
 
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 `;
 
@@ -124,11 +129,10 @@ const Main = styled.main`
 
   padding: 1rem;
 
-  background: ${props => props.theme.color.main.offWhite};
-  color: ${props => props.theme.color.fonts.eerieBlack};
+  background: ${props => props.theme.color.background.offWhite};
+  color: ${props => props.theme.color.font.eerieBlack};
 
   @media screen and (min-width: 769px) {
-   /* change to full-page layout */
    grid-template-rows: auto 1fr;
    grid-template-columns: 1fr 33%;
    grid-template-areas:
@@ -142,12 +146,12 @@ const GreetingSection = styled.section`
   margin-bottom: 1rem;
 
   .greeting-date {
-    color: ${props => props.theme.color.fonts.grey};
+    color: ${props => props.theme.color.font.grey};
   }
 
   .greeting-title {
     font-weight: 500;
-    color: ${props => props.theme.color.fonts.charleston};
+    color: ${props => props.theme.color.font.charleston};
   }
 
   @media screen and (min-width: 769px) {
@@ -162,7 +166,7 @@ const StatsSection = styled.section`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.font.pureWhite};
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   border-radius: .50em;
 
@@ -170,7 +174,7 @@ const StatsSection = styled.section`
     width: 100%;
     text-align: left;
     margin-bottom: 1rem;
-    color: ${props => props.theme.color.fonts.blackCoral};
+    color: ${props => props.theme.color.font.blackCoral};
   }
 
   @media screen and (min-width: 769px) {
@@ -186,7 +190,7 @@ const PackSection = styled.section`
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
   box-shadow: 0px 6px 10px 0px rgba(133,133,133,0.3);
   border-radius: .50em;
 
@@ -194,7 +198,7 @@ const PackSection = styled.section`
     width: 100%;
     text-align: left;
     margin-bottom: 1rem;
-    color: ${props => props.theme.color.fonts.blackCoral};
+    color: ${props => props.theme.color.font.blackCoral};
   }
 
   @media screen and (min-width: 769px) {
@@ -217,6 +221,13 @@ const PackWrapper = styled.div`
 
 /* Elements */
 
+const PackCardContent = styled(LinkButton)`
+  min-height: 100px;
+  text-align: center;
+  font-weight: 400;
+  word-break: break-word;
+`;
+
 const ButtonGroup = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -228,16 +239,11 @@ const ButtonGroup = styled.div`
   }
 
   h6 {
-    color: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.font.primary};
   }
 `;
 
 const MenuIcon = styled(Menu)`
-  height: 1.5rem;
-  width: 1.5rem;
-`;
-
-const CloseIcon = styled(Close)`
   height: 1.5rem;
   width: 1.5rem;
 `;
@@ -252,7 +258,7 @@ const StatCard = styled.div`
 
   border: 1px dashed ${props => props.theme.color.border.charleston};
   border-radius: .50rem;
-  color: ${props => props.theme.color.fonts.grey};
+  color: ${props => props.theme.color.font.grey};
 `;
 
 const CreatePackButton = styled(LinkButton)`
@@ -261,23 +267,7 @@ const CreatePackButton = styled(LinkButton)`
   align-items: center;
   border-radius: .50rem;
   width: 100%;
-
-  background: ${props => props.theme.color.main.secondary};
-  color: ${props => props.theme.color.main.primaryHover};
-  box-shadow: 0px 10px 16px -8px rgba(0,0,0,0.12);
-  outline: none;
-  border: none;
-
-  &:hover {
-    background: ${props => props.theme.color.main.secondaryHover};
-    color: ${props => props.theme.color.main.primary};
-    h1 {
-      font-weight: 500;
-    }
-  }
-  &:active {
-
-  }
+  min-height: 100px;
 `;
 
 export default Dashboard;

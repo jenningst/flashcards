@@ -162,17 +162,18 @@ const FormWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 2rem;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
 
   a {
-    color: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.font.primary};
     text-decoration: none;
     outline: none;
     border-bottom: 1px solid transparent;
 
     &:hover {
-      transition: color .2s ease-out, border-bottom-color .2s ease-out;
-      border-bottom: 1px solid ${props => props.theme.color.main.primaryHover};
+      transition: color .2s ease-out
+      border-bottom-color .2s ease-out;
+      border-bottom: 1px solid ${props => props.theme.color.border.primary};
     }
   }
 

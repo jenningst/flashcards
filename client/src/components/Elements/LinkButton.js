@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PrimaryButton } from '../elements/Button';
 import { withRouter } from 'react-router-dom';
 
 const LinkButton = props => {
@@ -14,7 +15,7 @@ const LinkButton = props => {
   } = props;
 
   return (
-    <button
+    <PrimaryButton
       {...rest}
       onClick={(e) => {
         onClick && onClick(e)

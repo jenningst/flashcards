@@ -117,8 +117,8 @@ const ComposePackWrapper = styled.div`
     "header"
     "form";
   height: 100%;
-  background: ${props => props.theme.color.main.offWhite};
-  color: ${props => props.theme.color.fonts.charleston};
+  background: ${props => props.theme.color.background.offWhite};
+  color: ${props => props.theme.color.font.charleston};
 `;
 
 const BackIcon = styled(Back)`
@@ -137,7 +137,7 @@ const ButtonGroup = styled.div`
   }
 
   h6 {
-    color: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.font.primary};
   }
 `;
 
@@ -157,14 +157,14 @@ const MainSection = styled.section`
 
 const Form = styled.form`
   padding: 3rem 1rem 2rem 1rem;
-  background: ${props => props.theme.color.main.pureWhite};
+  background: ${props => props.theme.color.background.pureWhite};
   border-radius: 1rem;
   box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
 
   .form__title {
     margin-bottom: 2rem;
     font-weight: 500;
-    color: ${props => props.theme.color.main.primary};
+    color: ${props => props.theme.color.font.primary};
   }
   
   .form__label {
@@ -173,7 +173,7 @@ const Form = styled.form`
     font-weight: 400;
     line-height: 20px;
     margin: 0;
-    color: ${props => props.theme.color.fonts.grey};
+    color: ${props => props.theme.color.font.grey};
   }
   .input-group {
     display: flex;
@@ -188,11 +188,11 @@ const Form = styled.form`
       margin-top: .50rem;
       padding: .25rem 1rem .25rem 1rem;
       font-size: 1rem;
-      border: 1px solid ${props => props.theme.color.borders.lightGrey};
+      border: 1px solid ${props => props.theme.color.border.inputDefault};
       border-radius: .30rem;
 
       &:focus {
-        outline: 2px solid ${props => props.theme.color.main.primaryHover};
+        outline: 2px solid ${props => props.theme.color.border.primary};
       }
     }
   }
@@ -206,20 +206,6 @@ const FormFooter = styled.div`
 
 const StyledSubmit = styled(PrimaryButton)`
   max-width: 20rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  background: ${props => props.theme.color.main.primary};
-  color: ${props => props.theme.color.fonts.pureWhite};
-  border-radius: .50rem;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-
-  &:disabled {
-    background: ${props => props.theme.color.main.secondary};
-    box-shadow: none;
-  }
-  &:hover {
-    background-color: ${props => props.theme.color.main.primaryHover};
-  }
 `;
 
 ComposePack.propTypes = {
