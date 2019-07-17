@@ -52,12 +52,12 @@ const FlashcardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  max-width: 800px;
-  padding: 1.5rem;
+  max-width: 500px;
+  padding: 1rem;
   
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+  border-bottom-left-radius: .50rem;
+  border-bottom-right-radius: .50rem;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   background: ${props => props.theme.background.secondary};
   color: ${props => props.theme.font.secondary};
 `;
