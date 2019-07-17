@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useKeyPress } from '../hooks/use-key-press';
 
 import { Body } from './elements/Text';
-import { MediumButton } from './elements/Button';
+import { PrimaryButton } from './elements/Button';
 
 function Flashcard({ card }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const toggleAnswer = () => setShowAnswer(!showAnswer);
+  const spacebarPressed = useKeyPress(32);
+
+  useEffect(() => {
+    if (spacebarPressed) {
+      console.log('down');
+      setShowAnswer(!showAnswer);
+    }
+  }, [spacebarPressed]);
 
   return (
     <FlashcardWrapper className="Flashcard">
@@ -36,16 +45,19 @@ function Flashcard({ card }) {
 
 const FlashcardWrapper = styled.div`
   box-sizing: border-box;
+  flex-grow: 1;
+  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-width: 500px;
+  padding: 1rem;
   
-  border-radius: 20px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1.5rem 1rem 1rem 1rem;
+  border-bottom-left-radius: .50rem;
+  border-bottom-right-radius: .50rem;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   background: ${props => props.theme.background.secondary};
   color: ${props => props.theme.font.secondary};
 `;
@@ -53,22 +65,17 @@ const FlashcardWrapper = styled.div`
 const ContentArea = styled.section`
   flex-grow: 1;
   width: 100%;
+  margin: 0rem 1.5rem 1.5rem 1.5rem;
+
+  p {
+    font-weight: 300;
+    font-style: italic;
+  }
 `;
 
-const ToggleButton = styled(MediumButton)`
-  width: 100%;
-  background: ${props => props.theme.button.default.primary};
-  border: 2px solid ${props => props.theme.button.default.primary};
-  border-radius: 15px;
-  color: ${props => props.theme.font.primary};
-  outline: none;
-  &:hover {
-    background: ${props => props.theme.button.hover.primary};
-    border: 2px solid ${props => props.theme.button.hover.primary};
-  }
-  &:active {
-    border: 2px solid ${props => props.theme.button.active.primary};
-  }
+const ToggleButton = styled(PrimaryButton)`
+  min-width: 224px;
+  max-width: 500px;
 `;
 
 Flashcard.propTypes = {

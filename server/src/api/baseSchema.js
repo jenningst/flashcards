@@ -1,11 +1,10 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-boost');
 
 const base = gql`
   type Query {
-    fetchPacks: [Pack!]!
-    fetchPackById(id: String!): Pack!
-    fetchFlashcards: [Flashcard!]!
-    fetchFlashcardsByPack(id: String!): [Flashcard!]!
+    fetchPacks(owner: String!): [Pack]!
+    fetchPackByPackId(owner: String!, pack_id: String!): Pack
+    fetchFlashcardsByPackId(owner: String!, pack_id: String!): [Flashcard!]!
   }
 
   type Mutation {

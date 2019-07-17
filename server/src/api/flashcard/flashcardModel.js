@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const flashcardSchema = new Schema({
   text: String,
   answer: String,
-  user_id: String,
+  owner: String,
   pack_id: String,
 });
 

@@ -36,6 +36,38 @@ export const darkTheme = {
 
 export const lightTheme = {
   color: {
+    button: {
+      primary: '#939CE8',
+      primaryHover: '#7883E2',
+      active: '#5860A5',
+      secondary: '#50cdff',
+      secondaryHover: '#6FD6FF',
+      disabled: '#e0e0eb',
+    },
+    font: {
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+      eerieBlack: '#16171D',
+      charleston: '#33364d',
+      blackCoral: '#585A6D',
+      grey: '#b1aeb7',
+      lightGrey: '#eff0f1',
+      placeholder: '#e9eaf0',
+      danger: '#DE6A60',
+    },
+    border: {
+      primary: '#5860A5',
+      secondary: '#7883E2',
+      disabled: '#b1aeb7',
+      inputDefault: '#e9eaf0',
+      transparent: '#0000ffff',
+      eerieBlack: '#16171D',
+      charleston: '#33364d',
+    }, // TODO: consolidate everything below; using the above
+    background: {
+      pureWhite: '#ffffff',
+      offWhite: '#fcfbfc',
+    },
     main: {
       primary: '#7883E2',
       primaryHover: '#939CE8',
@@ -58,10 +90,16 @@ export const lightTheme = {
       pureWhite: '#ffffff',
       offWhite: '#fcfbfc',
       grey: '#b1aeb7',
+      lightGrey: '#eff0f1'
     },
     borders: {
       lightGrey: '#d8d6db',
     }
+  },
+  spacing: {
+    compact: '1rem',
+    comfortable: '1.5rem',
+    generous: '2rem',
   },
   font: {
     primary: '#4e5167',

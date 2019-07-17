@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { MediumButton } from './elements/Button';
+import { PrimaryButton } from './elements/Button';
 
 function ComposeFlashcard({
   handleTextChange,
@@ -22,12 +22,14 @@ function ComposeFlashcard({
               data-testid="question-text"
               onChange={handleTextChange}
               value={questionText}
+              placeholder="Type your question here..."
             />
           : <textarea
               className="ComposeFlashcard__input--answer"
               data-testid="question-answer"
               onChange={handleAnswerChange}
               value={questionAnswer}
+              placeholder="Type your answer here..."
             />
         }
       </QuestionTextInput>
@@ -44,38 +46,71 @@ function ComposeFlashcard({
 
 const ComposeFlashcardWrapper = styled.div`
   box-sizing: border-box;
+  flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-width: 500px;
+  padding: 1rem;
 
-  border-radius: 20px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1.5rem 1rem 1rem 1rem;
-  background: red;
-  color: ${props => props.theme.font.secondary};
+  border-bottom-left-radius: .50rem;
+  border-bottom-right-radius: .50rem;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  background: ${props => props.theme.color.main.pureWhite};
+  color: ${props => props.theme.color.fonts.charleston};
 `;
 
 const QuestionTextInput = styled.div`
   flex-grow: 1;
   width: 100%;
+  margin-bottom: 1rem;
+
+  textarea {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: .50rem;
+    resize: none;
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 20px;
+    outline: 1px dashed ${props => props.theme.color.fonts.lightGrey};
+
+    :focus {
+      background-color: ${props => props.theme.color.fonts.lightGrey};
+      outline: 1px dashed ${props => props.theme.color.fonts.charleston};
+      border: none;
+    }
+
+    ::placeholder {
+      color: ${props => props.theme.color.fonts.lightGrey};
+      font-family: 'Rubik', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 20px;
+    }
+  }
 `;
 
-const ToggleButton = styled(MediumButton)`
-  background: ${props => props.theme.button.default.primary};
-  border: 2px solid ${props => props.theme.button.default.primary};
-  color: ${props => props.theme.font.primary};
-  outline: none;
-  border-radius: 15px;
+const ToggleButton = styled(PrimaryButton)`
   width: 100%;
+  background: ${props => props.theme.color.main.primary};
+  border-bottom: 3px solid ${props => props.theme.color.main.primaryHover};
+  border-radius: 15px;
+  color: ${props => props.theme.color.fonts.pureWhite};
+  outline: none;
+  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+
   &:hover {
-    background: ${props => props.theme.button.hover.primary};
-    border: 2px solid ${props => props.theme.button.hover.primary};
+    background: ${props => props.theme.color.main.primaryHover};
+    border-bottom: 3px solid ${props => props.theme.color.main.primary};
   }
+  
   &:active {
-    border: 2px solid ${props => props.theme.button.active.primary};
+    background: ${props => props.theme.color.main.secondaryHover};
   }
 `;
 

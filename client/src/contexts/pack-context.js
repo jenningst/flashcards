@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { reducer, INITIAL_STATE } from '../reducers/pack-reducer';
 
-const PackStateContext = createContext();
-const PackDispatchContext = createContext();
+const PackStateContext = createContext(null);
+const PackDispatchContext = createContext(null);
 
 // setup our pack provider
 function PackProvider({ children }) {

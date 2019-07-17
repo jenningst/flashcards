@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const packSchema = new Schema({
   name: String,
-  image: String,
-  flashcardCount: Number,
+  owner: String,
 });
 
 module.exports = mongoose.model('Pack', packSchema);

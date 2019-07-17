@@ -4,19 +4,29 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { usePackDispatch } from '../contexts/pack-context';
 import { ReactComponent as Back } from '../components/icons/svg/back.svg';
-import { ReactComponent as EditIcon } from '../components/icons/svg/pencil.svg';
-import { ReactComponent as TestIcon } from '../components/icons/svg/play-button.svg';
-import { ReactComponent as AddIcon } from '../components/icons/svg/plus.svg';
-import { Title2, Caption3 } from './elements/Text';
+import { ReactComponent as Settings } from '../components/icons/svg/settings.svg';
+import { PrimaryButton } from '../components/elements/Button';
+import { Title2, Caption3, Body } from './elements/Text';
 
-function PackHome({ name, cards, image }) {
+PackHome.propTypes = {
+  name: PropTypes.string.isRequired,
+  cards: PropTypes.array,
+};
+
+PackHome.defaultProps = {
+  cards: [],
+};
+
+function PackHome({ name, cards }) {
   const dispatch = usePackDispatch();
   const setReviewMode = () => dispatch({ type: 'SET_REVIEW_MODE'});
   const setComposeMode = () => dispatch({ type: 'SET_WRITE_MODE'});
 
   return (
     <PackHomeWrapper className="PackHome">
+
       <Header className="PackHome__header">
+        
         <ButtonGroup className="btn-lbl-combo">
           <Link className="btn-lbl-combo__link" to="/">
             <BackIcon
@@ -26,77 +36,83 @@ function PackHome({ name, cards, image }) {
           </Link>
           <Caption3 className="PackHome__button-caption">Back</Caption3>
         </ButtonGroup>
-        <CardImage className="PackHome__image-card">
-          <img src={image.src} alt={image.alt} />
-        </CardImage>
+        <SettingsIcon
+          data-testid="edit-btn"
+          onClick={(e) => console.log('clicked edit button')}
+        />
       </Header>
-      <PackInfo className="PackHome__info">
+
+      <StatsSection className="PackHome__stats stats-section">
+        <StatsCard className="stats-card">
+          <Body className='stat-section__body'>Stats Coming Soon!</Body>
+        </StatsCard>
+      </StatsSection>
+
+      <PackInfoSection className="PackHome__info">
         <Title2 className="PackHome__title">
           {name}
         </Title2>
-        <Caption3 className="PackHome__count">
-          {cards.length === 1 ? `${cards.length} FLASHCARD` : `${cards.length} FLASHCARDS`}
-        </Caption3>
-      </PackInfo>
-      <Footer className="PackHome__footer">
+        <CounterPill className="PackHome__pill">
+          <Caption3 className="PackHome__count">
+            {cards.length === 1 ? `${cards.length} FLASHCARD` : `${cards.length} FLASHCARDS`}
+          </Caption3>
+        </CounterPill>
+      </PackInfoSection>
+
+      <PackControls className="PackHome__controls">
         {
           cards.length > 0
           ? (
-              <>
-                <ButtonGroup
-                  className="btn-lbl-combo"
-                  data-testid="test-btn"
-                  onClick={setReviewMode}
-                >
-                  <TestIcon className="PackHome__button-test ico"/>
-                  <Caption3>TEST</Caption3>
-                </ButtonGroup>
-
-                <ButtonGroup
-                  className="btn-lbl-combo"
-                  data-testid="edit-btn"
-                  onClick={(e) => console.log('clicked edit button')}
-                >
-                  <EditIcon className="PackHome__button-edit ico" />
-                  <Caption3>EDIT</Caption3>
-                </ButtonGroup>
-              </>
+              <PrimaryButton
+                className="btn-lbl-combo"
+                data-testid="test-btn"
+                onClick={setReviewMode}
+              >
+                TEST
+              </PrimaryButton>
           ):(
             null
           )
         }
-        <ButtonGroup
+        <PrimaryButton
           className="btn-lbl-combo"
           data-testid="add-btn"
           onClick={setComposeMode}
         >
-          <AddIcon className="PackHome__button-add ico"/>
-          <Caption3>ADD</Caption3>
-        </ButtonGroup>
-      </Footer>
+          ADD
+        </PrimaryButton>
+      </PackControls>
     </PackHomeWrapper>
   );
 };
 
+/* BLOCKS */
+
 const PackHomeWrapper = styled.div`
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) repeat(2, auto);
-  grid-row-gap: .50rem;
+  grid-template-rows: auto 1fr repeat(2, auto);
+  grid-row-gap: 1rem;
   height: 100%;
   background: ${props => props.theme.color.main.offWhite};
   color: ${props => props.theme.color.fonts.charleston};
 `;
 
 const Header = styled.header`
+  box-sizing: border-box;
+  grid-row: 1 / span 1;
   display: flex;
-  flex-flow: column nowrap;
-  padding: 1.5rem;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+  background: ${props => props.theme.color.main.pureWhite};
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 
   div[class~="btn-lbl-combo"] {
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 1rem;
 
     svg {
       margin-right: .50rem;
@@ -108,9 +124,73 @@ const Header = styled.header`
   }
 `;
 
+const StatsSection = styled.section`
+  grid-row: 2 / span 1;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+`;
+
+const PackInfoSection = styled.section`
+  grid-row: 3 / span 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .PackHome__title {
+    margin-bottom: .25rem;
+    font-weight: 500;
+  }
+`;
+
+const PackControls = styled.section`
+  box-sizing: border-box;
+  grid-row: 4 / span 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem 0rem 1rem 0rem;
+
+  button {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @media screen and (min-width: 376px){
+    justify-content: center;
+
+    button + button {
+      margin-left: 2rem;
+    }
+  }
+`;
+
+/* ELEMENTS */
+
+const StatsCard = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 500px;
+  background: ${props => props.theme.color.background.pureWhite};
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  border-radius: .50rem;
+`;
+
 const ButtonGroup = styled.div`
   display: flex;
   flex-flow: row nowrap;
+
+  a {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const BackIcon = styled(Back)`
@@ -118,73 +198,20 @@ const BackIcon = styled(Back)`
   width: 2rem;
 `;
 
-const CardImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background: ${props => props.theme.color.main.pureWhite};
-  border-radius: 2rem;
-  box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
+const SettingsIcon = styled(Settings)`
+  height: 1.5rem;
+  width: 1.5rem;
 `;
 
-const PackInfo = styled.section`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+const CounterPill = styled.div`
+  background: ${props => props.theme.color.button.secondaryHover};
+  border-radius: 1rem;
+  padding: .25rem 1rem .25rem 1rem;
 
-  .PackHome__title {
-    margin-bottom: .25rem;
-    font-weight: 500;
-    color: ${props => props.theme.color.main.primary};
-  }
-  .PackHome__count {
-    color: ${props => props.theme.color.fonts.grey};
+  h6 {
+    color: ${props => props.theme.color.fonts.pureWhite};
   }
 `;
-
-const Footer = styled.footer`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1.5rem;
-
-  div[class~="btn-lbl-combo"] {
-    justify-content: center;
-    align-items: center;
-    background: ${props => props.theme.color.main.primary};
-    color: ${props => props.theme.color.main.pureWhite};
-    padding: .75rem 1rem .75rem 1rem;
-    border-radius: .50rem;
-    box-shadow: 0px 10px 18px -11px rgba(120,119,120,1);
-
-    svg {
-      height: 1rem;
-      width: 1rem;
-      margin-right: .50rem;
-      path {
-        fill: ${props => props.theme.color.main.pureWhite};
-      }
-    }
-  }
-`;
-
-PackHome.propTypes = {
-  name: PropTypes.string.isRequired,
-  cards: PropTypes.array,
-  image: PropTypes.object,
-};
-
-PackHome.defaultProps = {
-  cards: [],
-  image: {
-    src: '',
-    alt: '',
-  },
-};
 
 export default PackHome;
 

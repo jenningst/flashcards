@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { logOut } from '../contexts/auth-context';
 import { ReactComponent as DefaultAvatar } from '../components/icons/svg/user.svg';
 
-const Avatar = user => {
+const Avatar = ({ user, history, toggleMenu }) => {
+  const handleLogout = () => {
+    console.log('logout');
+    logOut();
+    history.push('/');
+  };
+
   return (
     <AvatarWrapper
       className="Avatar"
-      onClick={e => alert('you clicked the Avatar!')}
+      onClick={toggleMenu}
     >
-      {user
-        ? <DefaultAvatar 
-            className="Avatar__image--unauth"
-            alt="avatar"
-            data-testid="avatar-unauth"
-          />
-        : <img
-            className="Avatar__image--auth"
-            src={user.profilePhotoUrl}
-            alt="avatar"
-            data-testid="avatar-auth"
-          />
-      }
+      <DefaultAvatar 
+        className="Avatar__image--unauth"
+        alt="avatar"
+        data-testid="avatar-unauth"
+      />
     </AvatarWrapper>
   );
 };
@@ -41,4 +41,4 @@ Avatar.propTypes = {
   user: PropTypes.object,
 };
 
-export default Avatar;
+export default withRouter(Avatar);
