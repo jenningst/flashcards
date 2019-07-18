@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import { useSession } from '../contexts/user-context';
-import { logOut } from '../contexts/auth-context';
+import { useAuth } from '../contexts/auth-context';
 
 import LinkButton from './elements/LinkButton';
 import { Title1, Title3, Body, Caption3, Title4 } from './elements/Text';
@@ -36,6 +36,7 @@ const UserPacks = ({ uid }) => (
 
 function Dashboard() {
   const [showMenu, setShowMenu] = useState(false);
+  const { logOut } = useAuth();
   // const toggleMenu = () => setShowMenu(!showMenu);
   const user = useSession();
 

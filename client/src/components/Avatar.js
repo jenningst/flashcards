@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { logOut } from '../contexts/auth-context';
+// import { logOut } from '../contexts/auth-context';
 import { ReactComponent as DefaultAvatar } from '../components/icons/svg/user.svg';
 
 const Avatar = ({ user, history, toggleMenu }) => {
   const handleLogout = () => {
     console.log('logout');
-    logOut();
+    // logOut();
     history.push('/');
   };
 

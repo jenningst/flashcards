@@ -32,14 +32,14 @@ const renderComponent = ({
 
 describe('<ComposeFlashcard /> spec', () => {
   it('assert component matches snapshot', () => {
-    const { asFragment } = renderComponent({
+    const { container } = renderComponent({
       handleTextChange: jest.fn(),
       handleAnswerChange: jest.fn(),
       questionText: '',
       questionAnswer: '',
       theme: lightTheme,
     });
-    expect(asFragment()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   // TODO: can we refactor test setup into a better helper function?

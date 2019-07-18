@@ -6,7 +6,7 @@ import { WaveSpinner } from 'react-spinners-kit';
 import { Title2, Caption3 } from '../components/elements/Text';
 import { Input } from '../components/elements/Input';
 import { PrimaryButton } from './elements/Button';
-import { loginWithEmail } from '../contexts/auth-context';
+import { useAuth } from '../contexts/auth-context';
 import ROUTE_CONFIG from '../constants/route-config';
 
 Login.propTypes = {
@@ -14,6 +14,7 @@ Login.propTypes = {
 };
 
 function Login({ history }) {
+  const { loginWithEmail } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -29,6 +30,7 @@ function Login({ history }) {
       await loginWithEmail(email, password);
       history.push(ROUTE_CONFIG.auth.DASHBOARD);
     } catch (err) {
+      console.log(err);
       switch (err.code) {
         case 'auth/user-not-found':
           setError(`No account found for email ${email}`);

@@ -2,102 +2,84 @@
 
 exports[`<PackHome /> specs assert component matches snapshot 1`] = `
 <div
-  class="PackHome sc-iwsKbI eivNFL"
+  class="PackHome sc-jTzLTM iQTdXV"
 >
   <header
-    class="PackHome__header sc-gZMcBi bvxfLq"
+    class="PackHome__header sc-fjdhpX NXmOK"
   >
     <div
-      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      class="btn-lbl-combo sc-kgoBCf cldxMn"
     >
       <a
         class="btn-lbl-combo__link"
         href="/"
       >
         <svg
-          class="PackHome__button-back btn-lbl-combo__icon sc-VigVT fCGeOx"
+          class="PackHome__button-back btn-lbl-combo__icon sc-kGXeez hAVnpz"
           data-testid="button-back"
         >
           back.svg
         </svg>
       </a>
       <h6
-        class="PackHome__button-caption sc-dnqmqq cPuweH"
+        class="PackHome__button-caption sc-VigVT voBwA"
       >
         Back
       </h6>
     </div>
-    <div
-      class="PackHome__image-card sc-jTzLTM kuOzMv"
+    <svg
+      class="sc-kpOJdX kQabda"
+      data-testid="edit-btn"
     >
-      <img
-        alt=""
-        src=""
-      />
-    </div>
+      settings.svg
+    </svg>
   </header>
   <section
-    class="PackHome__info sc-fjdhpX ftBcog"
+    class="PackHome__stats stats-section sc-jzJRlG ZMDfA"
+  >
+    <div
+      class="stats-card sc-chPdSV hjTxne"
+    >
+      <p
+        class="stat-section__body sc-dnqmqq eFdqdx"
+      >
+        Stats Coming Soon!
+      </p>
+    </div>
+  </section>
+  <section
+    class="PackHome__info sc-cSHVUG bdEAwI"
   >
     <h2
-      class="PackHome__title sc-bwzfXH hsuEfn"
+      class="PackHome__title sc-EHOje cayYUN"
     >
       Random
     </h2>
-    <h6
-      class="PackHome__count sc-dnqmqq cPuweH"
-    >
-      2 FLASHCARDS
-    </h6>
-  </section>
-  <footer
-    class="PackHome__footer sc-jzJRlG POnLw"
-  >
     <div
-      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      class="PackHome__pill sc-dxgOiQ kFfXMj"
+    >
+      <h6
+        class="PackHome__count sc-VigVT voBwA"
+      >
+        2 FLASHCARDS
+      </h6>
+    </div>
+  </section>
+  <section
+    class="PackHome__controls sc-kAzzGY hLMvsW"
+  >
+    <button
+      class="sc-bdVaJa btn-lbl-combo sc-bwzfXH ebLKbS"
       data-testid="test-btn"
     >
-      <svg
-        class="PackHome__button-test ico"
-      >
-        play-button.svg
-      </svg>
-      <h6
-        class="sc-dnqmqq cPuweH"
-      >
-        TEST
-      </h6>
-    </div>
-    <div
-      class="btn-lbl-combo sc-gqjmRU kpjKDM"
-      data-testid="edit-btn"
-    >
-      <svg
-        class="PackHome__button-edit ico"
-      >
-        pencil.svg
-      </svg>
-      <h6
-        class="sc-dnqmqq cPuweH"
-      >
-        EDIT
-      </h6>
-    </div>
-    <div
-      class="btn-lbl-combo sc-gqjmRU kpjKDM"
+      TEST
+    </button>
+    <button
+      class="sc-bdVaJa btn-lbl-combo sc-bwzfXH ebLKbS"
       data-testid="add-btn"
     >
-      <svg
-        class="PackHome__button-add ico"
-      >
-        plus.svg
-      </svg>
-      <h6
-        class="sc-dnqmqq cPuweH"
-      >
-        ADD
-      </h6>
-    </div>
-  </footer>
+      ADD
+    </button>
+  </section>
 </div>
 `;
