@@ -2,27 +2,27 @@
 
 exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
 <div
-  class="ComposePack sc-VigVT hBdGBR"
+  class="ComposePack sc-fjdhpX jcbgzh"
 >
   <header
     class="ComposePack__header sc-jzJRlG lezlDT"
   >
     <div
-      class="button-label-group sc-fjdhpX igxUPt"
+      class="button-label-group sc-kgoBCf gESBRo"
     >
       <a
         class="button-label-group__link"
         href="/"
       >
         <svg
-          class="ComposePack__button-back button-label-group__icon sc-jTzLTM kLosfp"
+          class="ComposePack__button-back button-label-group__icon sc-chPdSV fffzMH"
           data-testid="button-back"
         >
           back.svg
         </svg>
       </a>
       <h6
-        class="sc-gqjmRU bUQwPt"
+        class="sc-jTzLTM idVnLD"
       >
         Dashboard
       </h6>
@@ -32,10 +32,10 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
     class="sc-cSHVUG kLZNWu"
   >
     <form
-      class="ComposePack__form form sc-kAzzGY jwPtbk"
+      class="ComposePack__form form sc-kAzzGY erSrgO"
     >
       <h2
-        class="form__title sc-ifAKCX bcZUfi"
+        class="form__title sc-bZQynM bBvnIe"
       >
         Create a Pack
       </h2>
@@ -57,10 +57,10 @@ exports[`<ComposePack /> spec assert component matches snapshot 1`] = `
         />
       </div>
       <div
-        class="sc-chPdSV hCBDrf"
+        class="sc-kGXeez hoFwxn"
       >
         <button
-          class="sc-bwzfXH form__button-submit sc-kgoBCf kEKQZq"
+          class="sc-bwzfXH sc-htpNat form__button-submit sc-kpOJdX fJIxGy"
           disabled=""
           type="submit"
         >

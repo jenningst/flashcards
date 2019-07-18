@@ -3,53 +3,72 @@
 exports[`<SignUp /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="SignUp"
+    class="SignUp sc-cSHVUG cnhTFu"
   >
-    <label
-      for="email"
+    <div
+      class="form-wrapper sc-chPdSV jpkcqJ"
     >
-      Email Address
-    </label>
-    <input
-      class="SignUp__input-email"
-      id="email"
-      placeholder="Enter Email Address"
-      value=""
+      <form
+        class="SignUp__form sc-kGXeez jlvJeS"
+      >
+        <h2
+          class="SignUp__title form-title sc-htoDjs djcYTC"
+        >
+          Sign Up
+        </h2>
+        <span
+          class="SignUp__errors sc-kgoBCf fIjuNl"
+        >
+          <h6
+            class="sc-jzJRlG dvzZlm"
+          />
+        </span>
+        <input
+          aria-label="email"
+          class="sc-EHOje SignUp__input-email sc-bZQynM kmcLJp"
+          id="email"
+          placeholder="Email Address"
+          type="email"
+          value=""
+        />
+        <input
+          aria-label="password-one"
+          class="sc-EHOje SignUp__input-password-one sc-bZQynM kmcLJp"
+          id="password-one"
+          placeholder="Password"
+          value=""
+        />
+        <input
+          aria-label="password-two"
+          class="sc-EHOje SignUp__input-password-two sc-bZQynM kmcLJp"
+          id="password-two"
+          placeholder="Confirm Password"
+          value=""
+        />
+        <button
+          class="sc-bwzfXH sc-htpNat SignUp__button-sign-up sc-kpOJdX jJDPho"
+          disabled=""
+          type="button"
+        >
+          Sign Up
+        </button>
+      </form>
+      <span>
+        <h6
+          class="sc-jzJRlG dvzZlm"
+        >
+          Already have an account? 
+          <a
+            href="/login"
+          >
+            Log in
+          </a>
+        </h6>
+      </span>
+    </div>
+    <div
+      class="loading-spinner-wrapperhidden sc-kAzzGY atzHR"
     />
-    <label
-      for="password-one"
-    >
-      Password
-    </label>
-    <input
-      class="SignUp__input-password-one"
-      id="password-one"
-      placeholder="Enter Password"
-      value=""
-    />
-    <label
-      for="password-two"
-    >
-      Confirm Password
-    </label>
-    <input
-      class="SignUp__input-password-two"
-      id="password-two"
-      placeholder="Confirm Password"
-      value=""
-    />
-    <button
-      class="SignUp__button-sign-up sc-bwzfXH dVyRhp"
-      disabled=""
-      type="button"
-    >
-      Sign Up
-    </button>
-    <a
-      href="/login"
-    >
-      Already have an account? Log in here.
-    </a>
   </div>
 </DocumentFragment>
 `;

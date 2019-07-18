@@ -2,8 +2,8 @@ import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components'
 import { darkTheme, lightTheme } from '../themes/theme';
-import FullPageSpinner from './FullPageSpinner';
 import { useAuth } from '../contexts/auth-context';
+import FullPageSpinner from './FullPageSpinner';
 
 const AuthenticatedApp = lazy(() => import('./AuthenticatedApp'));
 const UnAuthenticatedApp = lazy(() => import('./UnAuthenticatedApp'));

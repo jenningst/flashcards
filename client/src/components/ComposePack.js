@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
 import { CREATE_PACK, GET_PACKS } from '../queries';
-import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { Link, withRouter } from 'react-router-dom';
+import ROUTE_CONFIG from '../constants/route-config';
+import { useSession } from '../contexts/user-context';
+import { ReactComponent as Back } from '../components/icons/svg/back.svg';
 import { PrimaryButton } from '../components/elements/Button';
 import { Title2, Caption3 } from './elements/Text';
-import { useSession } from '../contexts/user-context';
-import ROUTE_CONFIG from '../constants/route-config';
+
+ComposePack.propTypes = {
+  history: PropTypes.object,
+};
 
 function ComposePack({ history }) {
   const [packName, setPackName] = useState('');
@@ -18,11 +22,6 @@ function ComposePack({ history }) {
   return (
     <ComposePackWrapper className="ComposePack">
       <Header className="ComposePack__header">
-        {/* <IconButton
-          className="ComposePack__button-back"
-          data-testid="button-back"
-          to="/"
-        /> */}
         <ButtonGroup className="button-label-group">
           <Link className="button-label-group__link" to="/">
             <BackIcon
@@ -106,6 +105,8 @@ function ComposePack({ history }) {
   );
 };
 
+/* BLOCKS */
+
 const ComposePackWrapper = styled.div`
   box-sizing: border-box;
   display: grid;
@@ -116,26 +117,6 @@ const ComposePackWrapper = styled.div`
   height: 100%;
   background: ${props => props.theme.color.background.offWhite};
   color: ${props => props.theme.color.font.charleston};
-`;
-
-const BackIcon = styled(Back)`
-  height: 2rem;
-  width: 2rem;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-
-  svg {
-    margin-right: 1rem;
-  }
-
-  h6 {
-    color: ${props => props.theme.color.font.primary};
-  }
 `;
 
 const Header = styled.header`
@@ -195,6 +176,28 @@ const Form = styled.form`
   }
 `;
 
+/* ELEMENTS */
+
+const BackIcon = styled(Back)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  svg {
+    margin-right: 1rem;
+  }
+
+  h6 {
+    color: ${props => props.theme.color.font.primary};
+  }
+`;
+
 const FormFooter = styled.div`
   display: flex;
   justify-content: center;
@@ -204,9 +207,5 @@ const FormFooter = styled.div`
 const StyledSubmit = styled(PrimaryButton)`
   max-width: 20rem;
 `;
-
-ComposePack.propTypes = {
-  history: PropTypes.object,
-}
 
 export default withRouter(ComposePack);

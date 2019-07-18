@@ -3,42 +3,86 @@
 exports[`<Login /> spec assert component matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Login"
+    class="Login sc-cSHVUG cnhTFu"
   >
-    <label
-      for="email"
+    <div
+      class="form-wrapper sc-chPdSV eTDCRq"
     >
-      Email Address
-    </label>
-    <input
-      class="Login__input-email"
-      id="email"
-      placeholder="Enter Email Address"
-      value=""
+      <form
+        class="Login__form sc-kGXeez jlvJeS"
+      >
+        <h2
+          class="Login__title form-title sc-htpNat dYSOWx"
+        >
+          Login
+        </h2>
+        <span
+          class="Login__errors sc-kgoBCf fIjuNl"
+        >
+          <h6
+            class="sc-iwsKbI iMjCin"
+          />
+        </span>
+        <input
+          aria-label="email"
+          class="sc-gZMcBi Login__input-email sc-gqjmRU hOlNGk"
+          id="email"
+          placeholder="Email Address"
+          value=""
+        />
+        <input
+          aria-label="password"
+          class="sc-gZMcBi Login__input-password sc-gqjmRU hOlNGk"
+          id="password"
+          placeholder="Password"
+          value=""
+        />
+        <div
+          class="ancillary-form-controls"
+        >
+          <div
+            class="Login__toggle-remember-me"
+          >
+            <h6
+              class="sc-iwsKbI iMjCin"
+            >
+              Remember me
+            </h6>
+          </div>
+          <a
+            href="/forgot-password"
+          >
+            <h6
+              class="sc-iwsKbI iMjCin"
+            >
+              Forgot Password
+            </h6>
+          </a>
+        </div>
+        <button
+          class="sc-VigVT sc-jTzLTM Login__btn-submit sc-kpOJdX jJDPho"
+          disabled=""
+          type="primary"
+        >
+          Log In
+        </button>
+      </form>
+      <span>
+        <h6
+          class="sc-iwsKbI iMjCin"
+        >
+          New to Flashcards? 
+          <a
+            href="/signup"
+          >
+            Sign up
+          </a>
+        </h6>
+      </span>
+    </div>
+    <div
+      class="loading-spinner-wrapperhidden sc-kAzzGY atzHR"
     />
-    <label
-      for="password-one"
-    >
-      Password
-    </label>
-    <input
-      class="Login__input-password-one"
-      id="password-one"
-      placeholder="Enter Password"
-      value=""
-    />
-    <button
-      class="Login__button-sign-up sc-bwzfXH dVyRhp"
-      disabled=""
-      type="button"
-    >
-      Log In
-    </button>
-    <a
-      href="/signup"
-    >
-      Don't have an account? Sign up here.
-    </a>
   </div>
 </DocumentFragment>
 `;

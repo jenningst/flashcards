@@ -1,89 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> spec assert component matches snapshot 1`] = `
-<DocumentFragment>
+<div
+  class="FullPageSpinner"
+  style="display: flex; justify-content: center; align-items: center; height: 100vh; background: rgb(252, 251, 252);"
+>
   <div
-    class="app"
-    style="height: 100vh; width: 100vw;"
+    class="wave__Wrapper-sc-8a0z7x-0 bkEnrM"
+    size="30"
   >
     <div
-      class="Dashboard sc-fjdhpX gDzOsO"
-    >
-      <section
-        class="Dashboard__main sc-cSHVUG BvFso"
-      >
-        <header
-          class="Dashboard__header sc-kAzzGY dLZksr"
-        >
-          <div
-            class="button-label-group sc-chPdSV jWyHxp"
-          >
-            <svg
-              class="Dashboard__button-menu sc-kgoBCf eToamk"
-              data-testid="button-menu"
-            >
-              menu.svg
-            </svg>
-            <h6
-              class="sc-dnqmqq cPuweH"
-            >
-              Dashboard
-            </h6>
-          </div>
-          <div
-            class="Avatar sc-jTzLTM jtdSqc"
-          >
-            <svg
-              alt="avatar"
-              class="Avatar__image--unauth"
-              data-testid="avatar-unauth"
-            >
-              user.svg
-            </svg>
-          </div>
-        </header>
-        <section
-          class="Dashboard__greeting-section sc-kpOJdX cRLgjE"
-        >
-          <h6
-            class="greeting-date sc-dnqmqq cPuweH"
-            data-testid="greeting-date"
-          >
-            October 19th
-          </h6>
-          <h2
-            class="greeting-title sc-bwzfXH hsuEfn"
-          >
-            Ready to learn?
-          </h2>
-        </section>
-        <section
-          class="Dashboard__pack-section sc-dxgOiQ dcoTlG"
-        >
-          <p
-            class="sc-EHOje gzeaHE"
-          >
-            Your Packs
-          </p>
-          <div
-            class="Dashboard__list sc-ckVGcZ iwuFkb"
-          >
-            <button
-              class="Dashboard__button-create-pack sc-jKJlTe xKupp"
-              data-testid="create-pack-button"
-              type="button"
-            >
-              <h1
-                class="sc-bdVaJa beESmM"
-              >
-                +
-              </h1>
-            </button>
-            Loading...
-          </div>
-        </section>
-      </section>
-    </div>
+      class="wave__Bar-sc-8a0z7x-1 eYgqzc"
+      color="#939CE8"
+      size="30"
+      x="0"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 eeBsAZ"
+      color="#939CE8"
+      size="30"
+      x="7.7"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 jzfQZl"
+      color="#939CE8"
+      size="30"
+      x="15.4"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 idEbod"
+      color="#939CE8"
+      size="30"
+      x="23.1"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 sOGxD"
+      color="#939CE8"
+      size="30"
+      x="30.8"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 gCnfAU"
+      color="#939CE8"
+      size="30"
+      x="38.5"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 crkVMT"
+      color="#939CE8"
+      size="30"
+      x="46.2"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 ewFufB"
+      color="#939CE8"
+      size="30"
+      x="53.9"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 jaMgCO"
+      color="#939CE8"
+      size="30"
+      x="61.6"
+      y="0"
+    />
+    <div
+      class="wave__Bar-sc-8a0z7x-1 kVhTNp"
+      color="#939CE8"
+      size="30"
+      x="69.3"
+      y="0"
+    />
   </div>
-</DocumentFragment>
+</div>
 `;

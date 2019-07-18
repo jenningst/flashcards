@@ -55,10 +55,10 @@ const ComposeFlashcardWrapper = styled.div`
   max-width: 500px;
   padding: 1rem;
 
+  background: ${props => props.theme.color.background.pureWhite};
   border-bottom-left-radius: .50rem;
   border-bottom-right-radius: .50rem;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-  background: ${props => props.theme.color.background.pureWhite};
   color: ${props => props.theme.color.font.charleston};
 `;
 
